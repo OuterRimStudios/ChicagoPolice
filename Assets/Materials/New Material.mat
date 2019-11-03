@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: New Material
   m_Shader: {fileID: 4800000, guid: 4854cfa286dab934ab7b7d8bebee2984, type: 3}
-  m_ShaderKeywords: FORCEEYE_NONE LAYOUT_NONE STEREO_NONE
+  m_ShaderKeywords: FORCEEYE_NONE HIGH_QUALITY LAYOUT_NONE STEREO_NONE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -71,7 +71,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HighQuality: 0
+    - _HighQuality: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
