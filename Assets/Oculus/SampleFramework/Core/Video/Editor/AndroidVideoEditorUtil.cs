@@ -6,13 +6,13 @@ using System.IO;
 
 public class AndroidVideoEditorUtil
 {
-    private static readonly string videoPlayerFileName = "Assets/Plugins/Android/java/com/oculus/videoplayer/NativeVideoPlayer.java";
+    private static readonly string videoPlayerFileName = "Assets/Oculus/SampleFramework/Core/Video/Plugins/Android/java/com/oculus/videoplayer/NativeVideoPlayer.java";
     private static readonly string disabledPlayerFileName = videoPlayerFileName + ".DISABLED";
 
-    private static readonly string gradleSourceSetPath = "$projectDir/../../Assets/Plugins/Android/java";
+    private static readonly string gradleSourceSetPath = "$projectDir/../../Assets/Oculus/SampleFramework/Core/Video/Plugins/Android/java";
 
-    private static readonly string audio360PluginPath = "Assets/Plugins/Android/Audio360/audio360.aar";
-    private static readonly string audio360Exo28PluginPath = "Assets/Plugins/Android/Audio360/audio360-exo28.aar";
+    private static readonly string audio360PluginPath = "Assets/Oculus/SampleFramework/Core/Video/Plugins/Android/Audio360/audio360.aar";
+    private static readonly string audio360Exo28PluginPath = "Assets/Oculus/SampleFramework/Core/Video/Plugins/Android/Audio360/audio360-exo28.aar";
 
     private static readonly string gradleTemplatePath = "Assets/Plugins/Android/mainTemplate.gradle";
     private static readonly string disabledGradleTemplatePath = gradleTemplatePath + ".DISABLED";
@@ -53,7 +53,7 @@ public class AndroidVideoEditorUtil
             if (File.Exists(gradleTemplatePath + ".DISABLED"))
             {
                 File.Move(disabledGradleTemplatePath, gradleTemplatePath);
-                File.Move(disabledGradleTemplatePath + ".meta", gradleTemplatePath + ".meta");
+                File.Move(disabledGradleTemplatePath + ".meta", gradleTemplatePath+".meta");
             }
             else
             {
@@ -102,7 +102,7 @@ public class AndroidVideoEditorUtil
         // add sourceSets if Version < 2018.2
 #if !UNITY_2018_2_OR_NEWER
         int android = GoToSection("android", lines);
-
+    
         if (FindInScope("sourceSets\\.main\\.java\\.srcDir", android + 1, lines) == -1)
         {
             lines.Insert(GetScopeEnd(android + 1, lines), "\tsourceSets.main.java.srcDir \"" + gradleSourceSetPath + "\"");

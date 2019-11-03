@@ -311,23 +311,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &4928661112718952623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4928661112718952627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b666ca80b3aa42efac718fe4903bff5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovieName: VR_Full_A1_2.mp4
-  DrmLicenseUrl: 
-  LoopVideo: 1
-  Shape: 0
-  Stereo: 1
 --- !u!114 &4928661112718952626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,8 +334,8 @@ GameObject:
   - component: {fileID: 4928661112718952616}
   - component: {fileID: 4928661112718952617}
   - component: {fileID: 4928661112718952622}
-  - component: {fileID: 4928661112718952623}
   - component: {fileID: 4928661112718952620}
+  - component: {fileID: 4928661112718952628}
   - component: {fileID: 4928661112718952621}
   - component: {fileID: 4928661112718952626}
   m_Layer: 0
@@ -362,6 +345,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4928661112718952628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4928661112718952627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b666ca80b3aa42efac718fe4903bff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovieName: PP_VR_A1.mp4
+  DrmLicenseUrl: 
+  LoopVideo: 1
+  Shape: 0
+  Stereo: 1
 --- !u!114 &4928661113294386076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,7 +494,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: 3
+  m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
