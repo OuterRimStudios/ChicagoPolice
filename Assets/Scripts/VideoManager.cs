@@ -5,21 +5,38 @@ using UnityEngine.Video;
 
 public class VideoManager : MonoBehaviour
 {
-    public VideoClip clip1;
-    public VideoClip clip2;
+    public OVROverlay clip1;
+    public OVROverlay clip2;
+    bool toggle;
+    bool acceptInput = true;
 
-    public VideoPlayer player;
-
-    long frame;
+    //long frame;
 
     void Update()
     {
-        frame = player.frame;
+        OVRInput.Update();
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (acceptInput && OVRInput.Get(OVRInput.Button.One))
         {
-            player.clip = player.clip == clip1 ? clip2 : clip1;
-            player.frame = frame;
+            acceptInput = false;
+            toggle = !toggle;
+            if (!toggle)
+            {
+                clip1.colorScale = Color.white;
+                clip2.colorScale = Color.clear;
+            }
+            else
+            {
+                clip1.colorScale = Color.clear;
+                clip2.colorScale = Color.white;
+            }
+            StartCoroutine(ResetInput());
         }
+    }
+
+    IEnumerator ResetInput()
+    {
+        yield return new WaitForSeconds(0.5f);
+        acceptInput = true;
     }
 }
