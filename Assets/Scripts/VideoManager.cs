@@ -8,12 +8,19 @@ public class VideoManager : MonoBehaviour
     public MediaPlayer playerOne;
     public MeshRenderer sphereOne;
     public string path1;
+    public AudioSource source1;
+
+    [Space]
     public MediaPlayer playerTwo;
     public MeshRenderer sphereTwo;
     public string path2;
+    public AudioSource source2;
+
+    [Space]
     public MediaPlayer interview;
     public MeshRenderer interviewSphere;
     public string path3;
+    public AudioSource source3;
 
     bool acceptInput = true;
     bool allowSwitch = true;
@@ -39,6 +46,8 @@ public class VideoManager : MonoBehaviour
             sphereTwo.enabled = false;
             interview.Control.Play();
             interviewSphere.enabled = true;
+
+            source3.Play();
         }
 
         if (!allowSwitch)
@@ -57,6 +66,9 @@ public class VideoManager : MonoBehaviour
                 playerTwo.Control.SeekFast(time);
                 playerTwo.Control.Play();
                 sphereTwo.enabled = true;
+
+                source1.mute = true;
+                source2.mute = false;
             }
             else if (playerTwo.Control.IsPlaying() && !playerOne.Control.IsFinished())
             {
@@ -66,6 +78,9 @@ public class VideoManager : MonoBehaviour
                 playerOne.Control.SeekFast(time);
                 playerOne.Control.Play();
                 sphereOne.enabled = true;
+
+                source1.mute = false;
+                source2.mute = true;
             }
 
             StartCoroutine(ResetInput());
