@@ -5,6 +5,9 @@ using RenderHeads.Media.AVProVideo;
 
 public class VideoManager : MonoBehaviour
 {
+    public float switchTimer = 120f;
+
+    [Space]
     public MediaPlayer playerOne;
     public MeshRenderer sphereOne;
     public string path1;
@@ -34,7 +37,7 @@ public class VideoManager : MonoBehaviour
 
     IEnumerator Start()
     {
-        yield return new WaitForSeconds(60f);
+        yield return new WaitForSeconds(switchTimer);
         allowSwitch = false;
     }
 
