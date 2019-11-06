@@ -7,6 +7,7 @@ using RenderHeads.Media.AVProVideo;
 public class VideoManager : MonoBehaviour
 {
     public float audioDelay = 1;
+    public float audioTransitionDelay = 0.3f;
     public float switchTimer = 120f;
 
     public Vector2[] safeTimers;
@@ -18,12 +19,14 @@ public class VideoManager : MonoBehaviour
     public MeshRenderer sphereOne;
     public string path1;
     public AudioSource source1;
+    public AudioSource source1_2d;
 
     [Space]
     public MediaPlayer playerTwo;
     public MeshRenderer sphereTwo;
     public string path2;
     public AudioSource source2;
+    public AudioSource source2_2d;
 
     [Space]
     public MediaPlayer interview;
@@ -47,7 +50,7 @@ public class VideoManager : MonoBehaviour
         yield return new WaitUntil(() => (playerOne.Control.IsPlaying() || playerTwo.Control.IsPlaying()));
         yield return new WaitForSeconds(audioDelay);
         source1.Play();
-        source2.Play();
+        //source2.Play();
         yield return new WaitForSeconds(switchTimer);
         allowSwitch = false;
     }
@@ -93,8 +96,16 @@ public class VideoManager : MonoBehaviour
                 playerTwo.Control.Play();
                 sphereTwo.enabled = true;
 
-                source1.mute = true;
-                source2.mute = false;
+                //source1.mute = true;
+                //source1_2d.mute = true;
+                //source2.mute = false;
+                //source2_2d.mute = false;
+                source1.Pause();
+                source1_2d.Pause();
+                source2.UnPause();
+                source2_2d.UnPause();
+                source2.time = (time / 1000.0f) - audioTransitionDelay;
+                source2_2d.time = (time / 1000.0f) - audioTransitionDelay;
             }
             else if (playerTwo.Control.IsPlaying() && !playerOne.Control.IsFinished())
             {
@@ -105,8 +116,16 @@ public class VideoManager : MonoBehaviour
                 playerOne.Control.Play();
                 sphereOne.enabled = true;
 
-                source1.mute = false;
-                source2.mute = true;
+                //source1.mute = false;
+                //source1_2d.mute = false;
+                //source2.mute = true;
+                //source2_2d.mute = true;
+                source1.UnPause();
+                source1_2d.UnPause();
+                source2.Pause();
+                source2_2d.Pause();
+                source1.time = (time / 1000.0f) - audioTransitionDelay;
+                source1_2d.time = (time / 1000.0f) - audioTransitionDelay;
             }
 
             StartCoroutine(ResetInput());
