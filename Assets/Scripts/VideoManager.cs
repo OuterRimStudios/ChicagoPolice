@@ -9,6 +9,7 @@ public class VideoManager : MonoBehaviour
     public float audioDelay = 1;
     public float switchTimer = 120f;
 
+    [Tooltip("The X value refers to the start of the safe time in seconds. The Y value refers to the length of time the user has to switch perspectives.")]
     public Vector2[] safeTimers;
     const float MARGIN_OF_ERROR = 1000f;
     public Slider timerBar;
@@ -34,6 +35,7 @@ public class VideoManager : MonoBehaviour
     bool acceptInput = true;
     bool allowSwitch = true;
     int safeTimerIndex = 0;
+    float timerTime;
 
     private void Awake()
     {
@@ -48,8 +50,8 @@ public class VideoManager : MonoBehaviour
         yield return new WaitForSeconds(audioDelay);
         source1.Play();
         source2.Play();
-        yield return new WaitForSeconds(switchTimer);
-        allowSwitch = false;
+        //yield return new WaitForSeconds(switchTimer);
+        //allowSwitch = false;
     }
 
     void Update()
@@ -65,16 +67,15 @@ public class VideoManager : MonoBehaviour
         }
 
         MediaPlayer currentPlayer = playerOne.Control.IsPlaying() ? playerOne : playerTwo;
-
-        //if(Mathf.Abs(safeTimers[safeTimerIndex].x - currentPlayer.Control.GetCurrentTimeMs()) < MARGIN_OF_ERROR)
-        //{
-        //    timerBar.value = 0;
-        //    timerBar.maxValue = safeTimers[safeTimerIndex].y;
-        //    timerBar.gameObject.SetActive(true);
-        //    StartCoroutine(TimerBar());
-        //    allowSwitch = true;
-        //    safeTimerIndex++;
-        //}
+        if (Mathf.Abs((safeTimers[safeTimerIndex].x * 1000) - currentPlayer.Control.GetCurrentTimeMs()) < MARGIN_OF_ERROR)
+        {
+            timerBar.value = 0;
+            timerBar.maxValue = safeTimers[safeTimerIndex].y;
+            timerBar.gameObject.SetActive(true);
+            StartCoroutine(TimerBar());
+            allowSwitch = true;
+            safeTimerIndex++;
+        }
 
         if (!allowSwitch)
             return;
@@ -119,23 +120,33 @@ public class VideoManager : MonoBehaviour
         acceptInput = true;
     }
 
-    //IEnumerator TimerBar()
-    //{
+    IEnumerator TimerBar()
+    {
+        timerTime = safeTimers[safeTimerIndex].y;
+        yield return new WaitUntil(()=> Timer(ref timerTime));
+        allowSwitch = false;
+        timerBar.gameObject.SetActive(false);
+        timerBar.value = 0;
+    }
 
-    //}
+    public bool Timer(ref float currentTime)
+    {
+        if (currentTime > 0)
+        {
+            if (currentTime - Time.deltaTime > 0)
+            {
+                currentTime -= Time.deltaTime;
+                timerBar.value += Time.deltaTime;
+            }
+            else
+            {
+                currentTime = 0;
+                timerBar.value = timerBar.maxValue;
+            }
 
-    //public bool Timer(ref float currentTime)
-    //{
-    //    if (currentTime > 0)
-    //    {
-    //        if (currentTime - Time.deltaTime > 0)
-    //            currentTime -= Time.deltaTime;
-    //        else
-    //            currentTime = 0;
-
-    //        return false;
-    //    }
-    //    else
-    //        return true;
-    //}
+            return false;
+        }
+        else
+            return true;
+    }
 }
