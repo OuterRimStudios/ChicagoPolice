@@ -1,11 +1,17 @@
 ﻿using System.IO;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using RenderHeads.Media.AVProVideo;
 
 public class VideoManager : MonoBehaviour
 {
+    public float audioDelay = 1;
     public float switchTimer = 120f;
+
+    public Vector2[] safeTimers;
+    const float MARGIN_OF_ERROR = 1000f;
+    public Slider timerBar;
 
     [Space]
     public MediaPlayer playerOne;
@@ -27,6 +33,7 @@ public class VideoManager : MonoBehaviour
 
     bool acceptInput = true;
     bool allowSwitch = true;
+    int safeTimerIndex = 0;
 
     private void Awake()
     {
@@ -37,6 +44,10 @@ public class VideoManager : MonoBehaviour
 
     IEnumerator Start()
     {
+        yield return new WaitUntil(() => (playerOne.Control.IsPlaying() || playerTwo.Control.IsPlaying()));
+        yield return new WaitForSeconds(audioDelay);
+        source1.Play();
+        source2.Play();
         yield return new WaitForSeconds(switchTimer);
         allowSwitch = false;
     }
@@ -52,6 +63,18 @@ public class VideoManager : MonoBehaviour
 
             source3.Play();
         }
+
+        MediaPlayer currentPlayer = playerOne.Control.IsPlaying() ? playerOne : playerTwo;
+
+        //if(Mathf.Abs(safeTimers[safeTimerIndex].x - currentPlayer.Control.GetCurrentTimeMs()) < MARGIN_OF_ERROR)
+        //{
+        //    timerBar.value = 0;
+        //    timerBar.maxValue = safeTimers[safeTimerIndex].y;
+        //    timerBar.gameObject.SetActive(true);
+        //    StartCoroutine(TimerBar());
+        //    allowSwitch = true;
+        //    safeTimerIndex++;
+        //}
 
         if (!allowSwitch)
             return;
@@ -95,4 +118,24 @@ public class VideoManager : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         acceptInput = true;
     }
+
+    //IEnumerator TimerBar()
+    //{
+
+    //}
+
+    //public bool Timer(ref float currentTime)
+    //{
+    //    if (currentTime > 0)
+    //    {
+    //        if (currentTime - Time.deltaTime > 0)
+    //            currentTime -= Time.deltaTime;
+    //        else
+    //            currentTime = 0;
+
+    //        return false;
+    //    }
+    //    else
+    //        return true;
+    //}
 }
