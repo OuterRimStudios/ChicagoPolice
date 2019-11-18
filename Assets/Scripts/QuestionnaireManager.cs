@@ -70,6 +70,8 @@ public class QuestionnaireManager : MonoBehaviour
         currentQuestionIndex = 0;
 
         //Reset Answer slider
+
+        acceptInput = true;
     }
 
     IEnumerator ResetInput()
