@@ -15,10 +15,14 @@ public class ChicagoSceneTransition : MonoBehaviour
 
     private void Update()
     {
+        OVRInput.Update();
         if (sceneIndex == 0 && OVRInput.GetDown(OVRInput.Button.One))
             isTestB = false;
         else if (sceneIndex == 0 && OVRInput.GetDown(OVRInput.Button.Two))
             isTestB = true;
+
+        if (OVRInput.GetDown(OVRInput.Button.Three))
+            NextScene();
     }
 
     public void NextScene()
