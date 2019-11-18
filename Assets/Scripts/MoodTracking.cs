@@ -1,58 +1,94 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using RenderHeads.Media.AVProVideo;
 
 public class MoodTracking : MonoBehaviour
 {
-    byte moodIndex = 6;
+    public Slider moodSlider;
     MediaPlayer currentMediaPlayer;
-    const double USER_DEAD_ZONE = .2;
+
+    List<MoodInfo> moodInfos = new List<MoodInfo>();
+
+    [SerializeField]
+    double USER_DEAD_ZONE = .2;
+
+    byte moodIndex = 6;
+    bool canUpdateSlider = true;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        UpdateUI();
     }
 
     void OnEnable()
     {
-        //ChicagoSceneTransition.OnSceneStarted += SetMediaType;
+        ChicagoSceneTransition.OnSceneStarted += SetMediaType;
     }
 
     void OnDisable()
     {
-        //ChicagoSceneTransition.OnSceneStarted -= SetMediaType;
+        ChicagoSceneTransition.OnSceneStarted -= SetMediaType;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).x > USER_DEAD_ZONE)
-        {
-            Debug.Log("Moving Right");
-            float secondsSinceStart = currentMediaPlayer.Control.GetCurrentTimeMs() * 1000;
-            moodIndex++;
+        OVRInput.Update();
 
-        }
-        else if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).x < -USER_DEAD_ZONE)
+        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).x > USER_DEAD_ZONE && canUpdateSlider)
         {
-            Debug.Log("Moving Left");
-            moodIndex--;
+            StartCoroutine(InputCooldown());
+
+            if (moodIndex < moodSlider.maxValue)
+                moodIndex++;
+
+            UpdateUI();
+            CreateMoodLine();
+        }
+        else if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).x < -USER_DEAD_ZONE && canUpdateSlider)
+        {
+            StartCoroutine(InputCooldown());
+
+            if (moodIndex > moodSlider.minValue)
+                moodIndex--;
+
+            UpdateUI();
+            CreateMoodLine();
         }
     }
 
-    void SetMediaType(/*BaseScene baseScene*/)
+    IEnumerator InputCooldown()
     {
-        /*if (baseScene.GetType() == typeof(VideoScene))
-        {
-            currentMediaPlayer = baseScene.GetMediaPlayer();*/
-        
-        //}
+        canUpdateSlider = false;
+        yield return new WaitForSeconds(.25f);
+        canUpdateSlider = true;
     }
 
-    
+    void SetMediaType(BaseScene baseScene)
+    {
+        if (baseScene.GetType() == typeof(VideoScene))
+        {
+            currentMediaPlayer = ((VideoScene)baseScene).mediaPlayer;
+        }
+    }
 
-    //Movement for the Slider
-    //UI for the the Slider
-    //Time sense 
+    void CreateMoodLine()
+    {
+        moodInfos.Add(new MoodInfo(currentMediaPlayer?.Control.GetCurrentTimeMs() * 1000 ?? 10, moodIndex));
+    }
+
+    void UpdateUI()
+    {
+        moodSlider.value = moodIndex;
+    }
+}
+
+internal class MoodInfo{
+    public double time;
+    public byte mood;
+
+    public MoodInfo(double time, byte mood) { this.time = time; this.mood = mood; }
 }
