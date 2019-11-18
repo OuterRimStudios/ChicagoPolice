@@ -7,6 +7,7 @@ using RenderHeads.Media.AVProVideo;
 public class MoodTracking : MonoBehaviour
 {
     public Slider moodSlider;
+    public RectTransform middleBackground;
     MediaPlayer currentMediaPlayer;
 
     List<MoodInfo> moodInfos = new List<MoodInfo>();
@@ -38,7 +39,7 @@ public class MoodTracking : MonoBehaviour
     {
         OVRInput.Update();
 
-        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).x > USER_DEAD_ZONE && canUpdateSlider)
+        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).x > USER_DEAD_ZONE && canUpdateSlider || Input.GetKeyDown(KeyCode.RightArrow))
         {
             StartCoroutine(InputCooldown());
 
@@ -48,7 +49,7 @@ public class MoodTracking : MonoBehaviour
             UpdateUI();
             CreateMoodLine();
         }
-        else if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).x < -USER_DEAD_ZONE && canUpdateSlider)
+        else if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).x < -USER_DEAD_ZONE && canUpdateSlider || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             StartCoroutine(InputCooldown());
 
@@ -81,8 +82,12 @@ public class MoodTracking : MonoBehaviour
     }
 
     void UpdateUI()
-    {
+    {        
         moodSlider.value = moodIndex;
+
+        float handleX = moodSlider.handleRect.localPosition.x;
+        middleBackground.sizeDelta = new Vector2(Mathf.Abs(handleX), middleBackground.sizeDelta.y);
+        middleBackground.localPosition = new Vector2(handleX / 2, middleBackground.localPosition.y);
     }
 }
 
