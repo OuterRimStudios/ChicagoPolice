@@ -195,6 +195,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 23505289}
   m_CullTransparentMesh: 0
+--- !u!1 &40919614 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 127526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d,
+    type: 3}
+  m_PrefabInstance: {fileID: 994308811}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &64643165
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,6 +813,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 237195865}
   m_CullTransparentMesh: 0
+--- !u!1 &259715463 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 127526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d,
+    type: 3}
+  m_PrefabInstance: {fileID: 982990536}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &353820009
 GameObject:
   m_ObjectHideFlags: 0
@@ -1081,6 +1093,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mediaPlayer: {fileID: 994308812}
+  videoSphere: {fileID: 40919614}
 --- !u!1 &457674810
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,6 +1138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mediaPlayer: {fileID: 994308812}
+  videoSphere: {fileID: 40919614}
 --- !u!1 &515642602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1324,6 +1338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mediaPlayer: {fileID: 994308812}
+  videoSphere: {fileID: 1577749883}
 --- !u!1 &580898356
 GameObject:
   m_ObjectHideFlags: 0
@@ -2023,6 +2038,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Interview
       objectReference: {fileID: 0}
+    - target: {fileID: 127526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 427526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_LocalRotation.y
       value: 1
@@ -2081,7 +2100,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2327526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_FilterMode
@@ -2117,7 +2136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_Loop
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: _optionsAndroid.useFastOesPath
@@ -2450,6 +2469,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Perspective2
       objectReference: {fileID: 0}
+    - target: {fileID: 127526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 427526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0.9659258
@@ -2512,7 +2535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2327526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_FilterMode
@@ -2663,6 +2686,10 @@ PrefabInstance:
     - target: {fileID: 198420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_Name
       value: Perspective1
+      objectReference: {fileID: 0}
+    - target: {fileID: 127526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 427526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2959,7 +2986,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf56284d8f76b444ab614f77b2cf4179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mediaPlayer: {fileID: 994308812}
+  mediaPlayer: {fileID: 902737630}
+  videoSphere: {fileID: 1577749883}
 --- !u!1 &1081600598
 GameObject:
   m_ObjectHideFlags: 0
@@ -3048,6 +3076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mediaPlayer: {fileID: 902737630}
+  videoSphere: {fileID: 1577749883}
 --- !u!1 &1169756126
 GameObject:
   m_ObjectHideFlags: 0
@@ -3395,6 +3424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mediaPlayer: {fileID: 982990537}
+  videoSphere: {fileID: 259715463}
 --- !u!1 &1407733576
 GameObject:
   m_ObjectHideFlags: 0
@@ -3904,6 +3934,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1563868121}
   m_CullTransparentMesh: 0
+--- !u!1 &1577749883 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 127526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d,
+    type: 3}
+  m_PrefabInstance: {fileID: 902737629}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1579474195
 GameObject:
   m_ObjectHideFlags: 0
@@ -4245,6 +4281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mediaPlayer: {fileID: 902737630}
+  videoSphere: {fileID: 1577749883}
 --- !u!1 &1803123603
 GameObject:
   m_ObjectHideFlags: 0
@@ -5206,6 +5243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mediaPlayer: {fileID: 982990537}
+  videoSphere: {fileID: 259715463}
 --- !u!1 &2146765383
 GameObject:
   m_ObjectHideFlags: 0
