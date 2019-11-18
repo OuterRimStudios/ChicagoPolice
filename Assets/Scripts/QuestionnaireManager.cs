@@ -40,7 +40,9 @@ public class QuestionnaireManager : MonoBehaviour
             else
             {
                 //send analytics
-                //trigger scene 
+                //scene transition 
+                ChicagoSceneTransition.Instance.NextScene();
+                Reset();
             }
         }
         else if(direction == PREVIOUS_QUESTION)

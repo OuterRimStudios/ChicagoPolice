@@ -7,11 +7,18 @@ public class ChicagoSceneTransition : MonoBehaviour
     public delegate void SceneEvents(BaseScene baseScene);
     public static event SceneEvents OnSceneStarted;
 
+    public static ChicagoSceneTransition Instance;
+
     public List<BaseScene> testA;
     public List<BaseScene> testB;
 
     int sceneIndex;
     bool isTestB;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Update()
     {
@@ -21,7 +28,7 @@ public class ChicagoSceneTransition : MonoBehaviour
         else if (sceneIndex == 0 && OVRInput.GetDown(OVRInput.Button.Two))
             isTestB = true;
 
-        if (OVRInput.GetDown(OVRInput.Button.Three))
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger))
             NextScene();
     }
 
