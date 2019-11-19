@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using OuterRimStudios.Utilities;
 
 public class QuestionnaireManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class QuestionnaireManager : MonoBehaviour
     GameObject currentQuestion;
     int currentQuestionIndex;
     bool acceptInput = true;
+    const string ANALYTICS_TITLE = "QuestionnaireResponses";
 
     private void Start()
     {
@@ -40,6 +42,7 @@ public class QuestionnaireManager : MonoBehaviour
             else
             {
                 //send analytics
+                SendAnalytics();
                 //scene transition 
                 ChicagoSceneTransition.Instance.NextScene();
                 Reset();
@@ -79,5 +82,47 @@ public class QuestionnaireManager : MonoBehaviour
         acceptInput = false;
         yield return new WaitForSeconds(0.25f);
         acceptInput = true;
+    }
+
+    void SendAnalytics()
+    {
+        var data = new List<QuestionnaireData> { new QuestionnaireData{ 
+            UserID = 0,
+            VideoID = ChicagoSceneTransition.Instance.GetLastVideo() != null ? ChicagoSceneTransition.Instance.GetLastVideo().videoID : -1,
+            EmpathyAntwuan = 5,
+            EmpathyTony = 5,
+            Anger = 5
+        } };
+
+        AnalyticsUtilities.Event(ANALYTICS_TITLE, data);
+        GetAnalytics();
+    }
+
+    List<QuestionnaireData> GetAnalytics()
+    {
+        return AnalyticsUtilities.GetData<QuestionnaireData>(ANALYTICS_TITLE);
+    }
+
+    int GetCurrentUserID()
+    {
+        List<QuestionnaireData> data = GetAnalytics();
+        if (data != null && data.Count > 0)
+            return data[data.Count - 1].UserID + 1;
+        else
+            return 0;
+    }
+}
+
+public class QuestionnaireData
+{
+    public int UserID { get; set; }
+    public int VideoID { get; set; }
+    public int EmpathyAntwuan { get; set; }
+    public int EmpathyTony { get; set; }
+    public int Anger { get; set; }
+
+    public string GetValues()
+    {
+        return $"UserID: {UserID} | VideoID: {VideoID} | EmpathyAntwuan: {EmpathyAntwuan} | EmpathyTony: {EmpathyTony} | Anger: {Anger}";
     }
 }

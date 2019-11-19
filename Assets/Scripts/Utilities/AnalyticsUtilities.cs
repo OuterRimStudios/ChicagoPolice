@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,20 +24,44 @@ namespace OuterRimStudios.Utilities
             //This bool controls whether or not the Write operation adds the headers for the data. If the file already exists, then it should already have the headers and this bool should remain false.
             bool createHeaders = false;
             //Adding the date to the filename so the analytics are separated based on date.
-            string date = DateTime.Today.ToString("d").Replace('/', '-');
             string analyticsFolderPath = Path.Combine(savePath, "Analytics");
             if (!Directory.Exists(analyticsFolderPath))
                 Directory.CreateDirectory(analyticsFolderPath);
-            if (!File.Exists(analyticsFolderPath + eventName + "Analytics_" + date + ".csv"))
+            if (!File.Exists(Path.Combine(analyticsFolderPath, eventName + "Analytics.csv")))
                 createHeaders = true;
 
             //This section is writing the data to the csv file
-            using (var writer = new StreamWriter(Path.Combine(analyticsFolderPath, eventName) + "Analytics_" + date + ".csv", append: true))
+            using (var writer = new StreamWriter(Path.Combine(analyticsFolderPath, eventName) + "Analytics.csv", append: true))
             using (var csv = new CsvWriter(writer))
             {
                 csv.Configuration.HasHeaderRecord = createHeaders;
                 csv.WriteRecords(data);
             }
+        }
+
+        public static List<T> GetData<T>(string eventName)
+        {
+            string dataPath = "";
+#if UNITY_EDITOR || UNITY_STANDALONE
+            dataPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+#elif UNITY_ANDROID
+            dataPath = Application.persistentDataPath;
+#endif
+            string analyticsFolderPath = Path.Combine(dataPath, "Analytics");
+            if (!Directory.Exists(analyticsFolderPath))
+                Directory.CreateDirectory(analyticsFolderPath);
+            string filePath = Path.Combine(analyticsFolderPath, eventName + "Analytics.csv");
+            if (File.Exists(filePath))
+            {
+                using (var reader = new StreamReader(filePath))
+                using (var csv = new CsvReader(reader))
+                {
+                    var records = csv.GetRecords<T>();
+                    return records.ToList<T>();
+                }
+            }
+
+            return default(List<T>);
         }
     }
 }

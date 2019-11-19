@@ -6,6 +6,8 @@ public class VideoScene : BaseScene
     public MediaPlayer mediaPlayer;
     public GameObject videoSphere;
     public bool trackingEnabled;
+    public int videoID;
+
     public override void StartScene()
     {
         Debug.LogError("Start Scene: " + name);
