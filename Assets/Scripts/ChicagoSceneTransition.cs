@@ -28,7 +28,7 @@ public class ChicagoSceneTransition : MonoBehaviour
         else if (sceneIndex == 0 && OVRInput.GetDown(OVRInput.Button.Two))
             isTestB = true;
 
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger))
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
             NextScene();
     }
 
