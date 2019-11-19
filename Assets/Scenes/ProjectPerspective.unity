@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 23505292}
   - component: {fileID: 23505291}
   - component: {fileID: 23505293}
+  - component: {fileID: 23505294}
   m_Layer: 5
   m_Name: Tutorial
   m_TagString: Untagged
@@ -206,6 +207,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97e4e2497f4ba8c4087d5b78dae517cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &23505294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23505289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be0b491aabb24c43a04f744419bce5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &40919614 stripped
@@ -1001,6 +1014,7 @@ MonoBehaviour:
   mediaPlayer: {fileID: 902737630}
   videoSphere: {fileID: 1577749883}
   trackingEnabled: 0
+  videoID: 0
 --- !u!1 &639138135
 GameObject:
   m_ObjectHideFlags: 0
@@ -1576,6 +1590,7 @@ MonoBehaviour:
   mediaPlayer: {fileID: 994308812}
   videoSphere: {fileID: 40919614}
   trackingEnabled: 1
+  videoID: 0
 --- !u!1001 &902737629
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2220,6 +2235,7 @@ GameObject:
   - component: {fileID: 985450847}
   - component: {fileID: 985450846}
   - component: {fileID: 985450848}
+  - component: {fileID: 985450849}
   m_Layer: 5
   m_Name: Main Menu
   m_TagString: Untagged
@@ -2294,6 +2310,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97e4e2497f4ba8c4087d5b78dae517cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &985450849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985450844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37cd83e356290fd49a06afb3e4b5307f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &988025382
@@ -3081,6 +3109,7 @@ MonoBehaviour:
   mediaPlayer: {fileID: 982990537}
   videoSphere: {fileID: 259715463}
   trackingEnabled: 1
+  videoID: 0
 --- !u!1 &2016048373
 GameObject:
   m_ObjectHideFlags: 0
@@ -3467,6 +3496,7 @@ GameObject:
   - component: {fileID: 2125143371}
   - component: {fileID: 2125143370}
   - component: {fileID: 2125143369}
+  - component: {fileID: 2125143372}
   m_Layer: 5
   m_Name: IAT
   m_TagString: Untagged
@@ -3543,6 +3573,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2125143367}
   m_CullTransparentMesh: 0
+--- !u!114 &2125143372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125143367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cb416d39c8ce47479de2c5142d3cb9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &258907726608968756
 PrefabInstance:
   m_ObjectHideFlags: 0
