@@ -12,8 +12,11 @@ public class ChicagoSceneTransition : MonoBehaviour
     public List<BaseScene> testA;
     public List<BaseScene> testB;
 
+    public bool GoNext { get; private set; }
+
     int sceneIndex;
     bool isTestB;
+    bool acceptInput = true;
 
     private void Awake()
     {
@@ -28,8 +31,20 @@ public class ChicagoSceneTransition : MonoBehaviour
         else if (sceneIndex == 0 && OVRInput.GetDown(OVRInput.Button.Two))
             isTestB = true;
 
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
-            NextScene();
+        if(acceptInput && OVRInput.Get(OVRInput.Button.Three))
+        {
+            GoNext = true;
+            acceptInput = false;
+            StartCoroutine(Wait());
+        }
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForEndOfFrame();
+        GoNext = false;
+        yield return new WaitForSeconds(1);
+        acceptInput = true;
     }
 
     public void NextScene()
