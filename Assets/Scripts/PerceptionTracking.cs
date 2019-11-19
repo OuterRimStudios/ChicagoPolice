@@ -55,11 +55,9 @@ public class PerceptionTracking : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(transform.position, transform.forward, out hit, trackingLayer))
         {
-            Debug.LogError(hit.transform.tag);
             if(hit.transform.tag != lastTag)
             {
                 lastTag = hit.transform.tag;
-                Debug.LogError(lastTag + " " + (mediaPlayer.Control.GetCurrentTimeMs() / 1000));
             }
         }
 

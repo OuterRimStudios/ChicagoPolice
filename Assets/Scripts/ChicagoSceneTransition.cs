@@ -6,6 +6,7 @@ public class ChicagoSceneTransition : MonoBehaviour
 {
     public delegate void SceneEvents(BaseScene baseScene);
     public static event SceneEvents OnSceneStarted;
+    public static event SceneEvents OnSceneEnded;
 
     public static ChicagoSceneTransition Instance;
 
@@ -36,6 +37,7 @@ public class ChicagoSceneTransition : MonoBehaviour
     {
         List<BaseScene> baseScene = GetActiveTest();
         baseScene[sceneIndex].EndScene();
+        OnSceneEnded?.Invoke(baseScene[sceneIndex]);
 
         if (sceneIndex < baseScene.Count)
             sceneIndex++;
