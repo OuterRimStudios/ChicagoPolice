@@ -98,9 +98,9 @@ public class BubbleSlider : MonoBehaviour
 
         if (changeColor)
         {
-            if (stepIndex > (slider.maxValue / 2))
+            if (stepIndex > Mathf.CeilToInt(slider.maxValue / 2.0f))
                 handleImage.color = rightColor;
-            else if (stepIndex == (slider.maxValue / 2))
+            else if (stepIndex == Mathf.CeilToInt(slider.maxValue / 2.0f))
                 handleImage.color = middleColor;
             else
                 handleImage.color = leftColor;
@@ -109,7 +109,7 @@ public class BubbleSlider : MonoBehaviour
 
     public void Reset()
     {
-        stepIndex = (byte)(slider.maxValue / 2.0f);
+        stepIndex = (byte)Mathf.CeilToInt(slider.maxValue / 2.0f);
         UpdateUI();
     }
 
