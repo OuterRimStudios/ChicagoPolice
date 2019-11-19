@@ -5,13 +5,14 @@ public class VideoScene : BaseScene
 {
     public MediaPlayer mediaPlayer;
     public GameObject videoSphere;
+    public GameObject moodSlider;
     public bool trackingEnabled;
     public int videoID;
 
     public override void StartScene()
     {
-        Debug.LogError("Start Scene: " + name);
         videoSphere.SetActive(true);
+        moodSlider.SetActive(true);
         mediaPlayer.Play();
         StartCoroutine(IsPlaying());
     }
@@ -30,8 +31,8 @@ public class VideoScene : BaseScene
 
     public override void EndScene()
     {
-        Debug.LogError("End Scene Scene: " + name);
         mediaPlayer.Pause();
         videoSphere.SetActive(false);
+        moodSlider.SetActive(false);
     }
 }

@@ -1,18 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using OuterRimStudios.Utilities;
 
 public class QuestionnaireManager : MonoBehaviour
 {
     const int PREVIOUS_QUESTION = -1;
     const int NEXT_QUESTION = 1;
+    const string ANALYTICS_TITLE = "QuestionnaireResponses";
     public List<GameObject> questions;
+    public BubbleSlider responseSlider;
 
     GameObject currentQuestion;
     int currentQuestionIndex;
     bool acceptInput = true;
-    const string ANALYTICS_TITLE = "QuestionnaireResponses";
+    int[] responses;
 
     private void Start()
     {
@@ -37,8 +40,15 @@ public class QuestionnaireManager : MonoBehaviour
         StartCoroutine(ResetInput());
         if(direction == NEXT_QUESTION)
         {
+            responses[currentQuestionIndex] = responseSlider.GetSliderValue();
             if (currentQuestionIndex < questions.Count - 1)
+            {
                 currentQuestionIndex++;
+                if (responses[currentQuestionIndex] == -1)
+                    responseSlider.Reset();
+                else
+                    responseSlider.SetSliderValue(responses[currentQuestionIndex]);
+            }
             else
             {
                 //send analytics
@@ -51,7 +61,10 @@ public class QuestionnaireManager : MonoBehaviour
         else if(direction == PREVIOUS_QUESTION)
         {
             if (currentQuestionIndex > 0)
+            {
                 currentQuestionIndex--;
+                responseSlider.SetSliderValue(responses[currentQuestionIndex]);
+            }
         }
 
         if (currentQuestion != questions[currentQuestionIndex])
@@ -67,12 +80,17 @@ public class QuestionnaireManager : MonoBehaviour
         foreach (GameObject go in questions)
             go.SetActive(false);
 
+        responses = new int[questions.Count];
+        for(int i = 0; i < responses.Length; i++)
+            responses[i] = -1;
+
         currentQuestion = questions[0];
         currentQuestion.SetActive(true);
 
         currentQuestionIndex = 0;
 
         //Reset Answer slider
+        responseSlider.Reset();
 
         acceptInput = true;
     }
@@ -89,9 +107,9 @@ public class QuestionnaireManager : MonoBehaviour
         var data = new List<QuestionnaireData> { new QuestionnaireData{ 
             UserID = 0,
             VideoID = ChicagoSceneTransition.Instance.GetLastVideo() != null ? ChicagoSceneTransition.Instance.GetLastVideo().videoID : -1,
-            EmpathyAntwuan = 5,
-            EmpathyTony = 5,
-            Anger = 5
+            EmpathyAntwuan = responses[0],
+            EmpathyTony = responses[1],
+            Anger = responses[2]
         } };
 
         AnalyticsUtilities.Event(ANALYTICS_TITLE, data);
