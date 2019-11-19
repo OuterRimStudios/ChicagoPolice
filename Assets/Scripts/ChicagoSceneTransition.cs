@@ -34,7 +34,7 @@ public class ChicagoSceneTransition : MonoBehaviour
 
     public void NextScene()
     {
-        List<BaseScene> baseScene = GetActiveScene();
+        List<BaseScene> baseScene = GetActiveTest();
         baseScene[sceneIndex].EndScene();
 
         if (sceneIndex < baseScene.Count)
@@ -46,7 +46,27 @@ public class ChicagoSceneTransition : MonoBehaviour
         OnSceneStarted?.Invoke(baseScene[sceneIndex]);
     }
 
-    List<BaseScene> GetActiveScene()
+    public BaseScene GetActiveScene()
+    {
+        return isTestB ? testB[sceneIndex] : testA[sceneIndex];
+    }
+    public BaseScene GetPreviousScene()
+    {
+        return isTestB ? testB[sceneIndex - 1] : testA[sceneIndex - 1];
+    }
+
+    public VideoScene GetLastVideo()
+    {
+        for(int i = sceneIndex; i > 0; i--)
+        {
+            if (GetActiveTest()[i].GetType() == typeof(VideoScene))
+                return GetActiveTest()[i] as VideoScene;
+        }
+
+        return null;
+    }
+
+    List<BaseScene> GetActiveTest()
     {
         return isTestB ? testB : testA;
     }
