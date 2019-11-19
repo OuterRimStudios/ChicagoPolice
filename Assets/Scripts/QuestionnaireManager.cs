@@ -41,7 +41,7 @@ public class QuestionnaireManager : MonoBehaviour
             {
                 //send analytics
                 //scene transition 
-                ChicagoSceneTransition.Instance.NextScene();
+                //ChicagoSceneTransition.Instance.NextScene();
                 Reset();
             }
         }
