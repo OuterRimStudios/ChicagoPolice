@@ -13,11 +13,13 @@ public class MoodTracking : MonoBehaviour
     void OnEnable()
     {
         ChicagoSceneTransition.OnSceneStarted += SetMediaType;
+        ChicagoSceneTransition.OnSceneEnded += SendMoodAnalytics;
     }
 
     void OnDisable()
     {
         ChicagoSceneTransition.OnSceneStarted -= SetMediaType;
+        ChicagoSceneTransition.OnSceneEnded -= SendMoodAnalytics;
     }    
 
     void SetMediaType(BaseScene baseScene)
@@ -26,12 +28,27 @@ public class MoodTracking : MonoBehaviour
         {
             currentMediaPlayer = ((VideoScene)baseScene).mediaPlayer;
         }
+        else
+        {
+            currentMediaPlayer = null;
+        }
     }
 
-    public void CreateMoodLine(Slider sliderValue)
+    void SendMoodAnalytics(BaseScene baseScene)
     {
-        moodInfos.Add(new MoodInfo(currentMediaPlayer?.Control.GetCurrentTimeMs() * 1000 ?? -1, sliderValue?.value ?? -1));
+        if (baseScene.GetType() == typeof(VideoScene))
+        {
+            //send the moodInfos over to wherever we're storing them
+        }
     }
+
+    public void CreateMoodLine(Slider slider)
+    {
+        if (currentMediaPlayer != null)
+        {
+            moodInfos.Add(new MoodInfo(currentMediaPlayer.Control.GetCurrentTimeMs() / 1000, slider?.value ?? -1));
+        }        
+    }    
 }
 
 internal class MoodInfo
