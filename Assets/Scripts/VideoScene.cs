@@ -19,6 +19,7 @@ public class VideoScene : BaseScene
 
     IEnumerator IsPlaying()
     {
+        yield return new WaitForSeconds(1);
         yield return new WaitUntil(() => !mediaPlayer.Control.IsPlaying());
         ChicagoSceneTransition.Instance.NextScene();
     }
