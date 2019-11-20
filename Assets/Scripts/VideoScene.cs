@@ -19,13 +19,6 @@ public class VideoScene : BaseScene
 
     IEnumerator IsPlaying()
     {
-        if(OVRInput.Get(OVRInput.Button.Three))
-        {
-            ChicagoSceneTransition.Instance.NextScene();
-            yield break;
-        }
-
-        yield return new WaitForSeconds(1);
         yield return new WaitUntil(() => !mediaPlayer.Control.IsPlaying());
         ChicagoSceneTransition.Instance.NextScene();
     }
