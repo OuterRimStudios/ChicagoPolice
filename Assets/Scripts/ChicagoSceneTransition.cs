@@ -36,10 +36,14 @@ public class ChicagoSceneTransition : MonoBehaviour
         baseScene[sceneIndex].EndScene();
         OnSceneEnded?.Invoke(baseScene[sceneIndex]);
 
-        if (sceneIndex < baseScene.Count)
+        Debug.LogError("Before :" + sceneIndex);
+
+        if (sceneIndex < baseScene.Count - 1)
             sceneIndex++;
         else
             sceneIndex = 0;
+
+        Debug.LogError("After :" + sceneIndex);
 
         baseScene[sceneIndex].StartScene();
         OnSceneStarted?.Invoke(baseScene[sceneIndex]);
