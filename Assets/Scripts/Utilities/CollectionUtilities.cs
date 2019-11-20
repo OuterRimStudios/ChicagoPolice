@@ -130,26 +130,5 @@ namespace OuterRimStudios.Utilities
             return tempList.ToArray();
         }
         #endregion
-
-        #region GetUniqueFlags
-        /// <summary>
-        /// This function takes all of the flagged elements in a flagged enum and convert it into an IEnumerable
-        /// </summary>
-        /// <param name="flags">The flagged Enum to convert.</param>
-        /// <returns></returns>
-        public static IEnumerable<T> GetUniqueFlags<T>(Enum flags)
-        {
-            int flag = 1;
-            foreach (var value in Enum.GetValues(flags.GetType()).Cast<T>())
-            {
-                long bits = Convert.ToInt64(value);
-                while (flag < bits)
-                    flag <<= 1;
-
-                if (flag == bits)
-                    yield return value;
-            }
-        }
-        #endregion
     }
 }

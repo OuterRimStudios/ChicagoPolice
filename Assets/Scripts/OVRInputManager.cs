@@ -26,7 +26,7 @@ public class OVRInputManager : MonoBehaviour
 
     private void Start()
     {
-        IEnumerable<OVRInput.Button> enumerable = CollectionUtilities.GetUniqueFlags<OVRInput.Button>(activeButtons);
+        IEnumerable<OVRInput.Button> enumerable = GetUniqueFlags(activeButtons);
         buttons = enumerable.ToList();
 
         foreach (OVRInput.Button button in buttons)
@@ -47,6 +47,20 @@ public class OVRInputManager : MonoBehaviour
                 inputStates[button] = true;
                 OnButtonUp?.Invoke(button);
             }
+        }
+    }
+
+    public IEnumerable<OVRInput.Button> GetUniqueFlags(Enum flags)
+    {
+        int flag = 1;
+        foreach (var value in Enum.GetValues(flags.GetType()).Cast<OVRInput.Button>())
+        {
+            long bits = Convert.ToInt64(value);
+            while (flag < bits)
+                flag <<= 1;
+
+            if (flag == bits && flags.HasFlag(value))
+                yield return value;
         }
     }
 }

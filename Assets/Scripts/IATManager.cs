@@ -11,7 +11,7 @@ public class IATManager : MonoBehaviour
 
     private void Start()
     {
-        IEnumerable<OVRInput.Button> enumerable = CollectionUtilities.GetUniqueFlags<OVRInput.Button>(acceptedInput);
+        IEnumerable<OVRInput.Button> enumerable = OVRInputManager.Instance.GetUniqueFlags(acceptedInput);
         activeInput = enumerable.ToList();
     }
 
