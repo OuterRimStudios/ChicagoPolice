@@ -221,6 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be0b491aabb24c43a04f744419bce5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  acceptedInput: 4
 --- !u!1 &40919614 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 127526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d,
@@ -404,18 +405,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 112761139}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &112761143 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5655674179304564103, guid: 51f1e953bd84df44889cdacce3c642c4,
-    type: 3}
-  m_PrefabInstance: {fileID: 112761139}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 112761142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &112761144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,10 +418,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeColor: 0
-  middleColor: {r: 0.19241722, g: 0.5864629, b: 0.8679245, a: 1}
-  rightColor: {r: 0.8490566, g: 0.3419811, b: 0.33241364, a: 1}
-  leftColor: {r: 0.26673195, g: 0.6981132, b: 0.29739347, a: 1}
-  slider: {fileID: 112761143}
+  middleColor: {r: 0, g: 0, b: 0, a: 0}
+  rightColor: {r: 0, g: 0, b: 0, a: 0}
+  leftColor: {r: 0, g: 0, b: 0, a: 0}
+  slider: {fileID: 0}
   nodeImage: {fileID: 8510938723274818986, guid: 11777a88e3eab4d439718ea1f320be6a,
     type: 3}
   sliderArea: {fileID: 112761141}
@@ -1923,7 +1912,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_VideoPath
-      value: Monologue Tony Ver 1.mp4
+      value: V_03_Police_h265_Comp_FX _mos.mp4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
@@ -1960,6 +1949,7 @@ GameObject:
   - component: {fileID: 963194230}
   - component: {fileID: 963194232}
   - component: {fileID: 963194233}
+  - component: {fileID: 963194231}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2100,6 +2090,20 @@ MonoBehaviour:
   - {fileID: 633987595}
   - {fileID: 398747221}
   - {fileID: 2125143369}
+--- !u!114 &963194231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21fed5e5882269343afcea6da56e9a54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeButtons: 15
+  onButtonDownWaitTime: 0.1
 --- !u!114 &963194232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2392,7 +2396,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_VideoPath
-      value: A 3 Take 3 Ver 5 4K.mp4
+      value: V_03_Police_h265_Comp_FX _mos.mp4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
@@ -2515,6 +2519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37cd83e356290fd49a06afb3e4b5307f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  acceptedInput: 4
 --- !u!1001 &988025382
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2816,7 +2821,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_VideoPath
-      value: A1 Take 8 Ver 5 4K.mp4
+      value: V_03_Police_h265_Comp_FX _mos.mp4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
@@ -3355,18 +3360,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1708191254}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1708191257 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5655674179304564103, guid: 51f1e953bd84df44889cdacce3c642c4,
-    type: 3}
-  m_PrefabInstance: {fileID: 1708191254}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1708191258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1708191258 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5655674179304564105, guid: 51f1e953bd84df44889cdacce3c642c4,
@@ -3385,11 +3378,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d52dbb031ca9bd488d0ee46e1c5949b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changeColor: 1
-  middleColor: {r: 0.19241722, g: 0.5864629, b: 0.8679245, a: 1}
-  rightColor: {r: 0.8490566, g: 0.3419811, b: 0.33241364, a: 1}
-  leftColor: {r: 0.26673195, g: 0.6981132, b: 0.29739347, a: 1}
-  slider: {fileID: 1708191257}
+  changeColor: 0
+  middleColor: {r: 0, g: 0, b: 0, a: 0}
+  rightColor: {r: 0, g: 0, b: 0, a: 0}
+  leftColor: {r: 0, g: 0, b: 0, a: 0}
+  slider: {fileID: 0}
   nodeImage: {fileID: 8510938723274818986, guid: 11777a88e3eab4d439718ea1f320be6a,
     type: 3}
   sliderArea: {fileID: 1708191256}
@@ -3987,6 +3980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb416d39c8ce47479de2c5142d3cb9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  acceptedInput: 4
 --- !u!1001 &258907726608968756
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4698,7 +4692,9 @@ MonoBehaviour:
   - {fileID: 391259197338502848}
   - {fileID: 391259198277075337}
   - {fileID: 391259198323005006}
-  responseSlider: {fileID: 112761144}
+  responseSlider: {fileID: 0}
+  nextQuestionButton: 4
+  previousQuestionButton: 8
 --- !u!224 &391259198122574038
 RectTransform:
   m_ObjectHideFlags: 0

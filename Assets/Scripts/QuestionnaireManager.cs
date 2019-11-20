@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using OuterRimStudios.Utilities;
+using System.Linq;
 
 public class QuestionnaireManager : MonoBehaviour
 {
@@ -12,9 +13,11 @@ public class QuestionnaireManager : MonoBehaviour
     public List<GameObject> questions;
     public BubbleSlider responseSlider;
 
+    public OVRInput.Button nextQuestionButton;
+    public OVRInput.Button previousQuestionButton;
+
     GameObject currentQuestion;
     int currentQuestionIndex;
-    bool acceptInput = true;
     int[] responses;
 
     private void Start()
@@ -22,22 +25,27 @@ public class QuestionnaireManager : MonoBehaviour
         Reset();
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        OVRInput.Update();
-        if (acceptInput)
-        {
-            if (OVRInput.Get(OVRInput.Button.Three))
-                ChangeQuestion(NEXT_QUESTION);
-            else if (OVRInput.Get(OVRInput.Button.Four))
-                ChangeQuestion(PREVIOUS_QUESTION);
-        }
+        OVRInputManager.OnButtonDown += OnButtonDown;
+    }
+
+    private void OnDisable()
+    {
+        OVRInputManager.OnButtonDown -= OnButtonDown;
+    }
+
+    void OnButtonDown(OVRInput.Button button)
+    {
+        if (button == nextQuestionButton)
+            ChangeQuestion(NEXT_QUESTION);
+        else if(button == previousQuestionButton)
+            ChangeQuestion(PREVIOUS_QUESTION);
     }
 
     //Cycles the questions based on the direction [-1 = previous | 1 = next]
     void ChangeQuestion(int direction)
     {
-        StartCoroutine(ResetInput());
         if(direction == NEXT_QUESTION)
         {
             responses[currentQuestionIndex] = responseSlider.GetSliderValue();
@@ -91,16 +99,8 @@ public class QuestionnaireManager : MonoBehaviour
 
         //Reset Answer slider
         responseSlider.Reset();
-
-        acceptInput = true;
     }
-
-    IEnumerator ResetInput()
-    {
-        acceptInput = false;
-        yield return new WaitForSeconds(0.25f);
-        acceptInput = true;
-    }
+    
 
     void SendAnalytics()
     {
