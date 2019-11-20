@@ -4692,7 +4692,7 @@ MonoBehaviour:
   - {fileID: 391259197338502848}
   - {fileID: 391259198277075337}
   - {fileID: 391259198323005006}
-  responseSlider: {fileID: 0}
+  responseSlider: {fileID: 112761144}
   nextQuestionButton: 4
   previousQuestionButton: 8
 --- !u!224 &391259198122574038
