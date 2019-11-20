@@ -60,10 +60,10 @@ public class MoodTracking : MonoBehaviour
 
 internal class MoodInfo
 {
-    public int UserID;
-    public int VideoID;
-    public double Time;
-    public float Mood;
+    public int UserID { get; set; }
+    public int VideoID { get; set; }
+    public double Time { get; set; }
+    public float Mood { get; set; }
 
     public MoodInfo(int userId, int videoId, double time, float mood) { UserID = userId; VideoID = videoId; Time = time; Mood = mood; }
 }
