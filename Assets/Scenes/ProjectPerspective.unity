@@ -308,7 +308,7 @@ PrefabInstance:
     - target: {fileID: 5655674179304564104, guid: 51f1e953bd84df44889cdacce3c642c4,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 160
+      value: 315
       objectReference: {fileID: 0}
     - target: {fileID: 5655674179304564104, guid: 51f1e953bd84df44889cdacce3c642c4,
         type: 3}
@@ -385,6 +385,37 @@ PrefabInstance:
       propertyPath: m_MaxValue
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5655674179341700832, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655674179341700832, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655674179341700832, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655674177728017337, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655674177728017337, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d0d36075426e2cd4f9c9eeb342f21c28,
+        type: 3}
+    - target: {fileID: 5655674177728017337, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51f1e953bd84df44889cdacce3c642c4, type: 3}
 --- !u!224 &112761140 stripped
@@ -405,6 +436,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 112761139}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &112761143 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5655674179304564103, guid: 51f1e953bd84df44889cdacce3c642c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 112761139}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112761142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &112761144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,12 +464,14 @@ MonoBehaviour:
   middleColor: {r: 0, g: 0, b: 0, a: 0}
   rightColor: {r: 0, g: 0, b: 0, a: 0}
   leftColor: {r: 0, g: 0, b: 0, a: 0}
-  slider: {fileID: 0}
+  slider: {fileID: 112761143}
   nodeImage: {fileID: 8510938723274818986, guid: 11777a88e3eab4d439718ea1f320be6a,
     type: 3}
-  sliderArea: {fileID: 112761141}
-  sizeDif: 0
-  isHandleBehind: 0
+  sliderArea: {fileID: 112761140}
+  bubbleParent: {fileID: 112761141}
+  changeSize: 1
+  sizeDif: -10
+  isHandleInFront: 1
   userDeadZone: 0.2
   controllerDelayTime: 0.25
 --- !u!1 &133597282
@@ -3284,7 +3329,7 @@ PrefabInstance:
     - target: {fileID: 5655674179304564104, guid: 51f1e953bd84df44889cdacce3c642c4,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 160
+      value: 315
       objectReference: {fileID: 0}
     - target: {fileID: 5655674179304564104, guid: 51f1e953bd84df44889cdacce3c642c4,
         type: 3}
@@ -3346,6 +3391,37 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CreateMoodLine
       objectReference: {fileID: 0}
+    - target: {fileID: 5655674179341700832, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655674179341700832, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655674179341700832, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655674177728017337, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d0d36075426e2cd4f9c9eeb342f21c28,
+        type: 3}
+    - target: {fileID: 5655674177728017337, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655674177728017337, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51f1e953bd84df44889cdacce3c642c4, type: 3}
 --- !u!224 &1708191255 stripped
@@ -3360,6 +3436,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1708191254}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1708191257 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5655674179304564103, guid: 51f1e953bd84df44889cdacce3c642c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1708191254}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708191258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1708191258 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5655674179304564105, guid: 51f1e953bd84df44889cdacce3c642c4,
@@ -3378,16 +3466,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d52dbb031ca9bd488d0ee46e1c5949b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changeColor: 0
-  middleColor: {r: 0, g: 0, b: 0, a: 0}
-  rightColor: {r: 0, g: 0, b: 0, a: 0}
-  leftColor: {r: 0, g: 0, b: 0, a: 0}
-  slider: {fileID: 0}
+  changeColor: 1
+  middleColor: {r: 0.24688502, g: 0.5133347, b: 0.7169812, a: 1}
+  rightColor: {r: 0.8301887, g: 0.34069067, b: 0.34069067, a: 1}
+  leftColor: {r: 0.2474635, g: 0.7830189, b: 0.2755103, a: 1}
+  slider: {fileID: 1708191257}
   nodeImage: {fileID: 8510938723274818986, guid: 11777a88e3eab4d439718ea1f320be6a,
     type: 3}
-  sliderArea: {fileID: 1708191256}
+  sliderArea: {fileID: 1708191255}
+  bubbleParent: {fileID: 1708191256}
+  changeSize: 1
   sizeDif: 0
-  isHandleBehind: 0
+  isHandleInFront: 1
   userDeadZone: 0.2
   controllerDelayTime: 0.25
 --- !u!1 &1727917534
