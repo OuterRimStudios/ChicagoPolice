@@ -3153,6 +3153,41 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5655674179304564103, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655674179304564103, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655674179304564103, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655674179304564103, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 963194233}
+    - target: {fileID: 5655674179304564103, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CreateMoodLine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655674179304564103, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.UI.Slider, UnityEngine.UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655674179304564103, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1708191256}
     - target: {fileID: 7051638917293765965, guid: 51f1e953bd84df44889cdacce3c642c4,
         type: 3}
       propertyPath: amplitude
@@ -3171,6 +3206,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1708191254}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1708191256 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5655674179304564103, guid: 51f1e953bd84df44889cdacce3c642c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1708191254}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708191258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1708191258 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5655674179304564105, guid: 51f1e953bd84df44889cdacce3c642c4,

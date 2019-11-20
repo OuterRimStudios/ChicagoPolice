@@ -7,9 +7,9 @@ public class HapticInput : MonoBehaviour
 {
     public XRNode controllerInput = XRNode.LeftHand;
     [Range(0, 1f)]
-    public float amplitude = .3f;
+    public float amplitude = .2f;
     [Range(0, 1f)]
-    public float duration = .5f;
+    public float duration = .2f;
 
     public void PerformHapticRumble()
     {
