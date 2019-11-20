@@ -8,17 +8,20 @@ public class BubbleSlider : MonoBehaviour
 {
     [Header("UI Variables")]
     public bool changeColor;
-    public Color middleColor;
-    public Color rightColor;
-    public Color leftColor;
+    [ConditionalHide("changeColor", true)] public Color middleColor;
+    [ConditionalHide("changeColor", true)] public Color rightColor;
+    [ConditionalHide("changeColor", true)] public Color leftColor;
 
     public Slider slider;
     public Image nodeImage;
     public RectTransform sliderArea;
+    [Tooltip("The transform that the bubbles will be childed under.")]
+    public Transform bubbleParent;
 
+    public bool changeSize = true;
     [Tooltip("Setting how much smaller the slider nodes are compared to the handle")]
-    public float sizeDif = 0f;
-    public bool isHandleBehind = false;
+    [ConditionalHide("changeSize", true)] public float sizeDif = 0f;
+    public bool isHandleInFront = false;
 
     RectTransform handle;
     Image handleImage;
@@ -78,17 +81,20 @@ public class BubbleSlider : MonoBehaviour
         handle.sizeDelta = new Vector2(incrementValue, 0);
 
         float startingValue = -(sliderWidth / 2);
-        for (int i = 0; i < slider.maxValue; i++)
+        for (int i = (int)(slider.minValue - 1); i < slider.maxValue; i++)
         {
-            var spawnedRectTransform = Instantiate(nodeImage, sliderArea.transform).GetComponent<RectTransform>();
+            var spawnedRectTransform = Instantiate(nodeImage, bubbleParent).GetComponent<RectTransform>();
             spawnedRectTransform.localPosition = new Vector2(startingValue, nodeImage.GetComponent<RectTransform>().localPosition.y);
-            spawnedRectTransform.sizeDelta = new Vector2(incrementValue + sizeDif, sizeDif);
-            spawnedRectTransform.anchorMin = new Vector2(.5f, 0);
-            spawnedRectTransform.anchorMax = new Vector2(.5f, 1);
+            if (changeSize)
+            {
+                spawnedRectTransform.sizeDelta = new Vector2(incrementValue + sizeDif, sizeDif);
+                spawnedRectTransform.anchorMin = new Vector2(.5f, 0);
+                spawnedRectTransform.anchorMax = new Vector2(.5f, 1);
+            }
             startingValue += incrementValue;
         }
 
-        if (isHandleBehind)
+        if (isHandleInFront)
             slider.handleRect.gameObject.transform.SetAsLastSibling();
     }
 
