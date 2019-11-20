@@ -3028,6 +3028,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoodSlider
       objectReference: {fileID: 0}
+    - target: {fileID: 5655674179304564105, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5655674179304564104, guid: 51f1e953bd84df44889cdacce3c642c4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3136,17 +3141,27 @@ PrefabInstance:
     - target: {fileID: 5655674177728017338, guid: 51f1e953bd84df44889cdacce3c642c4,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5655674177728017338, guid: 51f1e953bd84df44889cdacce3c642c4,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5655674177728017338, guid: 51f1e953bd84df44889cdacce3c642c4,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7051638917293765965, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: amplitude
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7051638917293765965, guid: 51f1e953bd84df44889cdacce3c642c4,
+        type: 3}
+      propertyPath: duration
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51f1e953bd84df44889cdacce3c642c4, type: 3}
