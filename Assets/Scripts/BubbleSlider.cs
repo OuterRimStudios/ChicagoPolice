@@ -7,11 +7,12 @@ using RenderHeads.Media.AVProVideo;
 public class BubbleSlider : MonoBehaviour
 {
     [Header("UI Variables")]
-    public Color neutralColor;
-    public Color tenseColor;
-    public Color relaxedColor;
+    public bool changeColor;
+    public Color middleColor;
+    public Color rightColor;
+    public Color leftColor;
 
-    public Slider moodSlider;
+    public Slider slider;
     public Image nodeImage;
     public RectTransform sliderArea;
 
@@ -27,19 +28,17 @@ public class BubbleSlider : MonoBehaviour
     [SerializeField]
     float controllerDelayTime = .25f;
 
-    byte moodIndex = 6;
+    byte stepIndex = 6;
     bool canUpdateSlider = true;
 
-    // Start is called before the first frame update
     void Start()
     {
-        handle = moodSlider.handleRect;
+        handle = slider.handleRect;
         handleImage = handle.GetComponent<Image>();
-        UpdateUI();
+        Reset();
         SetUI();
     }    
 
-    // Update is called once per frame
     void Update()
     {
         OVRInput.Update();
@@ -48,8 +47,8 @@ public class BubbleSlider : MonoBehaviour
         {
             StartCoroutine(InputCooldown());
 
-            if (moodIndex < moodSlider.maxValue)
-                moodIndex++;
+            if (stepIndex < slider.maxValue)
+                stepIndex++;
 
             UpdateUI();
         }
@@ -57,8 +56,8 @@ public class BubbleSlider : MonoBehaviour
         {
             StartCoroutine(InputCooldown());
 
-            if (moodIndex > moodSlider.minValue)
-                moodIndex--;
+            if (stepIndex > slider.minValue)
+                stepIndex--;
 
             UpdateUI();
         }
@@ -74,12 +73,12 @@ public class BubbleSlider : MonoBehaviour
     void SetUI()
     {        
         float sliderWidth = sliderArea.GetComponent<RectTransform>().sizeDelta.x;
-        float incrementValue = sliderWidth / (moodSlider.maxValue - moodSlider.minValue);
+        float incrementValue = sliderWidth / (slider.maxValue - slider.minValue);
 
         handle.sizeDelta = new Vector2(incrementValue, 0);
 
         float startingValue = -(sliderWidth / 2);
-        for (int i = 0; i < moodSlider.maxValue; i++)
+        for (int i = 0; i < slider.maxValue; i++)
         {
             var spawnedRectTransform = Instantiate(nodeImage, sliderArea.transform).GetComponent<RectTransform>();
             spawnedRectTransform.localPosition = new Vector2(startingValue, nodeImage.GetComponent<RectTransform>().localPosition.y);
@@ -90,24 +89,37 @@ public class BubbleSlider : MonoBehaviour
         }
 
         if (isHandleBehind)
-            moodSlider.handleRect.gameObject.transform.SetAsLastSibling();
+            slider.handleRect.gameObject.transform.SetAsLastSibling();
     }
 
     void UpdateUI()
     {        
-        moodSlider.value = moodIndex;
+        slider.value = stepIndex;
 
-        if (moodIndex > 6)
+        if (changeColor)
         {
-            handleImage.color = tenseColor;
+            if (stepIndex > Mathf.CeilToInt(slider.maxValue / 2.0f))
+                handleImage.color = rightColor;
+            else if (stepIndex == Mathf.CeilToInt(slider.maxValue / 2.0f))
+                handleImage.color = middleColor;
+            else
+                handleImage.color = leftColor;
         }
-        else if (moodIndex == 6)
-        {
-            handleImage.color = neutralColor;
-        }
-        else
-        {
-            handleImage.color = relaxedColor;
-        }        
+    }
+
+    public void Reset()
+    {
+        stepIndex = (byte)Mathf.CeilToInt(slider.maxValue / 2.0f);
+        UpdateUI();
+    }
+
+    public int GetSliderValue()
+    {
+        return (int)slider.value;
+    }
+
+    public void SetSliderValue(int value)
+    {
+        slider.value = value;
     }
 }
