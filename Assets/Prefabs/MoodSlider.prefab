@@ -394,6 +394,7 @@ GameObject:
   - component: {fileID: 5655674179304564104}
   - component: {fileID: 5655674179304564103}
   - component: {fileID: 1708191259}
+  - component: {fileID: 7051638917293765965}
   m_Layer: 5
   m_Name: MoodSlider
   m_TagString: Untagged
@@ -471,12 +472,12 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: CreateMoodLine
-        m_Mode: 2
+      - m_Target: {fileID: 7051638917293765965}
+        m_MethodName: PerformHapticRumble
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 5655674179304564103}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Slider, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -498,7 +499,6 @@ MonoBehaviour:
   middleColor: {r: 0, g: 0.6480901, b: 0.8962264, a: 1}
   rightColor: {r: 1, g: 0, b: 0, a: 1}
   leftColor: {r: 0.2474635, g: 0.7830189, b: 0.2755103, a: 1}
-  slider: {fileID: 5655674179304564103}
   nodeImage: {fileID: 8510938723274818986, guid: 11777a88e3eab4d439718ea1f320be6a,
     type: 3}
   sliderArea: {fileID: 5655674179304564104}
@@ -508,6 +508,21 @@ MonoBehaviour:
   isHandleInFront: 1
   userDeadZone: 0.2
   controllerDelayTime: 0.25
+--- !u!114 &7051638917293765965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5655674179304564105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b9062e0958435e43a2eb8f344b14019, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerInput: 4
+  amplitude: 0.15
+  duration: 0.5
 --- !u!1 &5655674179341700833
 GameObject:
   m_ObjectHideFlags: 0

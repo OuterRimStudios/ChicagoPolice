@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using OuterRimStudios.Utilities;
 using RenderHeads.Media.AVProVideo;
 
 public class BubbleSlider : MonoBehaviour
@@ -12,7 +13,6 @@ public class BubbleSlider : MonoBehaviour
     [ConditionalHide("changeColor", true)] public Color rightColor;
     [ConditionalHide("changeColor", true)] public Color leftColor;
 
-    public Slider slider;
     public Image nodeImage;
     public RectTransform sliderArea;
     [Tooltip("The transform that the bubbles will be childed under.")]
@@ -23,6 +23,7 @@ public class BubbleSlider : MonoBehaviour
     [ConditionalHide("changeSize", true)] public float sizeDif = 0f;
     public bool isHandleInFront = false;
 
+    Slider slider;
     RectTransform handle;
     Image handleImage;
 
@@ -31,11 +32,19 @@ public class BubbleSlider : MonoBehaviour
     [SerializeField]
     float controllerDelayTime = .25f;
 
-    byte stepIndex = 6;
+    byte stepIndex;
+    byte middleIndex;
     bool canUpdateSlider = true;
 
     void Start()
     {
+        slider = GetComponent<Slider>();
+
+        if (slider == null)
+        {
+            Debug.LogError($"Hey! {name} has a BubbleSlider without a Slider component.");
+        }
+
         handle = slider.handleRect;
         handleImage = handle.GetComponent<Image>();
         Reset();
@@ -44,14 +53,11 @@ public class BubbleSlider : MonoBehaviour
 
     void Update()
     {
-        OVRInput.Update();
-
         if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).x > userDeadZone && canUpdateSlider || Input.GetKeyDown(KeyCode.RightArrow))
         {
             StartCoroutine(InputCooldown());
 
-            if (stepIndex < slider.maxValue)
-                stepIndex++;
+            stepIndex = stepIndex.IncrementClamped(slider.maxValue);
 
             UpdateUI();
         }
@@ -59,8 +65,7 @@ public class BubbleSlider : MonoBehaviour
         {
             StartCoroutine(InputCooldown());
 
-            if (stepIndex > slider.minValue)
-                stepIndex--;
+            stepIndex = stepIndex.DecrementClamped(slider.minValue);            
 
             UpdateUI();
         }
@@ -68,7 +73,7 @@ public class BubbleSlider : MonoBehaviour
 
     IEnumerator InputCooldown()
     {
-        canUpdateSlider = false;
+        canUpdateSlider = false;        
         yield return new WaitForSeconds(controllerDelayTime);
         canUpdateSlider = true;
     }   
@@ -104,9 +109,9 @@ public class BubbleSlider : MonoBehaviour
 
         if (changeColor)
         {
-            if (stepIndex > Mathf.CeilToInt(slider.maxValue / 2.0f))
+            if (stepIndex > middleIndex)
                 handleImage.color = rightColor;
-            else if (stepIndex == Mathf.CeilToInt(slider.maxValue / 2.0f))
+            else if (stepIndex == middleIndex)
                 handleImage.color = middleColor;
             else
                 handleImage.color = leftColor;
@@ -115,7 +120,8 @@ public class BubbleSlider : MonoBehaviour
 
     public void Reset()
     {
-        stepIndex = (byte)Mathf.CeilToInt(slider.maxValue / 2.0f);
+        middleIndex = (byte)Mathf.CeilToInt(slider.maxValue / 2.0f);
+        stepIndex = middleIndex;
         UpdateUI();
     }
 
