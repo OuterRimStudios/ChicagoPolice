@@ -46,10 +46,14 @@ public class BubbleSlider : MonoBehaviour
         }
 
         handle = slider.handleRect;
-        handleImage = handle.GetComponent<Image>();
-        Reset();
+        handleImage = handle.GetComponent<Image>();        
         SetUI();
-    }    
+    }
+
+    void OnEnable()
+    {
+        Reset();
+    }
 
     void Update()
     {
