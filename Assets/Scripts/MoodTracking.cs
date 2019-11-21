@@ -29,9 +29,11 @@ public class MoodTracking : MonoBehaviour
     {
         if (baseScene.GetType() == typeof(VideoScene))
         {
-            VideoScene videoScene = ((VideoScene)baseScene);
+            VideoScene videoScene = ((VideoScene)baseScene);            
             currentMediaPlayer = videoScene.mediaPlayer;
             videoId = videoScene.videoID;
+            moodInfos.Clear();
+            moodInfos.Add(new MoodInfo(0, videoId));
         }
         else
         {
@@ -65,5 +67,15 @@ internal class MoodInfo
     public double Time { get; set; }
     public float Mood { get; set; }
 
+    readonly int neutralValue = 6;
+
     public MoodInfo(int userId, int videoId, double time, float mood) { UserID = userId; VideoID = videoId; Time = time; Mood = mood; }
+
+    public MoodInfo(int userId, int videoId)
+    {
+        UserID = userId;
+        VideoID = videoId;
+        Time = 0;
+        Mood = neutralValue;
+    }
 }

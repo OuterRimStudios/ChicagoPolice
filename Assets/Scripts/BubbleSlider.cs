@@ -36,7 +36,7 @@ public class BubbleSlider : MonoBehaviour
     byte middleIndex;
     bool canUpdateSlider = true;
 
-    void Start()
+    void Awake()
     {
         slider = GetComponent<Slider>();
 
@@ -46,10 +46,14 @@ public class BubbleSlider : MonoBehaviour
         }
 
         handle = slider.handleRect;
-        handleImage = handle.GetComponent<Image>();
-        Reset();
+        handleImage = handle.GetComponent<Image>();        
         SetUI();
-    }    
+    }
+
+    void OnEnable()
+    {
+        Reset();
+    }
 
     void Update()
     {
@@ -132,6 +136,7 @@ public class BubbleSlider : MonoBehaviour
 
     public void SetSliderValue(int value)
     {
+        stepIndex = (byte)value;
         slider.value = value;
     }
 }
