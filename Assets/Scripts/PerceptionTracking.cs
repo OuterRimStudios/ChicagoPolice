@@ -62,7 +62,7 @@ public class PerceptionTracking : MonoBehaviour
                 lastTag = hit.transform.tag;
                 float time = mediaPlayer.Control.GetCurrentTimeMs() / 1000;
                 Debug.LogError(time + " " + lastTag);
-                var data = new List<object> { new { UserID = 0, VideoID = videoScene.videoID, Time = time, Value = lastTag } };
+                var data = new List<object> { new { UserID = 0, VideoID = videoScene.videoID, Time = time, Location = lastTag } };
                 AnalyticsUtilities.Event("PerceptionTracking", data);
             }
         }
