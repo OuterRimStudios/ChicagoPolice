@@ -36,7 +36,7 @@ public class BubbleSlider : MonoBehaviour
     byte middleIndex;
     bool canUpdateSlider = true;
 
-    void Start()
+    void Awake()
     {
         slider = GetComponent<Slider>();
 
