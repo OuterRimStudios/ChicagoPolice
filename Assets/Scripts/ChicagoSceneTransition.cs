@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿//Hector sux
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using OuterRimStudios.Utilities;
 
 public class ChicagoSceneTransition : MonoBehaviour
 {
@@ -12,22 +14,76 @@ public class ChicagoSceneTransition : MonoBehaviour
 
     public List<BaseScene> testA;
     public List<BaseScene> testB;
+    HapticInput hapticInput;
+
+    public float holdTime = 1.5f;
 
     int sceneIndex;
     bool isTestB;
+    float timer;
+    bool buttonHeld;
 
     private void Awake()
     {
         Instance = this;
     }
 
+    private void Start()
+    {
+        hapticInput = GetComponent<HapticInput>();
+        ResetTime();
+    }
+
+    private void OnEnable()
+    {
+        OVRInputManager.OnButtonDown += OnButtonDown;
+        OVRInputManager.OnButtonUp += OnButtonUp;
+    }
+
+    private void OnDisable()
+    {
+        OVRInputManager.OnButtonDown -= OnButtonDown;
+        OVRInputManager.OnButtonUp -= OnButtonUp;
+    }
+
     private void Update()
     {
         OVRInput.Update();
-        if (sceneIndex == 0 && OVRInput.GetDown(OVRInput.Button.One))
-            isTestB = false;
-        else if (sceneIndex == 0 && OVRInput.GetDown(OVRInput.Button.Two))
-            isTestB = true;
+        if (sceneIndex == 0)
+            CheckCountdown();
+    }
+
+    void OnButtonDown(OVRInput.Button button)
+    {
+        if (button == OVRInput.Button.One || button == OVRInput.Button.Two)
+        {
+            isTestB = button == OVRInput.Button.Two ? true : false;
+            buttonHeld = true;
+        }
+    }
+
+    void OnButtonUp(OVRInput.Button button)
+    {
+        if (button == OVRInput.Button.One || button == OVRInput.Button.Two)
+            buttonHeld = false;
+    }
+
+    void CheckCountdown()
+    {
+        if (buttonHeld)
+        {
+            if (MathUtilities.Timer(ref timer))
+                NextScene();
+            else
+                hapticInput.PerformHapticRumble();
+        }
+        else
+            ResetTime();
+    }
+
+    void ResetTime()
+    {
+        timer = holdTime;
     }
 
     public void NextScene()
@@ -36,14 +92,10 @@ public class ChicagoSceneTransition : MonoBehaviour
         baseScene[sceneIndex].EndScene();
         OnSceneEnded?.Invoke(baseScene[sceneIndex]);
 
-        Debug.LogError("Before :" + sceneIndex);
-
         if (sceneIndex < baseScene.Count - 1)
             sceneIndex++;
         else
             sceneIndex = 0;
-
-        Debug.LogError("After :" + sceneIndex);
 
         baseScene[sceneIndex].StartScene();
         OnSceneStarted?.Invoke(baseScene[sceneIndex]);

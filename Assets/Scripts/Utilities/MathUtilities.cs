@@ -376,5 +376,24 @@ namespace OuterRimStudios.Utilities
             return (byte)((double)count).DecrementClamped(minValue);
         }
         #endregion
+
+        #region Time Stuff
+
+
+        public static bool Timer(ref float currentTime)
+        {
+            if (currentTime > 0)
+            {
+                if ((currentTime - Time.deltaTime) > 0)
+                    currentTime -= Time.deltaTime;
+                else
+                    currentTime = 0;
+
+                return false;
+            }
+            else
+                return true;
+        }
+        #endregion
     }
 }
