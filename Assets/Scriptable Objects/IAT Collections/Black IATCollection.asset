@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6682517b839056e469a4a7e249bc5011, type: 3}
-  m_Name: White IATCollection
+  m_Name: Black IATCollection
   m_EditorClassIdentifier: 
-  key: 0
+  key: 1
   IATobjects:
   - {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
