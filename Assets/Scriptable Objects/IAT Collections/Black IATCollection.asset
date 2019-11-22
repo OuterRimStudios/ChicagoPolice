@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: 1
   IATobjects:
-  - {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 21300000, guid: 99e2846e72f06dc4fb23e772dca82743, type: 3}
+  - {fileID: 21300000, guid: ba356641f61a2fd44980734ced9d23f2, type: 3}
+  - {fileID: 21300000, guid: a027ce4a060e22444905f9ae23c6e37f, type: 3}
+  - {fileID: 21300000, guid: 63f6450ce306f9a498f0da4b7994537d, type: 3}
+  - {fileID: 21300000, guid: e96eacbc7afe1eb4d9ec1ecfc5c399c6, type: 3}
+  - {fileID: 21300000, guid: b8a3a99fa10de754b9e3992d35b3f05e, type: 3}
+  - {fileID: 21300000, guid: 753a42410381579498c06084ba655a86, type: 3}

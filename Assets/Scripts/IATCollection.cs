@@ -12,6 +12,6 @@ public enum IATKeys
 {
     White,
     Black,
-    Safe,
-    Dangerous
+    Good,
+    Bad
 };

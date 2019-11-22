@@ -10,6 +10,7 @@ using System;
 
 public class IATManager : MonoBehaviour
 {
+    const string ANALYTICS_TITLE = "IATResults";
     public IATCollection[] collections;
     public Round[] rounds;
 
@@ -26,11 +27,14 @@ public class IATManager : MonoBehaviour
     int nextSpriteIndex;
     int nextRoundIndex;
 
-    [SerializeField, Header("Control Variables")]
-    double userDeadZone = .2;
+    List<IATInfo> iatInfos = new List<IATInfo>();
+    string userID = "0";
+    float itemStartTime;    //Time when the current image was displayed
 
     private void OnEnable()
     {
+        iatInfos.Clear();
+        itemStartTime = 0;
         OVRInputManager.OnButtonDown += OnButtonDown;
     }
 
@@ -47,7 +51,10 @@ public class IATManager : MonoBehaviour
     void NextRound()
     {
         if (nextRoundIndex == rounds.Length)
+        {
+            SendAnalytics();
             ChicagoSceneTransition.Instance.NextScene();
+        }
         else
             SetUpRound(rounds[nextRoundIndex]);
 
@@ -109,12 +116,14 @@ public class IATManager : MonoBehaviour
             choiceImage.sprite = allSprites[nextSpriteIndex];
             nextSpriteIndex++;
         }
+
+        itemStartTime = Time.time;
     }
 
 #if UNITY_EDITOR || UNITY_STANDALONE
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))       //OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).x > userDeadZone || 
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             if (rightSprites.Contains(choiceImage.sprite))
             {
@@ -127,7 +136,7 @@ public class IATManager : MonoBehaviour
                 wrongAnswerPrompt.SetActive(true);
             }
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))   //OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).x < -userDeadZone || 
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             if (leftSprites.Contains(choiceImage.sprite))
             {
@@ -149,6 +158,7 @@ public class IATManager : MonoBehaviour
             if (leftSprites.Contains(choiceImage.sprite))
             {
                 //Store Stats
+                CreateIATInfo(choiceImage.sprite.name, "answer");
                 NextItem();
             }
             else
@@ -161,6 +171,7 @@ public class IATManager : MonoBehaviour
             if (rightSprites.Contains(choiceImage.sprite))
             {
                 //Store Stats
+                CreateIATInfo(choiceImage.sprite.name, "answer");
                 NextItem();
             }
             else
@@ -171,9 +182,40 @@ public class IATManager : MonoBehaviour
         }
     }
 
+    void CreateIATInfo(string imageID, string answer)
+    {
+        float responseTime = Time.time - itemStartTime;
+        iatInfos.Add(new IATInfo(userID, "a", imageID, nextRoundIndex - 1, answer, responseTime));
+    }
+
+    void SendAnalytics()
+    {
+        AnalyticsUtilities.Event(ANALYTICS_TITLE, iatInfos);
+    }
+
     List<Sprite> GetSpritesFromEnum(IATKeys key)
     {
         var collection = collections.FirstOrDefault(x => x.key == key)?.IATobjects;
         return collection;
+    }
+}
+
+public class IATInfo
+{
+    public string UserID { get; set; }
+    public string GroupID { get; set; }
+    public string ImageID { get; set; }
+    public int RoundID { get; set; }
+    public string Answer { get; set; }
+    public float ResponseTime { get; set; }
+
+    public IATInfo(string userID, string groupID, string imageID, int roundID, string answer, float responseTime)
+    {
+        UserID = userID;
+        GroupID = groupID;
+        ImageID = imageID;
+        RoundID = roundID;
+        Answer = answer;
+        ResponseTime = responseTime;
     }
 }
