@@ -7,6 +7,9 @@ using System.Linq;
 public class IATManager : MonoBehaviour
 {
     public OVRInput.Button acceptedInput;
+    public IATCollection[] iATCollection;
+    public Round[] rounds;
+
     List<OVRInput.Button> activeInput = new List<OVRInput.Button>();
 
     private void Start()
