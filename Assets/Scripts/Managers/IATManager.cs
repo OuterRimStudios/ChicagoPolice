@@ -68,7 +68,7 @@ public class IATManager : MonoBehaviour
         rightText.text = "";
         leftText.text = "";
 
-        foreach (IATKeys key in round.rightKeys)
+        foreach (IATKey key in round.rightKeys)
         {
             rightSprites.AddRange(GetSpritesFromEnum(key));
             if (rightText.text == "")
@@ -81,7 +81,7 @@ public class IATManager : MonoBehaviour
             }
         }
 
-        foreach (IATKeys key in round.leftKeys)
+        foreach (IATKey key in round.leftKeys)
         {
             leftSprites.AddRange(GetSpritesFromEnum(key));
             if (leftText.text == "")
@@ -128,6 +128,7 @@ public class IATManager : MonoBehaviour
             if (rightSprites.Contains(choiceImage.sprite))
             {
                 //Store Stats
+                CreateIATInfo(choiceImage.sprite.name, GetItemKey(choiceImage.sprite).ToString());
                 NextItem();
             }
             else
@@ -141,6 +142,7 @@ public class IATManager : MonoBehaviour
             if (leftSprites.Contains(choiceImage.sprite))
             {
                 //Store Stats
+                CreateIATInfo(choiceImage.sprite.name, GetItemKey(choiceImage.sprite).ToString());
                 NextItem();
             }
             else
@@ -158,7 +160,7 @@ public class IATManager : MonoBehaviour
             if (leftSprites.Contains(choiceImage.sprite))
             {
                 //Store Stats
-                CreateIATInfo(choiceImage.sprite.name, "answer");
+                CreateIATInfo(choiceImage.sprite.name, GetItemKey(choiceImage.sprite).ToString());
                 NextItem();
             }
             else
@@ -171,7 +173,7 @@ public class IATManager : MonoBehaviour
             if (rightSprites.Contains(choiceImage.sprite))
             {
                 //Store Stats
-                CreateIATInfo(choiceImage.sprite.name, "answer");
+                CreateIATInfo(choiceImage.sprite.name, GetItemKey(choiceImage.sprite).ToString());
                 NextItem();
             }
             else
@@ -188,12 +190,21 @@ public class IATManager : MonoBehaviour
         iatInfos.Add(new IATInfo(userID, "a", imageID, nextRoundIndex - 1, answer, responseTime));
     }
 
+    IATKey GetItemKey(Sprite item)
+    {
+        foreach(IATCollection collection in collections)
+            if (collection.IATobjects.Contains(item))
+                return collection.key;
+
+        return IATKey.None;
+    }
+
     void SendAnalytics()
     {
         AnalyticsUtilities.Event(ANALYTICS_TITLE, iatInfos);
     }
 
-    List<Sprite> GetSpritesFromEnum(IATKeys key)
+    List<Sprite> GetSpritesFromEnum(IATKey key)
     {
         var collection = collections.FirstOrDefault(x => x.key == key)?.IATobjects;
         return collection;

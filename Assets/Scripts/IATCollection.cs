@@ -4,14 +4,15 @@ using UnityEngine;
 [CreateAssetMenu (fileName = "IATCollection")]
 public class IATCollection : ScriptableObject
 {
-    public IATKeys key;
+    public IATKey key;
     public List<Sprite> IATobjects;       
 }
 
-public enum IATKeys
+public enum IATKey
 {
     White,
     Black,
     Good,
-    Bad
+    Bad,
+    None
 };
