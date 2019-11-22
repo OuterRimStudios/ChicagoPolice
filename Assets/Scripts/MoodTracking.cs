@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
 using OuterRimStudios.Utilities;
 using RenderHeads.Media.AVProVideo;
 
@@ -11,6 +12,7 @@ public class MoodTracking : MonoBehaviour
 
     List<MoodInfo> moodInfos = new List<MoodInfo>();
 
+    string userID = "0";
     int videoId;
 
     void OnEnable()
@@ -33,7 +35,7 @@ public class MoodTracking : MonoBehaviour
             currentMediaPlayer = videoScene.mediaPlayer;
             videoId = videoScene.videoID;
             moodInfos.Clear();
-            moodInfos.Add(new MoodInfo(0, videoId));
+            moodInfos.Add(new MoodInfo(userID, videoId));
         }
         else
         {
@@ -55,23 +57,33 @@ public class MoodTracking : MonoBehaviour
     {
         if (currentMediaPlayer != null)
         {
-            moodInfos.Add(new MoodInfo(0, videoId, currentMediaPlayer.Control.GetCurrentTimeMs() / 1000, slider?.value ?? -1));
+            double time = currentMediaPlayer.Control.GetCurrentTimeMs() / 1000;
+            float mood = slider?.value ?? -1;
+            moodInfos.Add(new MoodInfo(userID, videoId, time, mood));
+
+            Analytics.CustomEvent("MoodTracking", new Dictionary<string, object>
+            {
+                { "UserID", userID },
+                { "VideoID", videoId },
+                { "Time", time },
+                { "Mood", mood }
+            });
         }        
     }    
 }
 
 internal class MoodInfo
 {
-    public int UserID { get; set; }
+    public string UserID { get; set; }
     public int VideoID { get; set; }
     public double Time { get; set; }
     public float Mood { get; set; }
 
     readonly int neutralValue = 6;
 
-    public MoodInfo(int userId, int videoId, double time, float mood) { UserID = userId; VideoID = videoId; Time = time; Mood = mood; }
+    public MoodInfo(string userId, int videoId, double time, float mood) { UserID = userId; VideoID = videoId; Time = time; Mood = mood; }
 
-    public MoodInfo(int userId, int videoId)
+    public MoodInfo(string userId, int videoId)
     {
         UserID = userId;
         VideoID = videoId;

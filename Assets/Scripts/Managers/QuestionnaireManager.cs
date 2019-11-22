@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
 using OuterRimStudios.Utilities;
-using System.Linq;
 
 public class QuestionnaireManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class QuestionnaireManager : MonoBehaviour
     GameObject currentQuestion;
     int currentQuestionIndex;
     int[] responses;
+    string userID = "0";
 
     private void Start()
     {
@@ -104,36 +106,36 @@ public class QuestionnaireManager : MonoBehaviour
 
     void SendAnalytics()
     {
+        int videoID = ChicagoSceneTransition.Instance.GetLastVideo() != null ? ChicagoSceneTransition.Instance.GetLastVideo().videoID : -1;
         var data = new List<QuestionnaireData> { new QuestionnaireData{ 
-            UserID = 0,
-            VideoID = ChicagoSceneTransition.Instance.GetLastVideo() != null ? ChicagoSceneTransition.Instance.GetLastVideo().videoID : -1,
+            UserID = userID,
+            VideoID = videoID,
             EmpathyAntwuan = responses[0],
             EmpathyTony = responses[1],
             Anger = responses[2]
         } };
 
         AnalyticsUtilities.Event(ANALYTICS_TITLE, data);
-        GetAnalytics();
+
+        Analytics.CustomEvent(ANALYTICS_TITLE, new Dictionary<string, object>
+        {
+            { "UserID", userID},
+            { "VideoID", videoID},
+            { "EmpathyAntwaun", responses[0]},
+            { "EmpathyTony", responses[1]},
+            { "Anger", responses[2]}
+        });
     }
 
     List<QuestionnaireData> GetAnalytics()
     {
         return AnalyticsUtilities.GetData<QuestionnaireData>(ANALYTICS_TITLE);
     }
-
-    int GetCurrentUserID()
-    {
-        List<QuestionnaireData> data = GetAnalytics();
-        if (data != null && data.Count > 0)
-            return data[data.Count - 1].UserID + 1;
-        else
-            return 0;
-    }
 }
 
 public class QuestionnaireData
 {
-    public int UserID { get; set; }
+    public string UserID { get; set; }
     public int VideoID { get; set; }
     public int EmpathyAntwuan { get; set; }
     public int EmpathyTony { get; set; }

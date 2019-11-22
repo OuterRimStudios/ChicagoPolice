@@ -737,10 +737,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 9c2d3816-0ba6-485b-b86e-d5bec00df580
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: ChicagoPolice
+  organizationId: outerrimstudios
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

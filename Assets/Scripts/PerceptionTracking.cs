@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 using RenderHeads.Media.AVProVideo;
 using OuterRimStudios.Utilities;
 public class PerceptionTracking : MonoBehaviour
@@ -13,6 +14,7 @@ public class PerceptionTracking : MonoBehaviour
     string lastTag;
     MediaPlayer mediaPlayer;
     VideoScene videoScene;
+    string userID = "0";
     void OnEnable()
     {
         ChicagoSceneTransition.OnSceneStarted += Initialize;
@@ -62,8 +64,15 @@ public class PerceptionTracking : MonoBehaviour
                 lastTag = hit.transform.tag;
                 float time = mediaPlayer.Control.GetCurrentTimeMs() / 1000;
                 Debug.LogError(time + " " + lastTag);
-                var data = new List<object> { new { UserID = 0, VideoID = videoScene.videoID, Time = time, Location = lastTag } };
+                var data = new List<object> { new { UserID = userID, VideoID = videoScene.videoID, Time = time, Location = lastTag } };
                 AnalyticsUtilities.Event("PerceptionTracking", data);
+
+                Analytics.CustomEvent("PerceptionTracking", new Dictionary<string, object>{
+                    { "UserID", userID},
+                    { "VideoID", videoScene.videoID},
+                    { "Time", time},
+                    { "Location", lastTag}
+                });
             }
         }
 
