@@ -29,6 +29,16 @@ public class IATManager : MonoBehaviour
     [SerializeField, Header("Control Variables")]
     double userDeadZone = .2;
 
+    private void OnEnable()
+    {
+        OVRInputManager.OnButtonDown += OnButtonDown;
+    }
+
+    private void OnDisable()
+    {
+        OVRInputManager.OnButtonDown -= OnButtonDown;
+    }
+
     private void Start()
     {       
         NextRound();
@@ -101,9 +111,10 @@ public class IATManager : MonoBehaviour
         }
     }
 
+#if UNITY_EDITOR || UNITY_STANDALONE
     void Update()
     {
-        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).x > userDeadZone || Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow))       //OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).x > userDeadZone || 
         {
             if (rightSprites.Contains(choiceImage.sprite))
             {
@@ -116,7 +127,7 @@ public class IATManager : MonoBehaviour
                 wrongAnswerPrompt.SetActive(true);
             }
         }
-        else if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).x < -userDeadZone || Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))   //OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).x < -userDeadZone || 
         {
             if (leftSprites.Contains(choiceImage.sprite))
             {
@@ -125,6 +136,36 @@ public class IATManager : MonoBehaviour
             }
             else
             {
+                wrongAnswerPrompt.SetActive(true);
+            }
+        }
+    }
+#endif
+
+    void OnButtonDown(OVRInput.Button button)
+    {
+        if(button == OVRInput.Button.PrimaryThumbstickLeft)
+        {
+            if (leftSprites.Contains(choiceImage.sprite))
+            {
+                //Store Stats
+                NextItem();
+            }
+            else
+            {
+                wrongAnswerPrompt.SetActive(true);
+            }
+        }
+        else if(button == OVRInput.Button.PrimaryThumbstickRight)
+        {
+            if (rightSprites.Contains(choiceImage.sprite))
+            {
+                //Store Stats
+                NextItem();
+            }
+            else
+            {
+                //Display "Nope"
                 wrongAnswerPrompt.SetActive(true);
             }
         }

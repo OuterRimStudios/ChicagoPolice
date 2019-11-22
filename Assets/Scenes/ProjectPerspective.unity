@@ -2055,7 +2055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21fed5e5882269343afcea6da56e9a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeButtons: 15
+  activeButtons: 983055
   onButtonDownWaitTime: 0.1
 --- !u!114 &963194232
 MonoBehaviour:
