@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu (fileName = "IATCollection" + "")]
+[CreateAssetMenu (fileName = "IATCollection")]
 public class IATCollection : ScriptableObject
 {
-    public IATKeys keys;
-    public List<GameObject> IATobjects;   
+    public IATKeys key;
+    public List<Sprite> IATobjects;       
 }
 
 public enum IATKeys

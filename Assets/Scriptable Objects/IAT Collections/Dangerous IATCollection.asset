@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6682517b839056e469a4a7e249bc5011, type: 3}
   m_Name: Dangerous IATCollection
   m_EditorClassIdentifier: 
-  keys: 0
-  IATobjects: []
+  key: 1
+  IATobjects:
+  - {fileID: 21300000, guid: fd7cf88ee9b05f94f84bd7686a9669a6, type: 3}
+  - {fileID: 21300000, guid: a26663690a6580440963aa46e582c35b, type: 3}
+  - {fileID: 21300000, guid: d929e2a65a1cbc54dacdbdcdb33165e2, type: 3}
