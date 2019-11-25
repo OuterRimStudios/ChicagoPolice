@@ -8,9 +8,9 @@ using OuterRimStudios.Utilities;
 public class OVRInputManager : MonoBehaviour
 {
     public static OVRInputManager Instance;
-    public delegate void InputEvents(OVRInput.Button key);
-    public static event InputEvents OnButtonDown;
-    public static event InputEvents OnButtonUp;
+    public delegate void ButtonEvents(OVRInput.Button key);
+    public static event ButtonEvents OnButtonDown;
+    public static event ButtonEvents OnButtonUp;
 
     public OVRInput.Button activeButtons;
     public float onButtonDownWaitTime = .1f;

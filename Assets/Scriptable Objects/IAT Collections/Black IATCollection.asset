@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6682517b839056e469a4a7e249bc5011, type: 3}
+  m_Name: Black IATCollection
+  m_EditorClassIdentifier: 
+  key: 1
+  IATobjects:
+  - {fileID: 21300000, guid: ba356641f61a2fd44980734ced9d23f2, type: 3}
+  - {fileID: 21300000, guid: a027ce4a060e22444905f9ae23c6e37f, type: 3}
+  - {fileID: 21300000, guid: 63f6450ce306f9a498f0da4b7994537d, type: 3}
+  - {fileID: 21300000, guid: e96eacbc7afe1eb4d9ec1ecfc5c399c6, type: 3}
+  - {fileID: 21300000, guid: b8a3a99fa10de754b9e3992d35b3f05e, type: 3}
+  - {fileID: 21300000, guid: 753a42410381579498c06084ba655a86, type: 3}
