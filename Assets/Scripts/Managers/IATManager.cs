@@ -1,6 +1,4 @@
-﻿//Hector sux
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using OuterRimStudios.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,6 +30,7 @@ public class IATManager : MonoBehaviour
     int nextSpriteIndex;
     int nextRoundIndex;
     int tutorialIndex;
+    int occasionIndex;
 
     List<IATInfo> iatInfos = new List<IATInfo>();
     string userID = "0";
@@ -89,7 +88,7 @@ public class IATManager : MonoBehaviour
 
     void OnButtonDown(OVRInput.Button button)
     {
-        if (button == OVRInput.Button.Three && waitingToStart)
+        if (button == OVRInput.Button.PrimaryThumbstick && waitingToStart)
         {
             if (introPanel.activeInHierarchy)
             {
@@ -135,8 +134,8 @@ public class IATManager : MonoBehaviour
     {
         waitingToStart = true;
 
-        tutorialText.text = "Push the joystick left to match the items that belong to the category " + ConvertKeysToText(rounds[nextRoundIndex].leftKeys) + "." 
-                             +"\nPush the joystick right to match the items that belong to the category " + ConvertKeysToText(rounds[nextRoundIndex].rightKeys) + ".";
+        tutorialText.text = "Push the joystick <b>left</b> to match the items that belong to the category " + ConvertKeysToText(rounds[nextRoundIndex].leftKeys) + "." 
+                             +"\n\nPush the joystick <b>right</b> to match the items that belong to the category " + ConvertKeysToText(rounds[nextRoundIndex].rightKeys) + ".";
 
         tutorialText.transform.parent.gameObject.SetActive(true);
     }
@@ -186,6 +185,7 @@ public class IATManager : MonoBehaviour
             if (nextRoundIndex == rounds.Length)
             {
                 SendAnalytics();
+                occasionIndex++;
                 ChicagoSceneTransition.Instance.NextScene();
                 ResetIAT();
             }
@@ -211,7 +211,7 @@ public class IATManager : MonoBehaviour
     void CreateIATInfo(string imageID, string answer)
     {
         float responseTime = Time.time - itemStartTime;
-        iatInfos.Add(new IATInfo(userID, "a", imageID, nextRoundIndex - 1, answer, responseTime));
+        iatInfos.Add(new IATInfo(userID, "a", occasionIndex, imageID, nextRoundIndex - 1, answer, responseTime));
     }
 
     void SendAnalytics()
@@ -235,11 +235,11 @@ public class IATManager : MonoBehaviour
         {            
             if (text == "")
             {
-                text = key.ToString();
+                text = $"<b>{key.ToString()}</b>";
             }
             else
             {
-                text += $" or {key.ToString()}";
+                text += $" or <b>{key.ToString()}</b>";
             }
         }
 
@@ -257,15 +257,17 @@ public class IATInfo
 {
     public string UserID { get; set; }
     public string GroupID { get; set; }
+    public int OccassionID { get; set; }
     public string ImageID { get; set; }
     public int RoundID { get; set; }
     public string Answer { get; set; }
     public float ResponseTime { get; set; }
 
-    public IATInfo(string userID, string groupID, string imageID, int roundID, string answer, float responseTime)
+    public IATInfo(string userID, string groupID, int occasionID, string imageID, int roundID, string answer, float responseTime)
     {
         UserID = userID;
         GroupID = groupID;
+        OccassionID = occasionID;
         ImageID = imageID;
         RoundID = roundID;
         Answer = answer;
