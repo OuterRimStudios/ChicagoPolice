@@ -88,7 +88,7 @@ public class IATManager : MonoBehaviour
 
     void OnButtonDown(OVRInput.Button button)
     {
-        if (button == OVRInput.Button.PrimaryThumbstick && waitingToStart)
+        if (button == OVRInput.Button.Three && waitingToStart)
         {
             if (introPanel.activeInHierarchy)
             {
