@@ -9,9 +9,10 @@ public class BubbleSlider : MonoBehaviour
 {
     [Header("UI Variables")]
     public bool changeColor;
-    [ConditionalHide("changeColor", true)] public Color middleColor;
+    [ConditionalHide("changeColor", true)] public bool isNotGradient;
     [ConditionalHide("changeColor", true)] public Color rightColor;
     [ConditionalHide("changeColor", true)] public Color leftColor;
+    [ConditionalHide("isNotGradient", true)] public Color middleColor;
 
     public Image nodeImage;
     public RectTransform sliderArea;
@@ -113,12 +114,21 @@ public class BubbleSlider : MonoBehaviour
 
         if (changeColor)
         {
-            if (stepIndex > middleIndex)
-                handleImage.color = rightColor;
-            else if (stepIndex == middleIndex)
-                handleImage.color = middleColor;
+            if (isNotGradient)
+            {
+                if (stepIndex > middleIndex)
+                    handleImage.color = rightColor;
+                else if (stepIndex == middleIndex)
+                    handleImage.color = middleColor;
+                else
+                    handleImage.color = leftColor;
+            }
             else
-                handleImage.color = leftColor;
+            {
+                float ratio = 1.0f / slider.maxValue;
+
+                handleImage.color = Color.Lerp(leftColor, rightColor, ratio * stepIndex);
+            }            
         }
     }
 

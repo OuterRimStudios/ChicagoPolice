@@ -25,7 +25,7 @@ public class HapticInput : MonoBehaviour
         }
         else
         {
-            Debug.LogError("These controllers don't actually rumble");
+            Debug.Log("These controllers don't actually rumble");
         }
     }
 }
