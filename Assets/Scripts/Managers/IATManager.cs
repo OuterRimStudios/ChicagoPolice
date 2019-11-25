@@ -20,16 +20,24 @@ public class IATManager : MonoBehaviour
     public TextMeshProUGUI leftText;
     public TextMeshProUGUI rightText;
 
+    [Space]
+    public GameObject introPanel;
+    public GameObject iatBase;
+    public TextMeshProUGUI tutorialText;
+
     List<Sprite> leftSprites = new List<Sprite>();
     List<Sprite> rightSprites = new List<Sprite>();
     List<Sprite> allSprites = new List<Sprite>();
 
     int nextSpriteIndex;
     int nextRoundIndex;
+    int tutorialIndex;
 
     List<IATInfo> iatInfos = new List<IATInfo>();
     string userID = "0";
     float itemStartTime;    //Time when the current image was displayed
+
+    bool waitingToStart;
 
     private void OnEnable()
     {
@@ -44,83 +52,10 @@ public class IATManager : MonoBehaviour
     }
 
     private void Start()
-    {       
-        NextRound();
-    }
-
-    void NextRound()
     {
-        if (nextRoundIndex == rounds.Length)
-        {
-            SendAnalytics();
-            ChicagoSceneTransition.Instance.NextScene();
-        }
-        else
-            SetUpRound(rounds[nextRoundIndex]);
-
-        nextRoundIndex++;
+        waitingToStart = true;
     }
 
-    void SetUpRound(Round round)
-    {
-        rightSprites.Clear();
-        leftSprites.Clear();
-        rightText.text = "";
-        leftText.text = "";
-
-        foreach (IATKey key in round.rightKeys)
-        {
-            rightSprites.AddRange(GetSpritesFromEnum(key));
-            if (rightText.text == "")
-            {
-                rightText.text = key.ToString();
-            }
-            else
-            {
-                rightText.text += "\nor\n" + key.ToString();
-            }
-        }
-
-        foreach (IATKey key in round.leftKeys)
-        {
-            leftSprites.AddRange(GetSpritesFromEnum(key));
-            if (leftText.text == "")
-            {
-                leftText.text = key.ToString();
-            }
-            else
-            {
-                leftText.text += "\nor\n" + key.ToString();
-            }
-        }            
-
-        allSprites.Clear();
-        allSprites.AddRange(rightSprites);
-        allSprites.AddRange(leftSprites);
-
-        allSprites = allSprites.OrderBy(a => Guid.NewGuid()).ToList();
-        NextItem();
-    }
-
-    void NextItem()
-    {
-        wrongAnswerPrompt.SetActive(false);
-
-        if (nextSpriteIndex == allSprites.Count)
-        {
-            nextSpriteIndex = 0;
-            NextRound();
-        }
-        else
-        {
-            choiceImage.sprite = allSprites[nextSpriteIndex];
-            nextSpriteIndex++;
-        }
-
-        itemStartTime = Time.time;
-    }
-
-#if UNITY_EDITOR || UNITY_STANDALONE
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -151,11 +86,23 @@ public class IATManager : MonoBehaviour
             }
         }
     }
-#endif
 
     void OnButtonDown(OVRInput.Button button)
     {
-        if(button == OVRInput.Button.PrimaryThumbstickLeft)
+        if (button == OVRInput.Button.Three && waitingToStart)
+        {
+            if (introPanel.activeInHierarchy)
+            {
+                introPanel.SetActive(false);
+                ActivateTutorial();
+            }
+            else
+            {
+                waitingToStart = false;
+                NextRound();
+            }
+        }
+        else if (button == OVRInput.Button.PrimaryThumbstickLeft)
         {
             if (leftSprites.Contains(choiceImage.sprite))
             {
@@ -168,7 +115,7 @@ public class IATManager : MonoBehaviour
                 wrongAnswerPrompt.SetActive(true);
             }
         }
-        else if(button == OVRInput.Button.PrimaryThumbstickRight)
+        else if (button == OVRInput.Button.PrimaryThumbstickRight)
         {
             if (rightSprites.Contains(choiceImage.sprite))
             {
@@ -184,24 +131,119 @@ public class IATManager : MonoBehaviour
         }
     }
 
+    void ActivateTutorial()
+    {
+        waitingToStart = true;
+
+        tutorialText.text = "Push the joystick left to match the items that belong to the category " + ConvertKeysToText(rounds[nextRoundIndex].leftKeys) + "." 
+                             +"\nPush the joystick right to match the items that belong to the category " + ConvertKeysToText(rounds[nextRoundIndex].rightKeys) + ".";
+
+        tutorialText.transform.parent.gameObject.SetActive(true);
+    }
+
+    void NextRound()
+    {
+        SetUpRound(rounds[nextRoundIndex]);
+        nextRoundIndex++;
+    }
+
+    void SetUpRound(Round round)
+    {
+        tutorialText.transform.parent.gameObject.SetActive(false);
+        iatBase.SetActive(true);
+        rightSprites.Clear();
+        leftSprites.Clear();
+        rightText.text = ConvertKeysToText(round.rightKeys);
+        leftText.text = ConvertKeysToText(round.leftKeys);
+
+        foreach (IATKey key in round.rightKeys)
+        {
+            rightSprites.AddRange(GetSpritesFromEnum(key));
+        }
+
+        foreach (IATKey key in round.leftKeys)
+        {
+            leftSprites.AddRange(GetSpritesFromEnum(key));
+        }
+
+        allSprites.Clear();
+        allSprites.AddRange(rightSprites);
+        allSprites.AddRange(leftSprites);
+
+        allSprites = allSprites.OrderBy(a => Guid.NewGuid()).ToList();
+        NextItem();
+    }
+
+    void NextItem()
+    {
+        wrongAnswerPrompt.SetActive(false);
+
+        if (nextSpriteIndex == allSprites.Count)
+        {
+            nextSpriteIndex = 0;
+            iatBase.SetActive(false);
+
+            if (nextRoundIndex == rounds.Length)
+            {
+                SendAnalytics();
+                ChicagoSceneTransition.Instance.NextScene();
+                ResetIAT();
+            }
+            else
+                ActivateTutorial();
+        }
+        else
+        {
+            choiceImage.sprite = allSprites[nextSpriteIndex];
+            nextSpriteIndex++;
+        }
+
+        itemStartTime = Time.time;
+    }
+
+    void ResetIAT()
+    {
+        introPanel.SetActive(true);
+        waitingToStart = true;
+        nextRoundIndex = 0;
+    }
+
     void CreateIATInfo(string imageID, string answer)
     {
         float responseTime = Time.time - itemStartTime;
         iatInfos.Add(new IATInfo(userID, "a", imageID, nextRoundIndex - 1, answer, responseTime));
     }
 
+    void SendAnalytics()
+    {
+        AnalyticsUtilities.Event(ANALYTICS_TITLE, iatInfos);
+    }
+
     IATKey GetItemKey(Sprite item)
     {
-        foreach(IATCollection collection in collections)
+        foreach (IATCollection collection in collections)
             if (collection.IATobjects.Contains(item))
                 return collection.key;
 
         return IATKey.None;
     }
 
-    void SendAnalytics()
+    string ConvertKeysToText(List<IATKey> keys)
     {
-        AnalyticsUtilities.Event(ANALYTICS_TITLE, iatInfos);
+        string text = "";
+        foreach (IATKey key in keys)
+        {            
+            if (text == "")
+            {
+                text = key.ToString();
+            }
+            else
+            {
+                text += $" or {key.ToString()}";
+            }
+        }
+
+        return text;
     }
 
     List<Sprite> GetSpritesFromEnum(IATKey key)
