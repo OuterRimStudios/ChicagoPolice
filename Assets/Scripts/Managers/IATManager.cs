@@ -29,7 +29,6 @@ public class IATManager : MonoBehaviour
 
     int nextSpriteIndex;
     int nextRoundIndex;
-    int tutorialIndex;
     int occasionIndex;
 
     List<IATInfo> iatInfos = new List<IATInfo>();
@@ -53,11 +52,26 @@ public class IATManager : MonoBehaviour
     private void Start()
     {
         waitingToStart = true;
+        SetActiveTextObjects(false);
     }
 
+    //Really only being used for local testing
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.Space) && waitingToStart)
+        {
+            if (introPanel.activeInHierarchy)
+            {
+                introPanel.SetActive(false);
+                ActivateTutorial();
+            }
+            else
+            {
+                waitingToStart = false;
+                NextRound();
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             if (rightSprites.Contains(choiceImage.sprite))
             {
@@ -138,22 +152,24 @@ public class IATManager : MonoBehaviour
                              +"\n\nPush the joystick <b>right</b> to match the items that belong to the category " + ConvertKeysToText(rounds[nextRoundIndex].rightKeys) + ".";
 
         tutorialText.transform.parent.gameObject.SetActive(true);
+        UpdateTextDisplays(rounds[nextRoundIndex]);
+        iatBase.SetActive(true);
+        choiceImage.gameObject.SetActive(false);
+        SetActiveTextObjects(true);
     }
 
     void NextRound()
     {
-        SetUpRound(rounds[nextRoundIndex]);
+        tutorialText.transform.parent.gameObject.SetActive(false);
+        SetUpRoundSprites(rounds[nextRoundIndex]);
         nextRoundIndex++;
     }
 
-    void SetUpRound(Round round)
-    {
-        tutorialText.transform.parent.gameObject.SetActive(false);
-        iatBase.SetActive(true);
+    void SetUpRoundSprites(Round round)
+    {  
+        //=====SetUpTheSprites=====
         rightSprites.Clear();
-        leftSprites.Clear();
-        rightText.text = ConvertKeysToText(round.rightKeys);
-        leftText.text = ConvertKeysToText(round.leftKeys);
+        leftSprites.Clear();        
 
         foreach (IATKey key in round.rightKeys)
         {
@@ -169,6 +185,7 @@ public class IATManager : MonoBehaviour
         allSprites.AddRange(rightSprites);
         allSprites.AddRange(leftSprites);
 
+        //======Shuffle Order of Sprites=======
         allSprites = allSprites.OrderBy(a => Guid.NewGuid()).ToList();
         NextItem();
     }
@@ -180,25 +197,29 @@ public class IATManager : MonoBehaviour
         if (nextSpriteIndex == allSprites.Count)
         {
             nextSpriteIndex = 0;
-            iatBase.SetActive(false);
-
-            if (nextRoundIndex == rounds.Length)
-            {
-                SendAnalytics();
-                occasionIndex++;
-                ChicagoSceneTransition.Instance.NextScene();
-                ResetIAT();
-            }
-            else
-                ActivateTutorial();
+            choiceImage.gameObject.SetActive(false);
+            CheckIfTestEnded();            
         }
         else
         {
+            choiceImage.gameObject.SetActive(true);
             choiceImage.sprite = allSprites[nextSpriteIndex];
             nextSpriteIndex++;
         }
 
         itemStartTime = Time.time;
+    }
+
+    void UpdateTextDisplays(Round round)
+    {
+        rightText.text = ConvertKeysToText(round.rightKeys);
+        leftText.text = ConvertKeysToText(round.leftKeys);
+    }
+
+    void SetActiveTextObjects(bool isActive)
+    {
+        rightText.gameObject.SetActive(isActive);
+        leftText.gameObject.SetActive(isActive);
     }
 
     void ResetIAT()
@@ -208,15 +229,18 @@ public class IATManager : MonoBehaviour
         nextRoundIndex = 0;
     }
 
-    void CreateIATInfo(string imageID, string answer)
+    void CheckIfTestEnded()
     {
-        float responseTime = Time.time - itemStartTime;
-        iatInfos.Add(new IATInfo(userID, "a", occasionIndex, imageID, nextRoundIndex - 1, answer, responseTime));
-    }
-
-    void SendAnalytics()
-    {
-        AnalyticsUtilities.Event(ANALYTICS_TITLE, iatInfos);
+        //========Check if the IAT test has ended==========
+        if (nextRoundIndex == rounds.Length)
+        {
+            SendAnalytics();
+            occasionIndex++;
+            ChicagoSceneTransition.Instance.NextScene();
+            ResetIAT();
+        }
+        else
+            ActivateTutorial();
     }
 
     IATKey GetItemKey(Sprite item)
@@ -250,6 +274,17 @@ public class IATManager : MonoBehaviour
     {
         var collection = collections.FirstOrDefault(x => x.key == key)?.IATobjects;
         return collection;
+    }
+
+    void CreateIATInfo(string imageID, string answer)
+    {
+        float responseTime = Time.time - itemStartTime;
+        iatInfos.Add(new IATInfo(userID, "a", occasionIndex, imageID, nextRoundIndex - 1, answer, responseTime));
+    }
+
+    void SendAnalytics()
+    {
+        AnalyticsUtilities.Event(ANALYTICS_TITLE, iatInfos);
     }
 }
 
