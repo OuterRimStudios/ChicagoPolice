@@ -47,7 +47,9 @@ public class IATManager : MonoBehaviour {
 
         waitingToStart = true;
 
+    #if UNITY_ANDROID
         OVRInputManager.OnButtonDown += OnButtonDown;
+    #endif
         userID = ChicagoSceneTransition.Instance.UserID;
         groupID = ChicagoSceneTransition.Instance.GroupID;
         headsetID = ChicagoSceneTransition.Instance.HeadsetID;
@@ -55,10 +57,12 @@ public class IATManager : MonoBehaviour {
     }
 
     private void OnDisable() {
+    #if UNITY_ANDROID
         OVRInputManager.OnButtonDown -= OnButtonDown;
+    #endif
     }
 
-    //Really only being used for local testing
+#if UNITY_EDITOR || UNITY_STANDALONE
     void Update() {
         if (Input.GetKeyDown(KeyCode.Space) && waitingToStart) {
             if (introPanel.activeInHierarchy) {
@@ -88,7 +92,8 @@ public class IATManager : MonoBehaviour {
             }
         }
     }
-
+#endif
+#if UNITY_ANDROID
     void OnButtonDown(OVRInput.Button button) {
         if (button == OVRInput.Button.Three && waitingToStart) {
             if (introPanel.activeInHierarchy) {
@@ -118,7 +123,7 @@ public class IATManager : MonoBehaviour {
             }
         }
     }
-
+#endif
     void ActivateIntro(bool isActive) {
         introPanel.SetActive(isActive);
         iatBase.SetActive(!isActive);

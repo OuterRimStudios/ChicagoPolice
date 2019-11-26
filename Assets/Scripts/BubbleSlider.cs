@@ -45,12 +45,16 @@ public class BubbleSlider : MonoBehaviour
     void OnEnable()
     {
         Reset();
+    #if UNITY_ANDROID
         OVRInputManager.OnButtonDown += OnButtonDown;
+    #endif
     }
 
     private void OnDisable()
     {
+    #if UNITY_ANDROID
         OVRInputManager.OnButtonDown -= OnButtonDown;
+    #endif
     }
 
 #if UNITY_EDITOR || UNITY_STANDALONE
@@ -68,7 +72,7 @@ public class BubbleSlider : MonoBehaviour
         }
     }
 #endif
-
+#if UNITY_ANDROID
     void OnButtonDown(OVRInput.Button key)
     {
         if(key == OVRInput.Button.PrimaryThumbstickLeft)
@@ -82,8 +86,8 @@ public class BubbleSlider : MonoBehaviour
             stepIndex = stepIndex.IncrementClamped(slider.maxValue);
             UpdateUI();
         }
-    }  
-
+    }
+#endif
     void SetUI()
     {        
         float sliderWidth = sliderArea.GetComponent<RectTransform>().sizeDelta.x;
