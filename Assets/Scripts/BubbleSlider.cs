@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using OuterRimStudios.Utilities;
-using RenderHeads.Media.AVProVideo;
 
 public class BubbleSlider : MonoBehaviour
 {
@@ -28,14 +25,8 @@ public class BubbleSlider : MonoBehaviour
     RectTransform handle;
     Image handleImage;
 
-    [SerializeField, Header("Control Variables")]
-    double userDeadZone = .2;
-    [SerializeField]
-    float controllerDelayTime = .25f;
-
     byte stepIndex;
     byte middleIndex;
-    bool canUpdateSlider = true;
 
     void Awake()
     {
@@ -54,34 +45,44 @@ public class BubbleSlider : MonoBehaviour
     void OnEnable()
     {
         Reset();
+        OVRInputManager.OnButtonDown += OnButtonDown;
     }
 
+    private void OnDisable()
+    {
+        OVRInputManager.OnButtonDown -= OnButtonDown;
+    }
+
+#if UNITY_EDITOR || UNITY_STANDALONE
     void Update()
     {
-        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).x > userDeadZone && canUpdateSlider || Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            StartCoroutine(InputCooldown());
-
             stepIndex = stepIndex.IncrementClamped(slider.maxValue);
-
             UpdateUI();
         }
-        else if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).x < -userDeadZone && canUpdateSlider || Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            StartCoroutine(InputCooldown());
-
             stepIndex = stepIndex.DecrementClamped(slider.minValue);            
-
             UpdateUI();
         }
     }
+#endif
 
-    IEnumerator InputCooldown()
+    void OnButtonDown(OVRInput.Button key)
     {
-        canUpdateSlider = false;        
-        yield return new WaitForSeconds(controllerDelayTime);
-        canUpdateSlider = true;
-    }   
+        if(key == OVRInput.Button.PrimaryThumbstickLeft)
+        {
+            stepIndex = stepIndex.DecrementClamped(slider.minValue);
+            UpdateUI();
+            
+        }
+        else if(key == OVRInput.Button.PrimaryThumbstickRight)
+        {
+            stepIndex = stepIndex.IncrementClamped(slider.maxValue);
+            UpdateUI();
+        }
+    }  
 
     void SetUI()
     {        
