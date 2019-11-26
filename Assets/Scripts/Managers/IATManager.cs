@@ -33,16 +33,24 @@ public class IATManager : MonoBehaviour
     bool isFirstTest = true;
 
     List<IATInfo> iatInfos = new List<IATInfo>();
-    string userID = "0";
     float itemStartTime;    //Time when the current image was displayed
 
     bool waitingToStart;
+
+    int userID;
+    string groupID;
+    int headsetID;
+    string testTimestamp;
 
     private void OnEnable()
     {
         iatInfos.Clear();
         itemStartTime = 0;
         OVRInputManager.OnButtonDown += OnButtonDown;
+        userID = ChicagoSceneTransition.Instance.UserID;
+        groupID = ChicagoSceneTransition.Instance.GroupID;
+        headsetID = ChicagoSceneTransition.Instance.HeadsetID;
+        testTimestamp = ChicagoSceneTransition.Instance.TestTimestamp;
     }
 
     private void OnDisable()
@@ -237,7 +245,6 @@ public class IATManager : MonoBehaviour
         if (nextRoundIndex == rounds.Length)
         {
             SendAnalytics();
-            occasionIndex++;
             ChicagoSceneTransition.Instance.NextScene();
             ResetIAT();
         }
@@ -283,17 +290,20 @@ public class IATManager : MonoBehaviour
         string occurance = isFirstTest ? "pre" : "post";
         int roundID = nextRoundIndex - 1;
         float responseTime = Time.time - itemStartTime;
-        
-        iatInfos.Add(new IATInfo(userID, "a", occurance, imageID, roundID, answer, responseTime));
+        IATInfo iatInfo = new IATInfo(userID, groupID, headsetID, testTimestamp, occurance, imageID, roundID, answer, responseTime);
+        iatInfos.Add(iatInfo);
+
         Analytics.CustomEvent(ANALYTICS_TITLE, new Dictionary<string, object>
         {
-            { "UserID", userID},
-            { "GroupID", "a"},
-            { "Occurance", occurance},
-            { "ImageID", imageID},
-            { "RoundID", roundID},
-            { "Answer", answer},
-            { "ResponseTime", responseTime}
+            { "UserID", iatInfo.UserID},
+            { "GroupID", iatInfo.GroupID},
+            { "HeadsetID", iatInfo.HeadsetID},
+            { "TestTimestamp", iatInfo.TestTimestamp},
+            { "Occurance", iatInfo.Occurance},
+            { "ImageID", iatInfo.ImageID},
+            { "RoundID", iatInfo.RoundID},
+            { "Answer", iatInfo.Answer},
+            { "ResponseTime", iatInfo.ResponseTime}
         });
     }
 
@@ -305,18 +315,22 @@ public class IATManager : MonoBehaviour
 
 public class IATInfo
 {
-    public string UserID { get; set; }
+    public int UserID { get; set; }
     public string GroupID { get; set; }
+    public int HeadsetID { get; set; }
+    public string TestTimestamp { get; set; }
     public string Occurance { get; set; }
     public string ImageID { get; set; }
     public int RoundID { get; set; }
     public string Answer { get; set; }
     public float ResponseTime { get; set; }
 
-    public IATInfo(string userID, string groupID, string occurance, string imageID, int roundID, string answer, float responseTime)
+    public IATInfo(int userID, string groupID, int headsetID, string timestamp, string occurance, string imageID, int roundID, string answer, float responseTime)
     {
         UserID = userID;
         GroupID = groupID;
+        HeadsetID = headsetID;
+        TestTimestamp = timestamp;
         Occurance = occurance;
         ImageID = imageID;
         RoundID = roundID;

@@ -6,6 +6,7 @@ using RenderHeads.Media.AVProVideo;
 using OuterRimStudios.Utilities;
 public class PerceptionTracking : MonoBehaviour
 {
+    const string ANALYTICS_TITLE = "PerceptionTracking";
     public float trackingInterval = .1f;
     public LayerMask trackingLayer;
 
@@ -14,10 +15,15 @@ public class PerceptionTracking : MonoBehaviour
     string lastTag;
     MediaPlayer mediaPlayer;
     VideoScene videoScene;
-    string userID = "0";
+
+    int userID;
+    int headsetID;
+    string testTimestamp;
+
     void OnEnable()
     {
         ChicagoSceneTransition.OnSceneStarted += Initialize;
+        
     }
 
     void OnDisable()
@@ -27,6 +33,10 @@ public class PerceptionTracking : MonoBehaviour
 
     void Initialize(BaseScene baseScene)
     {
+        userID = ChicagoSceneTransition.Instance.UserID;
+        headsetID = ChicagoSceneTransition.Instance.HeadsetID;
+        testTimestamp = ChicagoSceneTransition.Instance.TestTimestamp;
+
         if (baseScene.GetType() == typeof(VideoScene))
         {
             videoScene = ((VideoScene)baseScene);
@@ -63,20 +73,43 @@ public class PerceptionTracking : MonoBehaviour
             {
                 lastTag = hit.transform.tag;
                 float time = mediaPlayer.Control.GetCurrentTimeMs() / 1000;
-                Debug.LogError(time + " " + lastTag);
-                var data = new List<object> { new { UserID = userID, VideoID = videoScene.videoID, Time = time, Location = lastTag } };
-                AnalyticsUtilities.Event("PerceptionTracking", data);
+                PerceptionInfo perceptionInfo = new PerceptionInfo(userID, headsetID, testTimestamp, videoScene.videoID, time, lastTag);
+                var data = new List<PerceptionInfo> { perceptionInfo };
 
-                Analytics.CustomEvent("PerceptionTracking", new Dictionary<string, object>{
-                    { "UserID", userID},
-                    { "VideoID", videoScene.videoID},
-                    { "Time", time},
-                    { "Location", lastTag}
+                AnalyticsUtilities.Event(ANALYTICS_TITLE, data);
+
+                Analytics.CustomEvent(ANALYTICS_TITLE, new Dictionary<string, object>{
+                    { "UserID", perceptionInfo.UserID},
+                    { "HeadsetID", perceptionInfo.HeadsetID},
+                    { "TestTimestamp", perceptionInfo.TestTimestamp},
+                    { "VideoID", perceptionInfo.VideoID},
+                    { "Time", perceptionInfo.Time},
+                    { "Location", perceptionInfo.Location}
                 });
             }
         }
 
         yield return new WaitForSeconds(trackingInterval);
         casting = false;
+    }
+}
+
+public class PerceptionInfo
+{
+    public int UserID { get; set; }
+    public int HeadsetID { get; set; }
+    public string TestTimestamp { get; set; }
+    public int VideoID { get; set; }
+    public double Time { get; set; }
+    public string Location { get; set; }
+
+    public PerceptionInfo(int userID, int headsetID, string testTimestamp, int videoID, double time, string location)
+    {
+        UserID = userID;
+        HeadsetID = headsetID;
+        TestTimestamp = testTimestamp;
+        VideoID = videoID;
+        Time = time;
+        Location = location;
     }
 }

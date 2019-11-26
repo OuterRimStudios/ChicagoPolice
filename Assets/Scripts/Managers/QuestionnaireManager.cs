@@ -20,7 +20,10 @@ public class QuestionnaireManager : MonoBehaviour
     GameObject currentQuestion;
     int currentQuestionIndex;
     int[] responses;
-    string userID = "0";
+
+    int userID;
+    int headsetID;
+    string testTimestamp;
 
     private void Start()
     {
@@ -30,6 +33,9 @@ public class QuestionnaireManager : MonoBehaviour
     private void OnEnable()
     {
         OVRInputManager.OnButtonDown += OnButtonDown;
+        userID = ChicagoSceneTransition.Instance.UserID;
+        headsetID = ChicagoSceneTransition.Instance.HeadsetID;
+        testTimestamp = ChicagoSceneTransition.Instance.TestTimestamp;
     }
 
     private void OnDisable()
@@ -107,23 +113,20 @@ public class QuestionnaireManager : MonoBehaviour
     void SendAnalytics()
     {
         int videoID = ChicagoSceneTransition.Instance.GetLastVideo() != null ? ChicagoSceneTransition.Instance.GetLastVideo().videoID : -1;
-        var data = new List<QuestionnaireData> { new QuestionnaireData{ 
-            UserID = userID,
-            VideoID = videoID,
-            EmpathyAntwuan = responses[0],
-            EmpathyTony = responses[1],
-            Anger = responses[2]
-        } };
+        QuestionnaireData questionnaireData = new QuestionnaireData(userID, headsetID, testTimestamp, videoID, responses[0], responses[1], responses[2]);
+        var data = new List<QuestionnaireData> { questionnaireData };
 
         AnalyticsUtilities.Event(ANALYTICS_TITLE, data);
 
         Analytics.CustomEvent(ANALYTICS_TITLE, new Dictionary<string, object>
         {
-            { "UserID", userID},
-            { "VideoID", videoID},
-            { "EmpathyAntwaun", responses[0]},
-            { "EmpathyTony", responses[1]},
-            { "Anger", responses[2]}
+            { "UserID", questionnaireData.UserID},
+            { "HeadsetID", questionnaireData.HeadsetID},
+            { "TestTimestamp", questionnaireData.TestTimestamp},
+            { "VideoID", questionnaireData.VideoID},
+            { "EmpathyAntwaun", questionnaireData.EmpathyAntwuan},
+            { "EmpathyTony", questionnaireData.EmpathyTony},
+            { "Anger", questionnaireData.Anger}
         });
     }
 
@@ -135,11 +138,24 @@ public class QuestionnaireManager : MonoBehaviour
 
 public class QuestionnaireData
 {
-    public string UserID { get; set; }
+    public int UserID { get; set; }
+    public int HeadsetID { get; set; }
+    public string TestTimestamp { get; set; }
     public int VideoID { get; set; }
     public int EmpathyAntwuan { get; set; }
     public int EmpathyTony { get; set; }
     public int Anger { get; set; }
+
+    public QuestionnaireData(int userID, int headsetID, string testTimestamp, int videoID, int empathyAnt, int empathyTony, int anger)
+    {
+        UserID = userID;
+        HeadsetID = headsetID;
+        TestTimestamp = testTimestamp;
+        VideoID = videoID;
+        EmpathyAntwuan = empathyAnt;
+        EmpathyTony = empathyTony;
+        Anger = anger;
+    }
 
     public string GetValues()
     {

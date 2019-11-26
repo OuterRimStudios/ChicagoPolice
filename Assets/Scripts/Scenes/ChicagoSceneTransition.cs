@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using OuterRimStudios.Utilities;
@@ -16,6 +17,11 @@ public class ChicagoSceneTransition : MonoBehaviour
     HapticInput hapticInput;
 
     public float holdTime = 1.5f;
+
+    public int UserID { get; private set; }
+    public string GroupID { get; private set; }
+    public int HeadsetID { get; private set; }
+    public string TestTimestamp { get; private set; }
 
     int sceneIndex;
     bool isTestB;
@@ -72,7 +78,13 @@ public class ChicagoSceneTransition : MonoBehaviour
         if (buttonHeld)
         {
             if (MathUtilities.Timer(ref timer))
+            {
+                UserID++;
+                GroupID = "a";
+                HeadsetID = 1;
+                TestTimestamp = DateTime.Now.ToString("MM/dd/yyyy H:mm");
                 NextScene();
+            }
             else
                 hapticInput.PerformHapticRumble();
         }

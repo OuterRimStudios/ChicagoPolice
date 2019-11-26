@@ -12,7 +12,9 @@ public class MoodTracking : MonoBehaviour
 
     List<MoodInfo> moodInfos = new List<MoodInfo>();
 
-    string userID = "0";
+    int userID;
+    int headsetID;
+    string testTimestamp;
     int videoId;
 
     void OnEnable()
@@ -29,13 +31,17 @@ public class MoodTracking : MonoBehaviour
 
     void SetMediaType(BaseScene baseScene)
     {
+        userID = ChicagoSceneTransition.Instance.UserID;
+        headsetID = ChicagoSceneTransition.Instance.HeadsetID;
+        testTimestamp = ChicagoSceneTransition.Instance.TestTimestamp;
+
         if (baseScene.GetType() == typeof(VideoScene))
         {
             VideoScene videoScene = ((VideoScene)baseScene);            
             currentMediaPlayer = videoScene.mediaPlayer;
             videoId = videoScene.videoID;
             moodInfos.Clear();
-            moodInfos.Add(new MoodInfo(userID, videoId));
+            moodInfos.Add(new MoodInfo(userID, headsetID, testTimestamp, videoId));
         }
         else
         {
@@ -59,14 +65,17 @@ public class MoodTracking : MonoBehaviour
         {
             double time = currentMediaPlayer.Control.GetCurrentTimeMs() / 1000;
             float mood = slider?.value ?? -1;
-            moodInfos.Add(new MoodInfo(userID, videoId, time, mood));
+            MoodInfo moodInfo = new MoodInfo(userID, headsetID, testTimestamp, videoId, time, mood);
+            moodInfos.Add(moodInfo);
 
             Analytics.CustomEvent("MoodTracking", new Dictionary<string, object>
             {
-                { "UserID", userID },
-                { "VideoID", videoId },
-                { "Time", time },
-                { "Mood", mood }
+                { "UserID", moodInfo.UserID },
+                { "HeadsetID", moodInfo.HeadsetID},
+                { "TestTimestamp", moodInfo.TestTimestamp},
+                { "VideoID", moodInfo.VideoID },
+                { "Time", moodInfo.Time },
+                { "Mood", moodInfo.Mood }
             });
         }        
     }    
@@ -74,20 +83,32 @@ public class MoodTracking : MonoBehaviour
 
 internal class MoodInfo
 {
-    public string UserID { get; set; }
+    public int UserID { get; set; }
+    public int HeadsetID { get; set; }
+    public string TestTimestamp { get; set; }
     public int VideoID { get; set; }
     public double Time { get; set; }
     public float Mood { get; set; }
 
     readonly int neutralValue = 6;
 
-    public MoodInfo(string userId, int videoId, double time, float mood) { UserID = userId; VideoID = videoId; Time = time; Mood = mood; }
-
-    public MoodInfo(string userId, int videoId)
+    public MoodInfo(int userID, int headsetID, string testTimestamp, int videoId)
     {
-        UserID = userId;
+        UserID = userID;
+        HeadsetID = headsetID;
+        TestTimestamp = testTimestamp;
         VideoID = videoId;
         Time = 0;
         Mood = neutralValue;
+    }
+
+    public MoodInfo(int userID, int headsetID, string testTimestamp, int videoId, double time, float mood)
+    {
+        UserID = userID;
+        HeadsetID = headsetID;
+        TestTimestamp = testTimestamp;
+        VideoID = videoId; 
+        Time = time;
+        Mood = mood;
     }
 }
