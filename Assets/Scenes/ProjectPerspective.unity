@@ -2441,8 +2441,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testA:
-  - {fileID: 2125143369}
-  - {fileID: 2125143369}
+  - {fileID: 985450848}
+  - {fileID: 23505293}
   - {fileID: 2125143369}
   - {fileID: 854905463}
   - {fileID: 398747221}
@@ -2691,7 +2691,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &985450845
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4470,7 +4470,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2125143368
 RectTransform:
   m_ObjectHideFlags: 0
