@@ -41,19 +41,16 @@ public class IATManager : MonoBehaviour
     private void OnEnable()
     {
         iatInfos.Clear();
-        itemStartTime = 0;
+        ActivateIntro(true);
+
+        waitingToStart = true;        
+
         OVRInputManager.OnButtonDown += OnButtonDown;
     }
 
     private void OnDisable()
     {
         OVRInputManager.OnButtonDown -= OnButtonDown;
-    }
-
-    private void Start()
-    {
-        waitingToStart = true;
-        SetActiveTextObjects(false);
     }
 
     //Really only being used for local testing
@@ -63,16 +60,17 @@ public class IATManager : MonoBehaviour
         {
             if (introPanel.activeInHierarchy)
             {
-                introPanel.SetActive(false);
-                ActivateTutorial();
+                ActivateIntro(false);
+                ActivateTutorial(true);
             }
             else
             {
-                waitingToStart = false;
+                ActivateTutorial(false);
                 NextRound();
+                NextItem();
             }
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(KeyCode.RightArrow) && !waitingToStart)
         {
             if (rightSprites.Contains(choiceImage.sprite))
             {
@@ -86,7 +84,7 @@ public class IATManager : MonoBehaviour
                 wrongAnswerPrompt.SetActive(true);
             }
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) && !waitingToStart)
         {
             if (leftSprites.Contains(choiceImage.sprite))
             {
@@ -107,16 +105,17 @@ public class IATManager : MonoBehaviour
         {
             if (introPanel.activeInHierarchy)
             {
-                introPanel.SetActive(false);
-                ActivateTutorial();
+                ActivateIntro(false);
+                ActivateTutorial(true);
             }
             else
             {
-                waitingToStart = false;
+                ActivateTutorial(false);
                 NextRound();
+                NextItem();
             }
         }
-        else if (button == OVRInput.Button.PrimaryThumbstickLeft)
+        else if (button == OVRInput.Button.PrimaryThumbstickLeft && !waitingToStart)
         {
             if (leftSprites.Contains(choiceImage.sprite))
             {
@@ -129,7 +128,7 @@ public class IATManager : MonoBehaviour
                 wrongAnswerPrompt.SetActive(true);
             }
         }
-        else if (button == OVRInput.Button.PrimaryThumbstickRight)
+        else if (button == OVRInput.Button.PrimaryThumbstickRight && !waitingToStart)
         {
             if (rightSprites.Contains(choiceImage.sprite))
             {
@@ -145,37 +144,45 @@ public class IATManager : MonoBehaviour
         }
     }
 
-    void ActivateTutorial()
+    void ActivateIntro(bool isActive)
     {
-        waitingToStart = true;
+        introPanel.SetActive(isActive);
+        iatBase.SetActive(!isActive);
+    }
 
-        tutorialText.text = "Push the joystick <b>left</b> to match the items that belong to the category " + ConvertKeysToText(rounds[nextRoundIndex].leftKeys) + "." 
-                             +"\n\nPush the joystick <b>right</b> to match the items that belong to the category " + ConvertKeysToText(rounds[nextRoundIndex].rightKeys) + ".";
+    void ActivateTutorial(bool isActive)
+    {
+        waitingToStart = isActive;
 
-        tutorialText.transform.parent.gameObject.SetActive(true);
-        UpdateTextDisplays(rounds[nextRoundIndex]);
-        iatBase.SetActive(true);
-        choiceImage.gameObject.SetActive(false);
-        SetActiveTextObjects(true);
+        if (isActive)
+        {
+            tutorialText.text = $"Push the joystick <b>left</b> to match the items that belong to the category {ConvertKeysToText(rounds[nextRoundIndex].leftKeys)}."
+                             + $"\n\nPush the joystick <b>right</b> to match the items that belong to the category {ConvertKeysToText(rounds[nextRoundIndex].rightKeys)}.";
+
+            UpdateTextDisplays(rounds[nextRoundIndex]);
+        }        
+
+        tutorialText.transform.parent.gameObject.SetActive(isActive);
+        
+        choiceImage.gameObject.SetActive(!isActive);        
     }
 
     void NextRound()
-    {
-        tutorialText.transform.parent.gameObject.SetActive(false);
+    {        
         SetUpRoundSprites(rounds[nextRoundIndex]);
         nextRoundIndex++;
     }
 
     void SetUpRoundSprites(Round round)
     {  
-        //=====SetUpTheSprites=====
         rightSprites.Clear();
-        leftSprites.Clear();        
 
         foreach (IATKey key in round.rightKeys)
         {
             rightSprites.AddRange(GetSpritesFromEnum(key));
         }
+
+        leftSprites.Clear();
 
         foreach (IATKey key in round.leftKeys)
         {
@@ -187,8 +194,7 @@ public class IATManager : MonoBehaviour
         allSprites.AddRange(leftSprites);
 
         //======Shuffle Order of Sprites=======
-        allSprites = allSprites.OrderBy(a => Guid.NewGuid()).ToList();
-        NextItem();
+        allSprites = allSprites.OrderBy(a => Guid.NewGuid()).ToList();        
     }
 
     void NextItem()
@@ -209,40 +215,26 @@ public class IATManager : MonoBehaviour
         }
 
         itemStartTime = Time.time;
-    }
-
-    void UpdateTextDisplays(Round round)
-    {
-        rightText.text = ConvertKeysToText(round.rightKeys);
-        leftText.text = ConvertKeysToText(round.leftKeys);
-    }
-
-    void SetActiveTextObjects(bool isActive)
-    {
-        rightText.gameObject.SetActive(isActive);
-        leftText.gameObject.SetActive(isActive);
-    }
-
-    void ResetIAT()
-    {
-        isFirstTest = !isFirstTest;
-        introPanel.SetActive(true);
-        waitingToStart = true;
-        nextRoundIndex = 0;
-    }  
+    }    
 
     void CheckIfTestEnded()
     {
         //========Check if the IAT test has ended==========
         if (nextRoundIndex == rounds.Length)
         {
+            nextRoundIndex = 0;
             SendAnalytics();
-            occasionIndex++;
+            isFirstTest = !isFirstTest;
             ChicagoSceneTransition.Instance.NextScene();
-            ResetIAT();
         }
         else
-            ActivateTutorial();
+            ActivateTutorial(true);
+    }
+
+    void UpdateTextDisplays(Round round)
+    {
+        rightText.text = ConvertKeysToText(round.rightKeys);
+        leftText.text = ConvertKeysToText(round.leftKeys);        
     }
 
     IATKey GetItemKey(Sprite item)
