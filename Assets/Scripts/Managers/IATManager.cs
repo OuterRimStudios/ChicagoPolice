@@ -2,6 +2,7 @@
 using OuterRimStudios.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
 using TMPro;
 using System.Linq;
 using System;
@@ -29,7 +30,7 @@ public class IATManager : MonoBehaviour
 
     int nextSpriteIndex;
     int nextRoundIndex;
-    int occasionIndex;
+    bool isFirstTest = true;
 
     List<IATInfo> iatInfos = new List<IATInfo>();
     string userID = "0";
@@ -224,10 +225,11 @@ public class IATManager : MonoBehaviour
 
     void ResetIAT()
     {
+        isFirstTest = !isFirstTest;
         introPanel.SetActive(true);
         waitingToStart = true;
         nextRoundIndex = 0;
-    }
+    }  
 
     void CheckIfTestEnded()
     {
@@ -278,8 +280,21 @@ public class IATManager : MonoBehaviour
 
     void CreateIATInfo(string imageID, string answer)
     {
+        string occurance = isFirstTest ? "pre" : "post";
+        int roundID = nextRoundIndex - 1;
         float responseTime = Time.time - itemStartTime;
-        iatInfos.Add(new IATInfo(userID, "a", occasionIndex, imageID, nextRoundIndex - 1, answer, responseTime));
+        
+        iatInfos.Add(new IATInfo(userID, "a", occurance, imageID, roundID, answer, responseTime));
+        Analytics.CustomEvent(ANALYTICS_TITLE, new Dictionary<string, object>
+        {
+            { "UserID", userID},
+            { "GroupID", "a"},
+            { "Occurance", occurance},
+            { "ImageID", imageID},
+            { "RoundID", roundID},
+            { "Answer", answer},
+            { "ResponseTime", responseTime}
+        });
     }
 
     void SendAnalytics()
@@ -292,17 +307,17 @@ public class IATInfo
 {
     public string UserID { get; set; }
     public string GroupID { get; set; }
-    public int OccassionID { get; set; }
+    public string Occurance { get; set; }
     public string ImageID { get; set; }
     public int RoundID { get; set; }
     public string Answer { get; set; }
     public float ResponseTime { get; set; }
 
-    public IATInfo(string userID, string groupID, int occasionID, string imageID, int roundID, string answer, float responseTime)
+    public IATInfo(string userID, string groupID, string occurance, string imageID, int roundID, string answer, float responseTime)
     {
         UserID = userID;
         GroupID = groupID;
-        OccassionID = occasionID;
+        Occurance = occurance;
         ImageID = imageID;
         RoundID = roundID;
         Answer = answer;
