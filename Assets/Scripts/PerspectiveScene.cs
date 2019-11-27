@@ -23,7 +23,7 @@ public class PerspectiveScene : BaseScene
 
     void OnButtonDown(OVRInput.Button button)
     {
-        Debug.Log("Getting input from button " + button);
+        Debug.LogError("Getting input from button " + button);
         if (button == OVRInput.Button.One)
             NextPerspective();
         else
@@ -32,36 +32,31 @@ public class PerspectiveScene : BaseScene
 
     private void Update()
     {
-        bool isDone = false;
-        foreach(MediaPlayer mediaPlayer in mediaPlayers)
+        foreach (MediaPlayer mediaPlayer in mediaPlayers)
         {
-            if (mediaPlayer.Control.IsPlaying())
-            {
-                isDone = false;
-                break;
-            }
-            else
-                isDone = true;
+            if(mediaPlayer.Control.IsFinished())
+                SundanceSceneTransition.Instance.NextScene();
         }
-
-        if (isDone)
-            SundanceSceneTransition.Instance.NextScene();
     }
 
     public override void StartScene()
     {
+        Debug.LogError("Starting Scene.");
         gameObject.SetActive(true);
         Play();
     }
 
     public override void EndScene()
     {
+        Debug.LogError("Ending Scene.");
         Stop();
         time = 0;
+        gameObject.SetActive(false);
     }
 
     void NextPerspective()
     {
+        Debug.LogError("Next Perspective");
         Stop();
         perspectiveIndex = perspectiveIndex.IncrementLoop(mediaPlayers.Length - 1);
         Play();
@@ -69,6 +64,7 @@ public class PerspectiveScene : BaseScene
 
     void PreviousPerspective()
     {
+        Debug.LogError("Previous Perspective");
         Stop();
         perspectiveIndex = perspectiveIndex.DecrementLoop(0, mediaPlayers.Length - 1);
         Play();
@@ -76,16 +72,24 @@ public class PerspectiveScene : BaseScene
 
     void Play()
     {
+        Debug.LogError("Playing: " + mediaPlayers[perspectiveIndex].transform.parent.name);
+        mediaPlayers[perspectiveIndex].OpenVideoFromFile(MediaPlayer.FileLocation.RelativeToStreamingAssetsFolder, mediaPlayers[perspectiveIndex].m_VideoPath, false);
+
+        Debug.LogError(mediaPlayers[perspectiveIndex].transform.parent.name + "is seeking to: " + time);
         mediaPlayers[perspectiveIndex].Control.SeekFast(time);
+
+        Debug.LogError(mediaPlayers[perspectiveIndex].transform.parent.name + "'s current time: " + time);
         videoSpheres[perspectiveIndex].SetActive(true);
         mediaPlayers[perspectiveIndex].Play();
     }
 
     void Stop()
     {
+        Debug.LogError("Stopping: " + mediaPlayers[perspectiveIndex].transform.parent.name);
         time = mediaPlayers[perspectiveIndex].Control.GetCurrentTimeMs();
-        videoSpheres[perspectiveIndex].SetActive(false);
-        mediaPlayers[perspectiveIndex].Pause();
-    }
 
+        Debug.LogError(mediaPlayers[perspectiveIndex].transform.parent.name + "'s current time: " + time);
+        videoSpheres[perspectiveIndex].SetActive(false);
+        mediaPlayers[perspectiveIndex].CloseVideo();
+    }
 }
