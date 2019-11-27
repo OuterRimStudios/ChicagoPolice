@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using OuterRimStudios.Utilities;
 
-public class ChicagoSceneTransition : MonoBehaviour
+public class ChicagoSceneTransition : SceneTransition
 {
     public delegate void SceneEvents(BaseScene baseScene);
     public static event SceneEvents OnSceneStarted;
@@ -97,7 +97,7 @@ public class ChicagoSceneTransition : MonoBehaviour
         timer = holdTime;
     }
 
-    public void NextScene()
+    public override void NextScene()
     {
         List<BaseScene> baseScene = GetActiveTest();
         baseScene[sceneIndex].EndScene();

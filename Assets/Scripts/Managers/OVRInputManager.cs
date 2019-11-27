@@ -35,6 +35,7 @@ public class OVRInputManager : MonoBehaviour
 
     private void Update()
     {
+        OVRInput.Update();
         foreach (OVRInput.Button button in buttons)
         {
             if (inputStates[button] && OVRInput.Get(button))

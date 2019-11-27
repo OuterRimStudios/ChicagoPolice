@@ -6,6 +6,7 @@ using System.Linq;
 
 public class TutorialManager : MonoBehaviour
 {
+    public SceneType sceneType = SceneType.Chicago;
     public OVRInput.Button acceptedInput;
     List<OVRInput.Button> activeInput = new List<OVRInput.Button>();
 
@@ -28,6 +29,11 @@ public class TutorialManager : MonoBehaviour
     void OnButtonDown(OVRInput.Button button)
     {
         if (activeInput.Contains(button))
-            ChicagoSceneTransition.Instance.NextScene();
+        {
+            if(sceneType == SceneType.Chicago)
+                ChicagoSceneTransition.Instance.NextScene();
+            else
+                SundanceSceneTransition.Instance.NextScene();
+        }
     }
 }
