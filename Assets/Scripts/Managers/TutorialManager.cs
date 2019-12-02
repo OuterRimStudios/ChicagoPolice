@@ -25,15 +25,29 @@ public class TutorialManager : MonoBehaviour
     {
         OVRInputManager.OnButtonDown -= OnButtonDown;
     }
-
+#if UNITY_EDITOR || UNITY_STANDALONE
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            NextScene();
+        }
+    }
+#endif
+#if UNITY_ANDROID
     void OnButtonDown(OVRInput.Button button)
     {
         if (activeInput.Contains(button))
         {
-            if(sceneType == SceneType.Chicago)
-                ChicagoSceneTransition.Instance.NextScene();
-            else
-                SundanceSceneTransition.Instance.NextScene();
+            NextScene();
         }
+    }
+#endif
+    void NextScene()
+    {
+        if (sceneType == SceneType.Chicago)
+            ChicagoSceneTransition.Instance.NextScene();
+        else
+            SundanceSceneTransition.Instance.NextScene();
     }
 }

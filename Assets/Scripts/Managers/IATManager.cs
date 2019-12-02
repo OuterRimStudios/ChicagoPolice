@@ -19,7 +19,6 @@ public class IATManager : MonoBehaviour {
     public TextMeshProUGUI rightText;
 
     [Space]
-    public GameObject introPanel;
     public GameObject iatBase;
     public TextMeshProUGUI tutorialText;
 
@@ -43,9 +42,7 @@ public class IATManager : MonoBehaviour {
 
     private void OnEnable() {
         iatInfos.Clear();
-        ActivateIntro(true);
-
-        waitingToStart = true;
+        ActivateTutorial(true);
 
     #if UNITY_ANDROID
         OVRInputManager.OnButtonDown += OnButtonDown;
@@ -64,15 +61,12 @@ public class IATManager : MonoBehaviour {
 
 #if UNITY_EDITOR || UNITY_STANDALONE
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Space) && waitingToStart) {
-            if (introPanel.activeInHierarchy) {
-                ActivateIntro(false);
-                ActivateTutorial(true);
-            } else {
-                ActivateTutorial(false);
-                NextRound();
-                NextItem();
-            }
+        if (Input.GetKeyDown(KeyCode.Space) && waitingToStart)
+        {
+            ActivateTutorial(false);
+            NextRound();
+            NextItem();
+            
         } else if (Input.GetKeyDown(KeyCode.RightArrow) && !waitingToStart) {
             if (rightSprites.Contains(choiceImage.sprite)) {
                 //Store Stats
@@ -95,16 +89,13 @@ public class IATManager : MonoBehaviour {
 #endif
 #if UNITY_ANDROID
     void OnButtonDown(OVRInput.Button button) {
-        if (button == OVRInput.Button.Three && waitingToStart) {
-            if (introPanel.activeInHierarchy) {
-                ActivateIntro(false);
-                ActivateTutorial(true);
-            } else {
-                ActivateTutorial(false);
-                NextRound();
-                NextItem();
-            }
-        } else if (button == OVRInput.Button.PrimaryThumbstickLeft && !waitingToStart) {
+        if (button == OVRInput.Button.Three && waitingToStart)
+        {           
+            ActivateTutorial(false);
+            NextRound();
+            NextItem();            
+        }
+        else if (button == OVRInput.Button.PrimaryThumbstickLeft && !waitingToStart) {
             if (leftSprites.Contains(choiceImage.sprite)) {
                 //Store Stats
                 CreateIATInfo(choiceImage.sprite.name, GetItemKey(choiceImage.sprite).ToString());
@@ -124,11 +115,6 @@ public class IATManager : MonoBehaviour {
         }
     }
 #endif
-    void ActivateIntro(bool isActive) {
-        introPanel.SetActive(isActive);
-        iatBase.SetActive(!isActive);
-    }
-
     void ActivateTutorial(bool isActive) {
         waitingToStart = isActive;
 
