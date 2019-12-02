@@ -21,7 +21,7 @@ public class QuestionnaireManager : MonoBehaviour
     int currentQuestionIndex;
     int[] responses;
 
-    int userID;
+    string userID;
     int headsetID;
     string testTimestamp;
 
@@ -138,7 +138,7 @@ public class QuestionnaireManager : MonoBehaviour
 
 public class QuestionnaireData
 {
-    public int UserID { get; set; }
+    public string UserID { get; set; }
     public int HeadsetID { get; set; }
     public string TestTimestamp { get; set; }
     public int VideoID { get; set; }
@@ -146,7 +146,7 @@ public class QuestionnaireData
     public int EmpathyTony { get; set; }
     public int Anger { get; set; }
 
-    public QuestionnaireData(int userID, int headsetID, string testTimestamp, int videoID, int empathyAnt, int empathyTony, int anger)
+    public QuestionnaireData(string userID, int headsetID, string testTimestamp, int videoID, int empathyAnt, int empathyTony, int anger)
     {
         UserID = userID;
         HeadsetID = headsetID;

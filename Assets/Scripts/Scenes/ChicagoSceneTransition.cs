@@ -18,7 +18,8 @@ public class ChicagoSceneTransition : SceneTransition
 
     public float holdTime = 1.5f;
 
-    public int UserID { get; private set; }
+    public int headsetID = 1;
+    public string UserID { get; private set; }
     public string GroupID { get; private set; }
     public int HeadsetID { get; private set; }
     public string TestTimestamp { get; private set; }
@@ -79,10 +80,6 @@ public class ChicagoSceneTransition : SceneTransition
         {
             if (MathUtilities.Timer(ref timer))
             {
-                UserID++;
-                GroupID = "a";
-                HeadsetID = 1;
-                TestTimestamp = DateTime.Now.ToString("MM/dd/yyyy H:mm");
                 NextScene();
             }
             else
@@ -135,5 +132,14 @@ public class ChicagoSceneTransition : SceneTransition
     List<BaseScene> GetActiveTest()
     {
         return isTestB ? testB : testA;
+    }
+
+    public void InitializeUser(string userID, string groupID)
+    {
+        UserID = userID;
+        GroupID = groupID;
+        HeadsetID = headsetID;
+        TestTimestamp = DateTime.Now.ToString("MM/dd/yyyy H:mm");
+        NextScene();
     }
 }

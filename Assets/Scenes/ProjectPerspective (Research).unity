@@ -221,6 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be0b491aabb24c43a04f744419bce5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneType: 0
   acceptedInput: 4
 --- !u!1 &40919614 stripped
 GameObject:
@@ -2326,6 +2327,7 @@ GameObject:
   - component: {fileID: 963194233}
   - component: {fileID: 963194231}
   - component: {fileID: 963194234}
+  - component: {fileID: 963194235}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2467,6 +2469,7 @@ MonoBehaviour:
   - {fileID: 398747221}
   - {fileID: 2125143369}
   holdTime: 1.5
+  headsetID: 1
 --- !u!114 &963194231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2524,6 +2527,18 @@ MonoBehaviour:
   controllerInput: 5
   amplitude: 0.2
   duration: 0.2
+--- !u!114 &963194235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b18f8fab382b4be4e898ecb30e280bbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &982990536
 PrefabInstance:
   m_ObjectHideFlags: 0

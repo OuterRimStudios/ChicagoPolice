@@ -16,14 +16,13 @@ public class PerceptionTracking : MonoBehaviour
     MediaPlayer mediaPlayer;
     VideoScene videoScene;
 
-    int userID;
+    string userID;
     int headsetID;
     string testTimestamp;
 
     void OnEnable()
     {
         ChicagoSceneTransition.OnSceneStarted += Initialize;
-        
     }
 
     void OnDisable()
@@ -96,14 +95,14 @@ public class PerceptionTracking : MonoBehaviour
 
 public class PerceptionInfo
 {
-    public int UserID { get; set; }
+    public string UserID { get; set; }
     public int HeadsetID { get; set; }
     public string TestTimestamp { get; set; }
     public int VideoID { get; set; }
     public double Time { get; set; }
     public string Location { get; set; }
 
-    public PerceptionInfo(int userID, int headsetID, string testTimestamp, int videoID, double time, string location)
+    public PerceptionInfo(string userID, int headsetID, string testTimestamp, int videoID, double time, string location)
     {
         UserID = userID;
         HeadsetID = headsetID;

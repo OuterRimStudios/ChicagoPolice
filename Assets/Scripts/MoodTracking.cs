@@ -12,7 +12,7 @@ public class MoodTracking : MonoBehaviour
 
     List<MoodInfo> moodInfos = new List<MoodInfo>();
 
-    int userID;
+    string userID;
     int headsetID;
     string testTimestamp;
     int videoId;
@@ -83,7 +83,7 @@ public class MoodTracking : MonoBehaviour
 
 internal class MoodInfo
 {
-    public int UserID { get; set; }
+    public string UserID { get; set; }
     public int HeadsetID { get; set; }
     public string TestTimestamp { get; set; }
     public int VideoID { get; set; }
@@ -92,7 +92,7 @@ internal class MoodInfo
 
     readonly int neutralValue = 6;
 
-    public MoodInfo(int userID, int headsetID, string testTimestamp, int videoId)
+    public MoodInfo(string userID, int headsetID, string testTimestamp, int videoId)
     {
         UserID = userID;
         HeadsetID = headsetID;
@@ -102,7 +102,7 @@ internal class MoodInfo
         Mood = neutralValue;
     }
 
-    public MoodInfo(int userID, int headsetID, string testTimestamp, int videoId, double time, float mood)
+    public MoodInfo(string userID, int headsetID, string testTimestamp, int videoId, double time, float mood)
     {
         UserID = userID;
         HeadsetID = headsetID;

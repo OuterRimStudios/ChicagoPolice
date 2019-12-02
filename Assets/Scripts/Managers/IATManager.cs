@@ -36,7 +36,7 @@ public class IATManager : MonoBehaviour {
 
     bool waitingToStart;
 
-    int userID;
+    string userID;
     string groupID;
     int headsetID;
     string testTimestamp;
@@ -253,7 +253,7 @@ public class IATManager : MonoBehaviour {
 }
 
 public class IATInfo {
-    public int UserID { get; set; }
+    public string UserID { get; set; }
     public string GroupID { get; set; }
     public int HeadsetID { get; set; }
     public string TestTimestamp { get; set; }
@@ -263,7 +263,7 @@ public class IATInfo {
     public string Answer { get; set; }
     public float ResponseTime { get; set; }
 
-    public IATInfo(int userID, string groupID, int headsetID, string timestamp, string occurance, string imageID, int roundID, string answer, float responseTime) {
+    public IATInfo(string userID, string groupID, int headsetID, string timestamp, string occurance, string imageID, int roundID, string answer, float responseTime) {
         UserID = userID;
         GroupID = groupID;
         HeadsetID = headsetID;
