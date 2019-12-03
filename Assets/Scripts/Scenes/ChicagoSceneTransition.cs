@@ -140,6 +140,7 @@ public class ChicagoSceneTransition : SceneTransition
         GroupID = groupID;
         HeadsetID = headsetID;
         TestTimestamp = DateTime.Now.ToString("MM/dd/yyyy H:mm");
+        isTestB = GroupID.ToLower() == "b" ? true : false;
         NextScene();
     }
 }
