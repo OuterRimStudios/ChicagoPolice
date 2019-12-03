@@ -18,7 +18,6 @@ public class ChicagoSceneTransition : SceneTransition
 
     public float holdTime = 1.5f;
 
-    public int headsetID = 1;
     public string UserID { get; private set; }
     public string GroupID { get; private set; }
     public int HeadsetID { get; private set; }
@@ -134,11 +133,16 @@ public class ChicagoSceneTransition : SceneTransition
         return isTestB ? testB : testA;
     }
 
+    public void InitializeHeadset(int headsetID)
+    {
+        HeadsetID = headsetID;
+        testA[0].gameObject.SetActive(true);
+    }
+
     public void InitializeUser(string userID, string groupID)
     {
         UserID = userID;
         GroupID = groupID;
-        HeadsetID = headsetID;
         TestTimestamp = DateTime.Now.ToString("MM/dd/yyyy H:mm");
         isTestB = GroupID.ToLower() == "b" ? true : false;
         NextScene();

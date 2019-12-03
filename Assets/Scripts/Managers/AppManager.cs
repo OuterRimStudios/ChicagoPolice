@@ -8,15 +8,20 @@ public class AppManager : MonoBehaviour
     string url = "ftp://ftpupload.net/htdocs/ProjectPerspective/appControl.json";
     NetworkCredential credential = new NetworkCredential("epiz_24876763", "Wr6f38F0XBubb");
     TestGroup data;
+    Coroutine getData;
 
-    void Start()
+    void OnEnable()
     {
-        StartCoroutine(Get());
+        getData = StartCoroutine(Get());
+    }
+
+    private void OnDisable()
+    {
+        StopCoroutine(getData);
     }
 
     IEnumerator Get()
     {
-        Debug.Log("trying to get data");
         WebClient request = new WebClient();
         request.Credentials = credential;
         for (; ; )
@@ -35,10 +40,10 @@ public class AppManager : MonoBehaviour
                     {
                         Debug.Log($"OculusID: {page.questID} | UserID: {page.userID} | GroupID: {page.groupID}");
                     }
-                    string userID = data.users[ChicagoSceneTransition.Instance.headsetID - 1].userID;
-                    string groupID = data.users[ChicagoSceneTransition.Instance.headsetID - 1].groupID;
+                    string userID = data.users[ChicagoSceneTransition.Instance.HeadsetID - 1].userID;
+                    string groupID = data.users[ChicagoSceneTransition.Instance.HeadsetID - 1].groupID;
                     ChicagoSceneTransition.Instance.InitializeUser(userID, groupID);
-                    data.users[ChicagoSceneTransition.Instance.headsetID - 1].questReady = true;
+                    data.users[ChicagoSceneTransition.Instance.HeadsetID - 1].questReady = true;
                     Post();
                     yield break;
                 }
