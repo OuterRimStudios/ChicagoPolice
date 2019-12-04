@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using OuterRimStudios.Utilities;
+
 
 public class AppManager : MonoBehaviour
 {
@@ -10,21 +12,76 @@ public class AppManager : MonoBehaviour
     TestGroup data;
     Coroutine getData;
 
+    //ManualInput
+    public float holdTime = 1.5f;
+    public GameObject manualInput;
+    HapticInput hapticInput;
+    private bool buttonHeld;
+    private bool isManual;
+    float timer;
+
+    void Start()
+    {
+        manualInput.SetActive(false);
+        hapticInput = GetComponent<HapticInput>();
+    }
+
     void OnEnable()
     {
         getData = StartCoroutine(Get());
+        OVRInputManager.OnButtonDown += OnButtonDown;
+        OVRInputManager.OnButtonUp += OnButtonUp;
     }
 
     private void OnDisable()
     {
         StopCoroutine(getData);
+        OVRInputManager.OnButtonDown -= OnButtonDown;
+        OVRInputManager.OnButtonUp -= OnButtonUp;
+    }
+
+    void OnButtonDown(OVRInput.Button button)
+    {
+        if (button == OVRInput.Button.Two || Input.GetKeyDown(KeyCode.B))
+        {
+            buttonHeld = true;
+        }
+    }
+
+    void OnButtonUp(OVRInput.Button button)
+    {
+        if (button == OVRInput.Button.Two || Input.GetKeyUp(KeyCode.B))
+        {
+            buttonHeld = false;
+        }            
+    }
+
+    void CheckCountdown()
+    {
+        if (buttonHeld)
+        {
+            if (MathUtilities.Timer(ref timer))
+            {
+                isManual = true;
+                manualInput.SetActive(true);
+            }
+            else
+                hapticInput.PerformHapticRumble();
+        }
+        else
+            ResetTime();
+    }
+
+    void ResetTime()
+    {
+        timer = holdTime;
     }
 
     IEnumerator Get()
     {
         WebClient request = new WebClient();
         request.Credentials = credential;
-        for (; ; )
+        while (!isManual)
         {
             yield return new WaitForSeconds(5f);
             try

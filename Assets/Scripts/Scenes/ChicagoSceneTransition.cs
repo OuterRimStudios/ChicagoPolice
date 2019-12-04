@@ -13,10 +13,7 @@ public class ChicagoSceneTransition : SceneTransition
     public static ChicagoSceneTransition Instance;
 
     public List<BaseScene> testA;
-    public List<BaseScene> testB;
-    HapticInput hapticInput;
-
-    public float holdTime = 1.5f;
+    public List<BaseScene> testB;    
 
     public string UserID { get; private set; }
     public string GroupID { get; private set; }
@@ -25,72 +22,15 @@ public class ChicagoSceneTransition : SceneTransition
 
     int sceneIndex;
     bool isTestB;
-    float timer;
-    bool buttonHeld;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    private void Start()
-    {
-        hapticInput = GetComponent<HapticInput>();
-        ResetTime();
-    }
-
-    private void OnEnable()
-    {
-        OVRInputManager.OnButtonDown += OnButtonDown;
-        OVRInputManager.OnButtonUp += OnButtonUp;
-    }
-
-    private void OnDisable()
-    {
-        OVRInputManager.OnButtonDown -= OnButtonDown;
-        OVRInputManager.OnButtonUp -= OnButtonUp;
-    }
-
     private void Update()
     {
-        OVRInput.Update();
-        if (sceneIndex == 0)
-            CheckCountdown();
-    }
-
-    void OnButtonDown(OVRInput.Button button)
-    {
-        if (button == OVRInput.Button.One || button == OVRInput.Button.Two)
-        {
-            isTestB = button == OVRInput.Button.Two ? true : false;
-            buttonHeld = true;
-        }
-    }
-
-    void OnButtonUp(OVRInput.Button button)
-    {
-        if (button == OVRInput.Button.One || button == OVRInput.Button.Two)
-            buttonHeld = false;
-    }
-
-    void CheckCountdown()
-    {
-        if (buttonHeld)
-        {
-            if (MathUtilities.Timer(ref timer))
-            {
-                NextScene();
-            }
-            else
-                hapticInput.PerformHapticRumble();
-        }
-        else
-            ResetTime();
-    }
-
-    void ResetTime()
-    {
-        timer = holdTime;
+        OVRInput.Update();      
     }
 
     public override void NextScene()
