@@ -7,6 +7,7 @@ public class PerspectiveScene : BaseScene
 {
     public MediaPlayer[] mediaPlayers;
     public GameObject[] videoSpheres;
+    public Animator fadeAnimator;
 
     int perspectiveIndex;
     float time;
@@ -24,10 +25,16 @@ public class PerspectiveScene : BaseScene
     void OnButtonDown(OVRInput.Button button)
     {
         //Debug.LogError("Getting input from button " + button);
-        if (button == OVRInput.Button.One)
-            NextPerspective();
-        else
-            PreviousPerspective();
+
+        if(!fadeAnimator.GetCurrentAnimatorStateInfo(0).IsName("Fade"))
+        {
+            fadeAnimator.SetTrigger("Fade");
+
+            if (button == OVRInput.Button.One)
+                NextPerspective();
+            else
+                PreviousPerspective();
+        }
     }
 
     private void Update()
