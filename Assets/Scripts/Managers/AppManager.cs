@@ -74,7 +74,7 @@ public class AppManager : MonoBehaviour
             else
                 hapticInput.PerformHapticRumble();
 
-            Debug.LogError("Check Countdown:");
+            //Debug.LogError("Check Countdown:");
         }
         else
             ResetTime();

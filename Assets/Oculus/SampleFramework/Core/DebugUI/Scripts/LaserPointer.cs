@@ -56,6 +56,7 @@ public class LaserPointer : OVRCursor
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        laserBeamBehavior = LaserBeamBehavior.On;
     }
 
     private void Start()
@@ -65,6 +66,7 @@ public class LaserPointer : OVRCursor
 
     public override void SetCursorStartDest(Vector3 start, Vector3 dest, Vector3 normal)
     {
+        Debug.LogError($"Cursor Start Dest {start}:start {dest}:dest {normal}:normal");
         _startPoint = start;
         _endPoint = dest;
         _hitTarget = true;
