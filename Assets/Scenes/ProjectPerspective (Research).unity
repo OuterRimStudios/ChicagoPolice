@@ -785,8 +785,6 @@ GameObject:
   - component: {fileID: 418151794}
   - component: {fileID: 418151798}
   - component: {fileID: 418151797}
-  - component: {fileID: 418151796}
-  - component: {fileID: 418151795}
   m_Layer: 5
   m_Name: ID Acknowledgement Panel
   m_TagString: Untagged
@@ -815,34 +813,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &418151795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 418151793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97e4e2497f4ba8c4087d5b78dae517cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &418151796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 418151793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a187c71fa05ffc44cb6a032294b5bbc0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  idText: {fileID: 1669637059}
-  mainPanel: {fileID: 0}
-  acknowledgementPanel: {fileID: 0}
-  acknowledgementText: {fileID: 0}
 --- !u!114 &418151797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4009,6 +3979,7 @@ GameObject:
   - component: {fileID: 985450846}
   - component: {fileID: 985450848}
   - component: {fileID: 985450849}
+  - component: {fileID: 985450850}
   m_Layer: 5
   m_Name: Main Menu
   m_TagString: Untagged
@@ -4099,6 +4070,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   holdTime: 5
   manualInput: {fileID: 788050982}
+--- !u!114 &985450850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985450844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b9062e0958435e43a2eb8f344b14019, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerInput: 4
+  amplitude: 0.2
+  duration: 0.2
 --- !u!1001 &988025382
 PrefabInstance:
   m_ObjectHideFlags: 0

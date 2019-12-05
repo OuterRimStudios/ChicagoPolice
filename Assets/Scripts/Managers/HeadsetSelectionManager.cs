@@ -9,7 +9,7 @@ public class HeadsetSelectionManager : MonoBehaviour
     public GameObject mainPanel;
     public GameObject acknowledgementPanel;
     public TextMeshProUGUI acknowledgementText;
-    int currentID;
+    int currentID = 1;
     bool acknowledgedID;
 
     private void OnEnable()

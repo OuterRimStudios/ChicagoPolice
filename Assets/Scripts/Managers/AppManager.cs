@@ -40,6 +40,11 @@ public class AppManager : MonoBehaviour
         OVRInputManager.OnButtonUp -= OnButtonUp;
     }
 
+    private void Update()
+    {
+        CheckCountdown();
+    }
+
     void OnButtonDown(OVRInput.Button button)
     {
         if (button == OVRInput.Button.Two || Input.GetKeyDown(KeyCode.B))
@@ -61,12 +66,15 @@ public class AppManager : MonoBehaviour
         if (buttonHeld)
         {
             if (MathUtilities.Timer(ref timer))
-            {
+            {                
                 isManual = true;
+                gameObject.SetActive(false);
                 manualInput.SetActive(true);
             }
             else
                 hapticInput.PerformHapticRumble();
+
+            Debug.LogError("Check Countdown:");
         }
         else
             ResetTime();
