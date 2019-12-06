@@ -429,6 +429,12 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!1 &76055132 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4822736268611752582, guid: a683bff9a6963044eabb12a6dbd6d249,
+    type: 3}
+  m_PrefabInstance: {fileID: 76055127}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &98999793
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3060,6 +3066,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputText: {fileID: 1467433186}
   groupIdText: {fileID: 770873937}
+  gosManualInput:
+  - {fileID: 788050982}
+  - {fileID: 76055132}
+  - {fileID: 76055129}
 --- !u!1001 &824261656
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4023,7 +4033,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdTime: 2
-  manualInput: {fileID: 788050982}
+  manualInput: {fileID: 788050984}
 --- !u!114 &985450850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5036,8 +5046,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7215,7 +7225,7 @@ GameObject:
   - component: {fileID: 1467433187}
   - component: {fileID: 1467433186}
   m_Layer: 5
-  m_Name: Text
+  m_Name: InputText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7690,7 +7700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1540458955
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8173,6 +8183,7 @@ MonoBehaviour:
   - {fileID: 98999795}
   - {fileID: 1652936868}
   inputText: {fileID: 1467433186}
+  defaultText: {fileID: 1540458956}
 --- !u!114 &1621938767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8297,8 +8308,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

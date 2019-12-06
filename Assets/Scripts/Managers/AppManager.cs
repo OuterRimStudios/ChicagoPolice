@@ -14,7 +14,7 @@ public class AppManager : MonoBehaviour
 
     //ManualInput
     public float holdTime = 1.5f;
-    public GameObject manualInput;
+    public ManualInput manualInput;
     HapticInput hapticInput;
     private bool buttonHeld;
     private bool isManual;
@@ -22,7 +22,7 @@ public class AppManager : MonoBehaviour
 
     void Start()
     {
-        manualInput.SetActive(false);
+        manualInput.Activate(false);
         hapticInput = GetComponent<HapticInput>();
     }
 
@@ -69,12 +69,12 @@ public class AppManager : MonoBehaviour
             {                
                 isManual = true;
                 gameObject.SetActive(false);
-                manualInput.SetActive(true);
+                manualInput.gameObject.SetActive(true);
+                manualInput.Activate(true);
             }
             else
                 hapticInput.PerformHapticRumble();
 
-            //Debug.LogError("Check Countdown:");
         }
         else
             ResetTime();

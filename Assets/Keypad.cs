@@ -8,6 +8,7 @@ public class Keypad : MonoBehaviour
 {
     public List<Button> inputKeys;
     public TextMeshProUGUI inputText;
+    public TextMeshProUGUI defaultText;
 
     void Awake()
     {
@@ -17,6 +18,11 @@ public class Keypad : MonoBehaviour
 
     public void Type(Button button)
     {
+        if (inputText.text.Length == 0)
+        {
+            defaultText.gameObject.SetActive(false);
+        }
+
         Text text = button.GetComponentInChildren<Text>();
         inputText.text += text.text;
     }
@@ -26,6 +32,11 @@ public class Keypad : MonoBehaviour
         if (inputText.text.Length > 0)
         {
             inputText.text = inputText.text.Remove(inputText.text.Length - 1);
+        }
+
+        if (inputText.text.Length == 0)
+        {
+            defaultText.gameObject.SetActive(true);
         }
     }
 

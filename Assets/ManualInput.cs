@@ -8,14 +8,21 @@ public class ManualInput : MonoBehaviour
 {
     public TextMeshProUGUI inputText;
     public TextMeshProUGUI groupIdText;
-    // Start is called before the first frame update
+
+    public GameObject[] gosManualInput;
 
     public void Submit()
     {
         ChicagoSceneTransition.Instance.InitializeUser(inputText.text, groupIdText.text.ToLower());
+        Activate(false);
+        ChicagoSceneTransition.Instance.NextScene();        
+    }
 
-        gameObject.SetActive(false);
-
-        ChicagoSceneTransition.Instance.NextScene();
+    public void Activate(bool isActive)
+    {
+        foreach (GameObject go in gosManualInput)
+        {
+            go.SetActive(isActive);
+        }
     }
 }
