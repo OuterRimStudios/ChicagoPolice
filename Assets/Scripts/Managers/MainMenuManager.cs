@@ -3,50 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using OuterRimStudios.Utilities;
 
-public class ManualInputManager : GameObjectScene
+public class MainMenuManager : MonoBehaviour
 {
     public float holdTime = 1.5f;
     [Header("The two scenes we're toggling between")]
     public ManualInput manualInput;
-    public GameObjectScene mainMenu;
+    public GameObject mainMenuText;
+    AppManager appManager;
 
     HapticInput hapticInput;
 
     private bool buttonHeld;
     private bool isManual;
-    private bool isScene;
 
     float timer;
 
     // Start is called before the first frame update
     void Start()
-    {
-        manualInput.Activate(false);
+    {       
         hapticInput = GetComponent<HapticInput>();
-    }
-
-    public override void StartScene()
-    {
-        isScene = true;
-        if (isManual)
-        {
-            manualInput.Activate(true);
-        }
-        else
-        {
-            mainMenu.StartScene();
-        }
-    }
-
-    public override void EndScene()
-    {
-        isScene = false;
+        appManager = GetComponent<AppManager>();
     }
 
     private void OnEnable()
     {
         OVRInputManager.OnButtonDown += OnButtonDown;
         OVRInputManager.OnButtonUp += OnButtonUp;
+
+        SetScene(isManual);
     }
 
     private void OnDisable()
@@ -62,24 +46,18 @@ public class ManualInputManager : GameObjectScene
 
     void OnButtonDown(OVRInput.Button button)
     {
-        if (isScene)
+        if (button == OVRInput.Button.Two || Input.GetKeyDown(KeyCode.B))
         {
-            if (button == OVRInput.Button.Two || Input.GetKeyDown(KeyCode.B))
-            {
-                buttonHeld = true;
-            }
-        }        
+            buttonHeld = true;
+        }
     }
 
     void OnButtonUp(OVRInput.Button button)
-    {
-        if (isScene)
+{
+        if (button == OVRInput.Button.Two || Input.GetKeyUp(KeyCode.B))
         {
-            if (button == OVRInput.Button.Two || Input.GetKeyUp(KeyCode.B))
-            {
-                buttonHeld = false;
-            }
-        }        
+            buttonHeld = false;
+        }     
     }
 
     void CheckCountdown()
@@ -87,19 +65,10 @@ public class ManualInputManager : GameObjectScene
         if (buttonHeld)
         {
             if (MathUtilities.Timer(ref timer))
-            {
+            {                
                 isManual = !isManual;
 
-                if (isManual)
-                {
-                    manualInput.Activate(true);
-                    mainMenu.EndScene();
-                }
-                else
-                {
-                    mainMenu.StartScene(); 
-                    manualInput.Activate(false);
-                }
+                SetScene(isManual);
 
                 ResetTimer();
             }
@@ -114,5 +83,12 @@ public class ManualInputManager : GameObjectScene
     void ResetTimer()
     {
         timer = holdTime;
+    }
+
+    void SetScene(bool isManualInput)
+    {
+        appManager.enabled = !isManualInput;
+        mainMenuText.SetActive(!isManualInput);
+        manualInput.Activate(isManualInput);
     }
 }
