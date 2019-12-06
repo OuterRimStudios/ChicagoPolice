@@ -301,10 +301,20 @@ PrefabInstance:
       propertyPath: minRenderScale
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1844553943679206883, guid: a683bff9a6963044eabb12a6dbd6d249,
+        type: 3}
+      propertyPath: near clip plane
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844553943679206883, guid: a683bff9a6963044eabb12a6dbd6d249,
+        type: 3}
+      propertyPath: far clip plane
+      value: 900
+      objectReference: {fileID: 0}
     - target: {fileID: 7811554729103150231, guid: a683bff9a6963044eabb12a6dbd6d249,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4822736268611752582, guid: a683bff9a6963044eabb12a6dbd6d249,
         type: 3}
@@ -360,7 +370,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e92c598ccd7563b408cb22916184a2e9, type: 2}
+  - {fileID: 2100000, guid: 6dd7afe847a85a447ae9e89c3d850068, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
