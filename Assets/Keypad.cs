@@ -38,6 +38,12 @@ public class Keypad : MonoBehaviour
         }
 
         gameObject.SetActive(false);
-    }    
+    }
+
+    public void Reset()
+    {
+        inputText.text = "";
+        defaultText.gameObject.SetActive(true);
+    }
 
 }

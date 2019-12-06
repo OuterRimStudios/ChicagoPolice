@@ -28,7 +28,17 @@ public class AppManager : MonoBehaviour
 
     void OnEnable()
     {
-        getData = StartCoroutine(Get());
+        if (isManual)
+        {
+            gameObject.SetActive(false);
+            manualInput.gameObject.SetActive(true);
+            manualInput.Activate(true);
+        }
+        else
+        {
+            getData = StartCoroutine(Get());
+        }
+        
         OVRInputManager.OnButtonDown += OnButtonDown;
         OVRInputManager.OnButtonUp += OnButtonUp;
     }
@@ -68,9 +78,7 @@ public class AppManager : MonoBehaviour
             if (MathUtilities.Timer(ref timer))
             {                
                 isManual = true;
-                gameObject.SetActive(false);
-                manualInput.gameObject.SetActive(true);
-                manualInput.Activate(true);
+                ActivateManualInput();
             }
             else
                 hapticInput.PerformHapticRumble();
@@ -83,6 +91,13 @@ public class AppManager : MonoBehaviour
     void ResetTime()
     {
         timer = holdTime;
+    }
+
+    void ActivateManualInput()
+    {
+        gameObject.SetActive(false);
+        manualInput.gameObject.SetActive(true);
+        manualInput.Activate(true);
     }
 
     IEnumerator Get()

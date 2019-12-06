@@ -12,6 +12,11 @@ public class TextToggle : MonoBehaviour
 
     bool isOn;
 
+    private void Start()
+    {
+        Reset();
+    }
+
     public void SwitchText()
     {
         if (isOn)
@@ -20,5 +25,11 @@ public class TextToggle : MonoBehaviour
             textDisplay.text = textOff;
 
         isOn = !isOn;
+    }
+
+    public void Reset()
+    {
+        isOn = false;
+        textDisplay.text = textOff;
     }
 }

@@ -6,14 +6,16 @@ using TMPro;
 
 public class ManualInput : MonoBehaviour
 {
-    public TextMeshProUGUI inputText;
-    public TextMeshProUGUI groupIdText;
+    public Keypad userId;
+    public TextToggle groupId;
 
     public GameObject[] gosManualInput;
 
     public void Submit()
     {
-        ChicagoSceneTransition.Instance.InitializeUser(inputText.text, groupIdText.text.ToLower());
+        ChicagoSceneTransition.Instance.InitializeUser(userId.inputText.text, groupId.textDisplay.text);
+        userId.Reset();
+        groupId.Reset();
         Activate(false);
         ChicagoSceneTransition.Instance.NextScene();        
     }
