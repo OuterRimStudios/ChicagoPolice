@@ -17,12 +17,7 @@ public class Keypad : MonoBehaviour
     }   
 
     public void Type(Button button)
-    {
-        if (inputText.text.Length == 0)
-        {
-            defaultText.gameObject.SetActive(false);
-        }
-
+    {       
         Text text = button.GetComponentInChildren<Text>();
         inputText.text += text.text;
     }
@@ -33,15 +28,15 @@ public class Keypad : MonoBehaviour
         {
             inputText.text = inputText.text.Remove(inputText.text.Length - 1);
         }
-
-        if (inputText.text.Length == 0)
-        {
-            defaultText.gameObject.SetActive(true);
-        }
     }
 
     public void CloseKeyboard()
     {
+        if (inputText.text.Length == 0)
+        {
+            defaultText.gameObject.SetActive(true);
+        }
+
         gameObject.SetActive(false);
     }    
 
