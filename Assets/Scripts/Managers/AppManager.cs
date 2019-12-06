@@ -1,9 +1,9 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using OuterRimStudios.Utilities;
-
 
 public class AppManager : MonoBehaviour
 {
@@ -15,6 +15,7 @@ public class AppManager : MonoBehaviour
     //ManualInput
     public float holdTime = 1.5f;
     public GameObject manualInput;
+    public int dataRate = 5;
     HapticInput hapticInput;
     private bool buttonHeld;
     private bool isManual;
@@ -91,7 +92,7 @@ public class AppManager : MonoBehaviour
         request.Credentials = credential;
         while (!isManual)
         {
-            yield return new WaitForSeconds(5f);
+            yield return new WaitUntil(CheckSeconds);
             try
             {
 
@@ -118,6 +119,14 @@ public class AppManager : MonoBehaviour
                 Debug.LogError(e.Message);
             }
         }
+    }
+
+    bool CheckSeconds()
+    {
+        if (DateTime.Now.Second % dataRate == 0)
+            return true;
+        else
+            return false;
     }
 
     void Post()
