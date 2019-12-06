@@ -17,10 +17,11 @@ public class ManualInput : MonoBehaviour
     }
 
     public void Activate(bool isActive)
-    {
+    {        
         foreach (GameObject go in gosManualInput)
         {
             go.SetActive(isActive);
         }
+        gameObject.SetActive(isActive);
     }
 }
