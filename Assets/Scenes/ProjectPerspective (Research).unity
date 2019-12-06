@@ -3084,8 +3084,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21031f475021e7d4591bdecad7bf5e5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputText: {fileID: 1467433186}
-  groupIdText: {fileID: 770873937}
+  groupId: {fileID: 1486990841}
+  userId: {fileID: 1621938766}
   gosManualInput:
   - {fileID: 788050982}
   - {fileID: 76055132}

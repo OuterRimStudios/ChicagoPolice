@@ -1,13 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+﻿using UnityEngine;
 
 public class ManualInput : MonoBehaviour
 {
-    public Keypad userId;
     public TextToggle groupId;
+    public Keypad userId;   
 
     public GameObject[] gosManualInput;
 
