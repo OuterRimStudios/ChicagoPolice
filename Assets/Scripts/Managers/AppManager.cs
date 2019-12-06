@@ -3,94 +3,30 @@ using System.Net;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using OuterRimStudios.Utilities;
 
 public class AppManager : MonoBehaviour
 {
+    public int dataRate = 5;
     string url = "ftp://ftpupload.net/htdocs/ProjectPerspective/appControl.json";
     NetworkCredential credential = new NetworkCredential("epiz_24876763", "Wr6f38F0XBubb");
     TestGroup data;
     Coroutine getData;
 
-    //ManualInput
-    public float holdTime = 1.5f;
-    public GameObject manualInput;
-    public int dataRate = 5;
-    HapticInput hapticInput;
-    private bool buttonHeld;
-    private bool isManual;
-    float timer;
-
-    void Start()
-    {
-        manualInput.SetActive(false);
-        hapticInput = GetComponent<HapticInput>();
-    }
-
     void OnEnable()
-    {
-        getData = StartCoroutine(Get());
-        OVRInputManager.OnButtonDown += OnButtonDown;
-        OVRInputManager.OnButtonUp += OnButtonUp;
+    {        
+        getData = StartCoroutine(Get());        
     }
 
     private void OnDisable()
     {
-        StopCoroutine(getData);
-        OVRInputManager.OnButtonDown -= OnButtonDown;
-        OVRInputManager.OnButtonUp -= OnButtonUp;
-    }
-
-    private void Update()
-    {
-        CheckCountdown();
-    }
-
-    void OnButtonDown(OVRInput.Button button)
-    {
-        if (button == OVRInput.Button.Two || Input.GetKeyDown(KeyCode.B))
-        {
-            buttonHeld = true;
-        }
-    }
-
-    void OnButtonUp(OVRInput.Button button)
-    {
-        if (button == OVRInput.Button.Two || Input.GetKeyUp(KeyCode.B))
-        {
-            buttonHeld = false;
-        }            
-    }
-
-    void CheckCountdown()
-    {
-        if (buttonHeld)
-        {
-            if (MathUtilities.Timer(ref timer))
-            {                
-                isManual = true;
-                gameObject.SetActive(false);
-                manualInput.SetActive(true);
-            }
-            else
-                hapticInput.PerformHapticRumble();
-
-            Debug.LogError("Check Countdown:");
-        }
-        else
-            ResetTime();
-    }
-
-    void ResetTime()
-    {
-        timer = holdTime;
-    }
+        StopCoroutine(getData);        
+    }   
 
     IEnumerator Get()
     {
         WebClient request = new WebClient();
         request.Credentials = credential;
-        while (!isManual)
+        while (true)
         {
             yield return new WaitUntil(CheckSeconds);
             try

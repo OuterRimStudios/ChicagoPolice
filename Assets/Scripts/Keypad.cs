@@ -7,7 +7,8 @@ using TMPro;
 public class Keypad : MonoBehaviour
 {
     public List<Button> inputKeys;
-    public TMP_InputField inputField;
+    public TextMeshProUGUI inputText;
+    public TextMeshProUGUI defaultText;
 
     void Awake()
     {
@@ -16,22 +17,33 @@ public class Keypad : MonoBehaviour
     }   
 
     public void Type(Button button)
-    {
+    {       
         Text text = button.GetComponentInChildren<Text>();
-        inputField.text += text.text;
+        inputText.text += text.text;
     }
 
     public void Backspace()
     {
-        if (inputField.text.Length > 0)
+        if (inputText.text.Length > 0)
         {
-            inputField.text = inputField.text.Remove(inputField.text.Length - 1);
+            inputText.text = inputText.text.Remove(inputText.text.Length - 1);
         }
     }
 
     public void CloseKeyboard()
     {
+        if (inputText.text.Length == 0)
+        {
+            defaultText.gameObject.SetActive(true);
+        }
+
         gameObject.SetActive(false);
-    }    
+    }
+
+    public void Reset()
+    {
+        inputText.text = "";
+        defaultText.gameObject.SetActive(true);
+    }
 
 }

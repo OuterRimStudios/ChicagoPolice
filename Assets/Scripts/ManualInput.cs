@@ -1,21 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+﻿using UnityEngine;
 
 public class ManualInput : MonoBehaviour
 {
-    public TextMeshProUGUI inputText;
-    public TextMeshProUGUI groupIdText;
-    // Start is called before the first frame update
+    public TextToggle groupId;
+    public Keypad userId;   
+
+    public GameObject[] gosManualInput;
 
     public void Submit()
     {
-        ChicagoSceneTransition.Instance.InitializeUser(inputText.text, groupIdText.text.ToLower());
+        ChicagoSceneTransition.Instance.InitializeUser(userId.inputText.text, groupId.textDisplay.text);
+        userId.Reset();
+        groupId.Reset();
+        Activate(false);
+        ChicagoSceneTransition.Instance.NextScene();        
+    }
 
-        gameObject.SetActive(false);
-
-        ChicagoSceneTransition.Instance.NextScene();
+    public void Activate(bool isActive)
+    {        
+        foreach (GameObject go in gosManualInput)
+        {
+            go.SetActive(isActive);
+        }
+        gameObject.SetActive(isActive);
     }
 }
