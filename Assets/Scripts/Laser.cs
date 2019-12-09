@@ -32,7 +32,6 @@ public class Laser : MonoBehaviour
         if (key == OVRInput.Button.SecondaryIndexTrigger && selectable != null)
         {
             BaseEventData data = new BaseEventData(eventSystem);
-            Debug.LogError($"{selectable.gameObject.name} has been clicked");
             ExecuteEvents.Execute(selectable.gameObject, data, ExecuteEvents.submitHandler);
         }
     }
@@ -60,14 +59,7 @@ public class Laser : MonoBehaviour
             if (hit.transform.tag.Equals("UI"))
             {
                 line.SetPosition(1, hit.point);
-                selectable = hit.transform.GetComponent<Selectable>();
-
-                if (selectable == null)
-                {
-                    Debug.LogError($"{hit.transform.gameObject.name} has no selectable");
-                }
-                else if(selectable.gameObject != null)
-                    Debug.LogError($"{selectable.gameObject.name} has been hovered over");
+                selectable = hit.transform.GetComponent<Selectable>();                
             }
         }
         else

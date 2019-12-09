@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 using OuterRimStudios.Utilities;
 
 public class BubbleSlider : MonoBehaviour
@@ -20,6 +21,9 @@ public class BubbleSlider : MonoBehaviour
     [Tooltip("Setting how much smaller the slider nodes are compared to the handle")]
     [ConditionalHide("changeSize", true)] public float sizeDif = 0f;
     public bool isHandleInFront = false;
+
+    public float holdDownTime = .4f;
+    Coroutine heldDownEnumerator;
 
     Slider slider;
     RectTransform handle;
@@ -47,6 +51,7 @@ public class BubbleSlider : MonoBehaviour
         Reset();
     #if UNITY_ANDROID
         OVRInputManager.OnButtonDown += OnButtonDown;
+        OVRInputManager.OnButtonUp += OnButtonUp;
     #endif
     }
 
@@ -54,6 +59,7 @@ public class BubbleSlider : MonoBehaviour
     {
     #if UNITY_ANDROID
         OVRInputManager.OnButtonDown -= OnButtonDown;
+        OVRInputManager.OnButtonUp -= OnButtonUp;
     #endif
     }
 
@@ -73,21 +79,51 @@ public class BubbleSlider : MonoBehaviour
     }
 #endif
 #if UNITY_ANDROID
+    void OnButtonUp(OVRInput.Button key)
+    {
+        if (key == OVRInput.Button.PrimaryThumbstickLeft || key == OVRInput.Button.PrimaryThumbstickRight)
+        {
+            if (heldDownEnumerator != null)
+                StopCoroutine(heldDownEnumerator);
+        }
+    }
     void OnButtonDown(OVRInput.Button key)
     {
         if(key == OVRInput.Button.PrimaryThumbstickLeft)
         {
             stepIndex = stepIndex.DecrementClamped(slider.minValue);
             UpdateUI();
-            
+            if (heldDownEnumerator != null)
+                StopCoroutine(heldDownEnumerator);
+            heldDownEnumerator = StartCoroutine(UpdateHold(false));
         }
         else if(key == OVRInput.Button.PrimaryThumbstickRight)
         {
             stepIndex = stepIndex.IncrementClamped(slider.maxValue);
             UpdateUI();
+            if (heldDownEnumerator != null)
+                StopCoroutine(heldDownEnumerator);
+            heldDownEnumerator = StartCoroutine(UpdateHold(true));
         }
     }
 #endif
+
+    IEnumerator UpdateHold(bool isIncreased)
+    {
+        yield return new WaitForSeconds(holdDownTime);
+        if (isIncreased)
+        {
+            stepIndex = stepIndex.IncrementClamped(slider.maxValue);
+        }
+        else
+        {
+            stepIndex = stepIndex.DecrementClamped(slider.minValue);
+        }
+
+        UpdateUI();
+        heldDownEnumerator = StartCoroutine(UpdateHold(isIncreased));
+    }
+
     void SetUI()
     {        
         float sliderWidth = sliderArea.GetComponent<RectTransform>().sizeDelta.x;

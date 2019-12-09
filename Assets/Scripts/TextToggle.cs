@@ -10,7 +10,7 @@ public class TextToggle : MonoBehaviour
 
     public TextMeshProUGUI textDisplay;
 
-    bool isOn;
+    bool isOff;
 
     private void Start()
     {
@@ -19,17 +19,17 @@ public class TextToggle : MonoBehaviour
 
     public void SwitchText()
     {
-        if (isOn)
-            textDisplay.text = textOn;
-        else
-            textDisplay.text = textOff;
+        isOff = !isOff;
 
-        isOn = !isOn;
+        if (isOff)
+            textDisplay.text = textOff;
+        else
+            textDisplay.text = textOn;        
     }
 
     public void Reset()
     {
-        isOn = false;
-        textDisplay.text = textOff;
+        isOff = false;
+        textDisplay.text = textOn;
     }
 }
