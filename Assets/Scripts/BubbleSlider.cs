@@ -188,6 +188,6 @@ public class BubbleSlider : MonoBehaviour
     public void SetSliderValue(int value)
     {
         stepIndex = (byte)value;
-        slider.value = value;
+        UpdateUI();
     }
 }
