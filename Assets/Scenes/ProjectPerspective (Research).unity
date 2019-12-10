@@ -455,6 +455,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 76055127}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &76055133 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7247575004355226930, guid: a683bff9a6963044eabb12a6dbd6d249,
+    type: 3}
+  m_PrefabInstance: {fileID: 76055127}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &98999793
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2163,6 +2169,7 @@ MonoBehaviour:
   moodSlider: {fileID: 1708191258}
   trackingEnabled: 0
   videoID: 3
+  eightBallAudioController: {fileID: 0}
 --- !u!1 &639138135
 GameObject:
   m_ObjectHideFlags: 0
@@ -3313,6 +3320,27 @@ MonoBehaviour:
   moodSlider: {fileID: 1708191258}
   trackingEnabled: 1
   videoID: 1
+  eightBallAudioController: {fileID: 0}
+--- !u!114 &854905464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854905462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2075895966, guid: e6dfd755027c24b0ea82bdd43cf88e7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClipFront: {fileID: 8300000, guid: f74f30e83fa9e09478af13b6bb3c9b9e, type: 3}
+  audioClipLeft: {fileID: 8300000, guid: 5602968156455c84489d47a481e76bca, type: 3}
+  audioClipBack: {fileID: 8300000, guid: 5b63e7b9920bde34ca32f7259e79d761, type: 3}
+  audioClipRight: {fileID: 8300000, guid: 95e64b1c660e9cb4f9ed50d7d8d5688f, type: 3}
+  cameraTransform: {fileID: 76055133}
+  volume: 1
+  autoPlay: 0
+  loop: 0
 --- !u!1 &860460684
 GameObject:
   m_ObjectHideFlags: 0
@@ -10182,6 +10210,7 @@ MonoBehaviour:
   moodSlider: {fileID: 1708191258}
   trackingEnabled: 1
   videoID: 2
+  eightBallAudioController: {fileID: 0}
 --- !u!1 &2016048373
 GameObject:
   m_ObjectHideFlags: 0
