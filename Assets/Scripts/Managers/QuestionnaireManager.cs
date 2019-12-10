@@ -10,27 +10,27 @@ public class QuestionnaireManager : MonoBehaviour
 {
     const int PREVIOUS_QUESTION = -1;
     const int NEXT_QUESTION = 1;
-    const string ANALYTICS_TITLE = "QuestionnaireResponses";
+    protected string ANALYTICS_TITLE = "QuestionnaireResponses";
     public List<GameObject> questions;
     public BubbleSlider responseSlider;
 
     public OVRInput.Button nextQuestionButton;
     public OVRInput.Button previousQuestionButton;
 
-    GameObject currentQuestion;
-    int currentQuestionIndex;
-    int[] responses;
+    protected GameObject currentQuestion;
+    protected int currentQuestionIndex;
+    protected int[] responses;
 
-    string userID;
-    int headsetID;
-    string testTimestamp;
+    protected string userID;
+    protected int headsetID;
+    protected string testTimestamp;
 
-    private void Start()
+    protected void Start()
     {
         Reset();
     }
 
-    private void OnEnable()
+    protected void OnEnable()
     {
         OVRInputManager.OnButtonDown += OnButtonDown;
         userID = ChicagoSceneTransition.Instance.UserID;
@@ -38,12 +38,12 @@ public class QuestionnaireManager : MonoBehaviour
         testTimestamp = ChicagoSceneTransition.Instance.TestTimestamp;
     }
 
-    private void OnDisable()
+    protected void OnDisable()
     {
         OVRInputManager.OnButtonDown -= OnButtonDown;
     }
 
-    void OnButtonDown(OVRInput.Button button)
+    protected void OnButtonDown(OVRInput.Button button)
     {
         if (button == nextQuestionButton)
             ChangeQuestion(NEXT_QUESTION);
@@ -52,7 +52,7 @@ public class QuestionnaireManager : MonoBehaviour
     }
 
     //Cycles the questions based on the direction [-1 = previous | 1 = next]
-    void ChangeQuestion(int direction)
+    protected void ChangeQuestion(int direction)
     {
         if(direction == NEXT_QUESTION)
         {
@@ -91,7 +91,7 @@ public class QuestionnaireManager : MonoBehaviour
         }
     }
 
-    private void Reset()
+    protected void Reset()
     {
         foreach (GameObject go in questions)
             go.SetActive(false);
@@ -110,7 +110,7 @@ public class QuestionnaireManager : MonoBehaviour
     }
     
 
-    void SendAnalytics()
+    protected virtual void SendAnalytics()
     {
         int videoID = ChicagoSceneTransition.Instance.GetLastVideo() != null ? ChicagoSceneTransition.Instance.GetLastVideo().videoID : -1;
         QuestionnaireData questionnaireData = new QuestionnaireData(userID, headsetID, testTimestamp, videoID, responses[0], responses[1], responses[2]);
