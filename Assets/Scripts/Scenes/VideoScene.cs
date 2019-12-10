@@ -1,6 +1,8 @@
 ﻿using RenderHeads.Media.AVProVideo;
 using UnityEngine;
 using System.Collections;
+using Hear360;
+
 public class VideoScene : BaseScene
 {
     public MediaPlayer mediaPlayer;
@@ -9,11 +11,16 @@ public class VideoScene : BaseScene
     public bool trackingEnabled;
     public int videoID;
 
+    public EightBallAudioController eightBallAudioController;
+
     public override void StartScene()
     {
         videoSphere.SetActive(true);
         moodSlider.SetActive(true);
         mediaPlayer.Play();
+
+        eightBallAudioController.Play();
+
         StartCoroutine(IsPlaying());
     }
 
