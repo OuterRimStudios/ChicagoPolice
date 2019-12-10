@@ -3340,7 +3340,7 @@ MonoBehaviour:
   moodSlider: {fileID: 1708191258}
   trackingEnabled: 1
   videoID: 1
-  eightBallAudioController: {fileID: 0}
+  eightBallAudioController: {fileID: 854905464}
 --- !u!114 &854905464
 MonoBehaviour:
   m_ObjectHideFlags: 0
