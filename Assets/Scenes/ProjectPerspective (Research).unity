@@ -2169,7 +2169,27 @@ MonoBehaviour:
   moodSlider: {fileID: 1708191258}
   trackingEnabled: 0
   videoID: 3
-  eightBallAudioController: {fileID: 0}
+  eightBallAudioController: {fileID: 633987596}
+--- !u!114 &633987596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633987594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2075895966, guid: e6dfd755027c24b0ea82bdd43cf88e7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClipFront: {fileID: 8300000, guid: f74f30e83fa9e09478af13b6bb3c9b9e, type: 3}
+  audioClipLeft: {fileID: 8300000, guid: 5602968156455c84489d47a481e76bca, type: 3}
+  audioClipBack: {fileID: 8300000, guid: 5b63e7b9920bde34ca32f7259e79d761, type: 3}
+  audioClipRight: {fileID: 8300000, guid: 95e64b1c660e9cb4f9ed50d7d8d5688f, type: 3}
+  cameraTransform: {fileID: 76055133}
+  volume: 1
+  autoPlay: 0
+  loop: 0
 --- !u!1 &639138135
 GameObject:
   m_ObjectHideFlags: 0
@@ -10210,7 +10230,27 @@ MonoBehaviour:
   moodSlider: {fileID: 1708191258}
   trackingEnabled: 1
   videoID: 2
-  eightBallAudioController: {fileID: 0}
+  eightBallAudioController: {fileID: 1985308838}
+--- !u!114 &1985308838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985308836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2075895966, guid: e6dfd755027c24b0ea82bdd43cf88e7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClipFront: {fileID: 8300000, guid: f74f30e83fa9e09478af13b6bb3c9b9e, type: 3}
+  audioClipLeft: {fileID: 8300000, guid: 5602968156455c84489d47a481e76bca, type: 3}
+  audioClipBack: {fileID: 8300000, guid: 5b63e7b9920bde34ca32f7259e79d761, type: 3}
+  audioClipRight: {fileID: 8300000, guid: 95e64b1c660e9cb4f9ed50d7d8d5688f, type: 3}
+  cameraTransform: {fileID: 76055133}
+  volume: 1
+  autoPlay: 0
+  loop: 0
 --- !u!1 &2016048373
 GameObject:
   m_ObjectHideFlags: 0
