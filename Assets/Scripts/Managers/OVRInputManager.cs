@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using OuterRimStudios.Utilities;
+using UnityEngine.XR;
 
 public class OVRInputManager : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class OVRInputManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        XRSettings.eyeTextureResolutionScale = 2f;
     }
 
     private void Start()
