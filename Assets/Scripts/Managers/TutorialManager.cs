@@ -23,6 +23,7 @@ public class TutorialManager : MonoBehaviour
     {
         OVRInputManager.OnButtonDown += OnButtonDown;
 
+        controllerAnimator.ResetTrigger("none");
         controllerAnimator.SetTrigger(controllerAnimation.ToString());
     }
 
