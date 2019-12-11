@@ -8,6 +8,9 @@ public class TutorialManager : MonoBehaviour
 {
     public SceneType sceneType = SceneType.Chicago;
     public OVRInput.Button acceptedInput;
+    public Animator controllerAnimator;
+    public ControllerAnimation controllerAnimation;
+
     List<OVRInput.Button> activeInput = new List<OVRInput.Button>();
 
     private void Start()
@@ -19,11 +22,15 @@ public class TutorialManager : MonoBehaviour
     private void OnEnable()
     {
         OVRInputManager.OnButtonDown += OnButtonDown;
+
+        controllerAnimator.SetTrigger(controllerAnimation.ToString());
     }
 
     private void OnDisable()
     {
         OVRInputManager.OnButtonDown -= OnButtonDown;
+
+        controllerAnimator.SetTrigger("none");
     }
 #if UNITY_EDITOR || UNITY_STANDALONE
     private void Update()
@@ -51,3 +58,12 @@ public class TutorialManager : MonoBehaviour
             SundanceSceneTransition.Instance.NextScene();
     }
 }
+
+public enum ControllerAnimation
+{
+    joystick,
+    xButton,
+    yButton,
+    xyButtons,
+    none
+};
