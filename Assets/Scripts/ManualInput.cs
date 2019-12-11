@@ -13,7 +13,7 @@ public class ManualInput : MonoBehaviour
         userId.Reset();
         groupId.Reset();
         Activate(false);
-        ChicagoSceneTransition.Instance.NextScene();        
+        //ChicagoSceneTransition.Instance.NextScene();        
     }
 
     public void Activate(bool isActive)

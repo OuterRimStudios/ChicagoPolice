@@ -39,6 +39,8 @@ public class ChicagoSceneTransition : SceneTransition
         baseScene[sceneIndex].EndScene();
         OnSceneEnded?.Invoke(baseScene[sceneIndex]);
 
+        Debug.LogError("isTestB: " + isTestB);
+
         if (sceneIndex < baseScene.Count - 1)
             sceneIndex++;
         else
