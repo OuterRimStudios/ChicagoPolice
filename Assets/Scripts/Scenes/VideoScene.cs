@@ -7,6 +7,7 @@ public class VideoScene : BaseScene
 {
     public MediaPlayer mediaPlayer;
     public GameObject videoSphere;
+    public AudioSource headlockedSource;
     public GameObject moodSlider;
     public bool trackingEnabled;
     public int videoID;
@@ -29,6 +30,7 @@ public class VideoScene : BaseScene
     {
         yield return new WaitForSeconds(audioDelay);
         eightBallAudioController.Play();
+        headlockedSource?.Play();
         yield return new WaitForSeconds(1);
         yield return new WaitUntil(() => !mediaPlayer.Control.IsPlaying());
         ChicagoSceneTransition.Instance.NextScene();
