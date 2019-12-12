@@ -27,6 +27,8 @@ public class MainMenuManager : MonoBehaviour
 
     private void OnEnable()
     {
+        hapticInput = GetComponent<HapticInput>();
+        appManager = GetComponent<AppManager>();
         OVRInputManager.OnButtonDown += OnButtonDown;
         OVRInputManager.OnButtonUp += OnButtonUp;
 

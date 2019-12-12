@@ -5311,7 +5311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_VideoPath
-      value: Selects 6 Take 3.mp4
+      value: A1 Take 8 Ver 5 4K trimmed SPATIAL ADAPTIVE.mp4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
@@ -5454,7 +5454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_VideoPath
-      value: 1C take 3.mp4
+      value: A 3 Take 3 Ver 5 4K trimmed w Spatial wav ADAPTIVE.mp4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
@@ -5931,7 +5931,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_VideoPath
-      value: 1A take 8.mp4
+      value: A1 Take 8 Ver 5 4K trimmed SPATIAL ADAPTIVE.mp4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
@@ -6679,7 +6679,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneType: 0
   acceptedInput: 4
-  controllerAnimator: {fileID: 0}
+  controllerAnimator: {fileID: 2097365874}
   controllerAnimation: 0
 --- !u!114 &1109154553
 MonoBehaviour:
@@ -6746,7 +6746,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1116322909
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7291,7 +7291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneType: 0
   acceptedInput: 4
-  controllerAnimator: {fileID: 0}
+  controllerAnimator: {fileID: 2097365874}
   controllerAnimation: 0
 --- !u!114 &1231057883
 MonoBehaviour:
@@ -7416,7 +7416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneType: 0
   acceptedInput: 4
-  controllerAnimator: {fileID: 0}
+  controllerAnimator: {fileID: 2097365874}
   controllerAnimation: 0
 --- !u!1001 &1264012385
 PrefabInstance:
