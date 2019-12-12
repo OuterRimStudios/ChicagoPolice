@@ -19,27 +19,29 @@ public class PerceptionTracking : MonoBehaviour
     string userID;
     int headsetID;
     string testTimestamp;
+    List<PerceptionInfo> perceptionData = new List<PerceptionInfo>();
 
     void OnEnable()
     {
         ChicagoSceneTransition.OnSceneStarted += Initialize;
+        ChicagoSceneTransition.OnSceneEnded += OnSceneEnded;
     }
 
     void OnDisable()
     {
         ChicagoSceneTransition.OnSceneStarted -= Initialize;
+        ChicagoSceneTransition.OnSceneEnded -= OnSceneEnded;
     }
 
     void Initialize(BaseScene baseScene)
     {
-        Debug.Log("Initializing...");
+        perceptionData.Clear();
         userID = ChicagoSceneTransition.Instance.UserID;
         headsetID = ChicagoSceneTransition.Instance.HeadsetID;
         testTimestamp = ChicagoSceneTransition.Instance.TestTimestamp;
 
         if (baseScene.GetType() == typeof(VideoScene))
         {
-            Debug.Log("Scene is a video scene");
             videoScene = ((VideoScene)baseScene);
 
             if (videoScene.trackingEnabled)
@@ -55,6 +57,11 @@ public class PerceptionTracking : MonoBehaviour
 
     }
 
+    private void OnSceneEnded(BaseScene baseScene)
+    {
+        SendAnalytics();
+    }
+
     private void Update()
     {
         if (!initialized) return;
@@ -67,19 +74,15 @@ public class PerceptionTracking : MonoBehaviour
 
     IEnumerator Cast()
     {
-        Debug.Log("Casting...");
         RaycastHit hit;
         if(Physics.Raycast(transform.position, transform.forward, out hit, trackingLayer))
         {
             if(hit.transform.tag != lastTag)
             {
-                Debug.Log("Hit: " + hit.transform.tag);
                 lastTag = hit.transform.tag;
                 float time = mediaPlayer.Control.GetCurrentTimeMs() / 1000;
                 PerceptionInfo perceptionInfo = new PerceptionInfo(userID, headsetID, testTimestamp, videoScene.videoID, time, lastTag);
-                var data = new List<PerceptionInfo> { perceptionInfo };
-
-                AnalyticsUtilities.Event(ANALYTICS_TITLE, data);
+                perceptionData.Add(perceptionInfo);
 
                 Analytics.CustomEvent(ANALYTICS_TITLE, new Dictionary<string, object>{
                     { "UserID", perceptionInfo.UserID},
@@ -94,6 +97,11 @@ public class PerceptionTracking : MonoBehaviour
 
         yield return new WaitForSeconds(trackingInterval);
         casting = false;
+    }
+
+    void SendAnalytics()
+    {
+        AnalyticsUtilities.Event(ANALYTICS_TITLE, perceptionData);
     }
 }
 

@@ -10,7 +10,7 @@ public class QuestionnaireManager : MonoBehaviour
 {
     const int PREVIOUS_QUESTION = -1;
     const int NEXT_QUESTION = 1;
-    protected string ANALYTICS_TITLE = "QuestionnaireResponses";
+    protected string ANALYTICS_TITLE = "EmpathyQuestionnaireResponses";
     public List<GameObject> questions;
     [Tooltip("This is the gameobject that will rotate to match the viewer's front.")]
     public Transform questionHub;
@@ -121,7 +121,7 @@ public class QuestionnaireManager : MonoBehaviour
     protected virtual void SendAnalytics()
     {
         int videoID = ChicagoSceneTransition.Instance.GetLastVideo() != null ? ChicagoSceneTransition.Instance.GetLastVideo().videoID : -1;
-        QuestionnaireData questionnaireData = new QuestionnaireData(userID, headsetID, testTimestamp, videoID, responses[0], responses[1], responses[2]);
+        QuestionnaireData questionnaireData = new QuestionnaireData(userID, headsetID, testTimestamp, videoID, responses[0], responses[1], responses[2], responses[3]);
         var data = new List<QuestionnaireData> { questionnaireData };
 
         AnalyticsUtilities.Event(ANALYTICS_TITLE, data);
@@ -134,7 +134,8 @@ public class QuestionnaireManager : MonoBehaviour
             { "VideoID", questionnaireData.VideoID},
             { "EmpathyAntwaun", questionnaireData.EmpathyAntwuan},
             { "EmpathyTony", questionnaireData.EmpathyTony},
-            { "Anger", questionnaireData.Anger}
+            { "EmpathySantana", questionnaireData.EmpathySantana},
+            { "EmpathyDanny", questionnaireData.EmpathyDanny}
         });
     }
 
@@ -152,9 +153,10 @@ public class QuestionnaireData
     public int VideoID { get; set; }
     public int EmpathyAntwuan { get; set; }
     public int EmpathyTony { get; set; }
-    public int Anger { get; set; }
+    public int EmpathySantana { get; set; }
+    public int EmpathyDanny { get; set; }
 
-    public QuestionnaireData(string userID, int headsetID, string testTimestamp, int videoID, int empathyAnt, int empathyTony, int anger)
+    public QuestionnaireData(string userID, int headsetID, string testTimestamp, int videoID, int empathyAnt, int empathyTony, int empathySant, int empathyDan)
     {
         UserID = userID;
         HeadsetID = headsetID;
@@ -162,11 +164,12 @@ public class QuestionnaireData
         VideoID = videoID;
         EmpathyAntwuan = empathyAnt;
         EmpathyTony = empathyTony;
-        Anger = anger;
+        EmpathySantana = empathySant;
+        EmpathyDanny = empathyDan;
     }
 
     public string GetValues()
     {
-        return $"UserID: {UserID} | VideoID: {VideoID} | EmpathyAntwuan: {EmpathyAntwuan} | EmpathyTony: {EmpathyTony} | Anger: {Anger}";
+        return $"UserID: {UserID} | VideoID: {VideoID} | EmpathyAntwuan: {EmpathyAntwuan} | EmpathyTony: {EmpathyTony} | Anger: {EmpathySantana}";
     }
 }
