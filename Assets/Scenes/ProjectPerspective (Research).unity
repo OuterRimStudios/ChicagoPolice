@@ -746,6 +746,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &76055136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76055134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 461ed35f9049f7446b5eda1c63dd2793, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trackingInterval: 0.5
+  trackingLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1001 &98999793
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8501,7 +8517,7 @@ RectTransform:
   - {fileID: 1119246185}
   - {fileID: 882533898}
   m_Father: {fileID: 1579474199}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -11076,7 +11092,7 @@ RectTransform:
   - {fileID: 1650540421}
   - {fileID: 1974680789}
   m_Father: {fileID: 1579474199}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -11741,8 +11757,8 @@ RectTransform:
   - {fileID: 391259198122574038}
   - {fileID: 421385295}
   - {fileID: 5655674177632127902}
-  - {fileID: 1233095845}
   - {fileID: 1043147497}
+  - {fileID: 1233095845}
   - {fileID: 1501009426}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -13157,7 +13173,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1733244158}
   - component: {fileID: 1733244157}
-  - component: {fileID: 1733244156}
   - component: {fileID: 1733244155}
   - component: {fileID: 1733244154}
   m_Layer: 0
@@ -13193,22 +13208,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 111df1700aa32f84fb38129f85ce21c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1733244156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1733244153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 461ed35f9049f7446b5eda1c63dd2793, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trackingInterval: 0.5
-  trackingLayer:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!114 &1733244157
 MonoBehaviour:
   m_ObjectHideFlags: 0
