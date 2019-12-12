@@ -23,7 +23,7 @@ public class OVRInputManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        XRSettings.eyeTextureResolutionScale = 2f;
+        XRSettings.eyeTextureResolutionScale = 1.8f;
     }
 
     private void Start()
