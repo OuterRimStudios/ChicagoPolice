@@ -14,5 +14,7 @@ public enum IATKey
     Black,
     Good,
     Bad,
+    Bird,
+    Mammal,
     None
 };

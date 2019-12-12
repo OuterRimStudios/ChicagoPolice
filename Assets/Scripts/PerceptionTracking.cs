@@ -32,12 +32,14 @@ public class PerceptionTracking : MonoBehaviour
 
     void Initialize(BaseScene baseScene)
     {
+        Debug.Log("Initializing...");
         userID = ChicagoSceneTransition.Instance.UserID;
         headsetID = ChicagoSceneTransition.Instance.HeadsetID;
         testTimestamp = ChicagoSceneTransition.Instance.TestTimestamp;
 
         if (baseScene.GetType() == typeof(VideoScene))
         {
+            Debug.Log("Scene is a video scene");
             videoScene = ((VideoScene)baseScene);
 
             if (videoScene.trackingEnabled)
@@ -65,11 +67,13 @@ public class PerceptionTracking : MonoBehaviour
 
     IEnumerator Cast()
     {
+        Debug.Log("Casting...");
         RaycastHit hit;
         if(Physics.Raycast(transform.position, transform.forward, out hit, trackingLayer))
         {
             if(hit.transform.tag != lastTag)
             {
+                Debug.Log("Hit: " + hit.transform.tag);
                 lastTag = hit.transform.tag;
                 float time = mediaPlayer.Control.GetCurrentTimeMs() / 1000;
                 PerceptionInfo perceptionInfo = new PerceptionInfo(userID, headsetID, testTimestamp, videoScene.videoID, time, lastTag);

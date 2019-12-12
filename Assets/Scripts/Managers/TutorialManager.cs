@@ -36,10 +36,14 @@ public class TutorialManager : MonoBehaviour
 #if UNITY_EDITOR || UNITY_STANDALONE
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (acceptedInput != OVRInput.Button.None)
         {
-            NextScene();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                NextScene();
+            }
         }
+        
     }
 #endif
 #if UNITY_ANDROID
