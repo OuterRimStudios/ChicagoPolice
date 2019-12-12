@@ -6,29 +6,34 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
-public class IATManager : MonoBehaviour {
+public class IATManager : MonoBehaviour 
+{
     const string ANALYTICS_TITLE = "IATResults";
-    public IATCollection[] collections;
+    public IATCollection[] practiceCollections;
+    public IATCollection[] picCollections;
+    public IATCollection[] wordCollections;
     public Round[] rounds;
 
     [Header("UI Variables")]
     public Image choiceImage;
     public GameObject wrongAnswerPrompt;
-    public TextMeshProUGUI leftText;
-    public TextMeshProUGUI rightText;
+    public GameObject renderController;
 
     [Space]
     public GameObject iatBase;
     public TextMeshProUGUI tutorialText;
+    public TextMeshProUGUI choiceText;
 
-    List<Sprite> leftSprites = new List<Sprite>();
-    List<Sprite> rightSprites = new List<Sprite>();
-    List<Sprite> allSprites = new List<Sprite>();
+    List<Sprite> picSprites = new List<Sprite>();
+    List<Sprite> wordSprites = new List<Sprite>();
 
-    int nextSpriteIndex;
-    int nextRoundIndex;
+    int answerCount;
+    int roundIndex;
+    int roundSpriteCount;
     bool isFirstTest = true;
+    bool isDisplayPic = true;
 
     List<IATInfo> iatInfos = new List<IATInfo>();
     float itemStartTime; //Time when the current image was displayed
@@ -68,20 +73,28 @@ public class IATManager : MonoBehaviour {
             NextItem();
             
         } else if (Input.GetKeyDown(KeyCode.RightArrow) && !waitingToStart) {
-            if (rightSprites.Contains(choiceImage.sprite)) {
+            var itemKey = GetItemKey(choiceImage.sprite);
+            if (rounds[roundIndex].noKeys.Contains(itemKey))
+            {
                 //Store Stats
-                CreateIATInfo(choiceImage.sprite.name, GetItemKey(choiceImage.sprite).ToString());
+                CreateIATInfo(choiceImage.sprite.name, itemKey.ToString());
                 NextItem();
-            } else {
+            } 
+            else 
+            {
                 //Display "Nope"
                 wrongAnswerPrompt.SetActive(true);
             }
         } else if (Input.GetKeyDown(KeyCode.LeftArrow) && !waitingToStart) {
-            if (leftSprites.Contains(choiceImage.sprite)) {
+            var itemKey = GetItemKey(choiceImage.sprite);
+            if (rounds[roundIndex].yesKeys.Contains(itemKey)) 
+            {
                 //Store Stats
-                CreateIATInfo(choiceImage.sprite.name, GetItemKey(choiceImage.sprite).ToString());
+                CreateIATInfo(choiceImage.sprite.name, itemKey.ToString());
                 NextItem();
-            } else {
+            } 
+            else 
+            {
                 wrongAnswerPrompt.SetActive(true);
             }
         }
@@ -95,20 +108,31 @@ public class IATManager : MonoBehaviour {
             NextRound();
             NextItem();            
         }
-        else if (button == OVRInput.Button.PrimaryThumbstickLeft && !waitingToStart) {
-            if (leftSprites.Contains(choiceImage.sprite)) {
+        else if (button == OVRInput.Button.PrimaryThumbstickLeft && !waitingToStart) 
+        {
+            var itemKey = GetItemKey(choiceImage.sprite);
+            if (rounds[roundIndex].yesKeys.Contains(itemKey)) 
+            {
                 //Store Stats
-                CreateIATInfo(choiceImage.sprite.name, GetItemKey(choiceImage.sprite).ToString());
+                CreateIATInfo(choiceImage.sprite.name, itemKey.ToString());
                 NextItem();
-            } else {
+            } 
+            else 
+            {
                 wrongAnswerPrompt.SetActive(true);
             }
-        } else if (button == OVRInput.Button.PrimaryThumbstickRight && !waitingToStart) {
-            if (rightSprites.Contains(choiceImage.sprite)) {
+        } 
+        else if (button == OVRInput.Button.PrimaryThumbstickRight && !waitingToStart) 
+        {
+            var itemKey = GetItemKey(choiceImage.sprite);
+            if (rounds[roundIndex].noKeys.Contains(itemKey))
+            {
                 //Store Stats
-                CreateIATInfo(choiceImage.sprite.name, GetItemKey(choiceImage.sprite).ToString());
+                CreateIATInfo(choiceImage.sprite.name, itemKey.ToString());
                 NextItem();
-            } else {
+            } 
+            else 
+            {
                 //Display "Nope"
                 wrongAnswerPrompt.SetActive(true);
             }
@@ -119,54 +143,84 @@ public class IATManager : MonoBehaviour {
         waitingToStart = isActive;
 
         if (isActive) {
-            tutorialText.text = $"Push the joystick <b>left</b> to match the items that belong to the category {ConvertKeysToText(rounds[nextRoundIndex].leftKeys)}." +
-                $"\n\nPush the joystick <b>right</b> to match the items that belong to the category {ConvertKeysToText(rounds[nextRoundIndex].rightKeys)}.";
-
-            UpdateTextDisplays(rounds[nextRoundIndex]);
+            tutorialText.text = $"Push the joystick <b>left</b> to match the items that belong to the category {ConvertKeysToText(rounds[roundIndex].yesKeys)}." +
+                $"\n\nPush the joystick <b>right</b> if they do not.";
         }
 
+        choiceText.text = ConvertKeysToText(rounds[roundIndex].yesKeys);
         tutorialText.transform.parent.gameObject.SetActive(isActive);
-
         choiceImage.gameObject.SetActive(!isActive);
+        renderController.SetActive(isActive);
     }
 
-    void NextRound() {
-        SetUpRoundSprites(rounds[nextRoundIndex]);
-        nextRoundIndex++;
+    void NextRound() 
+    {
+        SetUpRoundSprites();
+        isDisplayPic = true;
     }
 
-    void SetUpRoundSprites(Round round) {
-        rightSprites.Clear();
+    void SetUpRoundSprites() 
+    {
+        picSprites.Clear();
+        wordSprites.Clear();
 
-        foreach (IATKey key in round.rightKeys) {
-            rightSprites.AddRange(GetSpritesFromEnum(key));
+        if (roundIndex == 0)
+        {
+            foreach (IATCollection collection in practiceCollections)
+            {
+                picSprites.AddRange(CollectionUtilities.GetRandomItems(collection.IATobjects, 4));
+            }
+        }
+        else
+        {
+            foreach (IATCollection collection in picCollections)
+            {
+                picSprites.AddRange(CollectionUtilities.GetRandomItems(collection.IATobjects, 4));
+            }
+
+            foreach (IATCollection collection in wordCollections)
+            {
+                wordSprites.AddRange(CollectionUtilities.GetRandomItems(collection.IATobjects, 4));
+            }
         }
 
-        leftSprites.Clear();
+        
 
-        foreach (IATKey key in round.leftKeys) {
-            leftSprites.AddRange(GetSpritesFromEnum(key));
-        }
-
-        allSprites.Clear();
-        allSprites.AddRange(rightSprites);
-        allSprites.AddRange(leftSprites);
-
-        //======Shuffle Order of Sprites=======
-        allSprites = allSprites.OrderBy(a => Guid.NewGuid()).ToList();
+        roundSpriteCount = picSprites.Count + wordSprites.Count;
     }
 
-    void NextItem() {
+    void NextItem() 
+    {
         wrongAnswerPrompt.SetActive(false);
 
-        if (nextSpriteIndex == allSprites.Count) {
-            nextSpriteIndex = 0;
+        if (answerCount == roundSpriteCount) 
+        {
+            answerCount = 0;
+            roundIndex++;
             choiceImage.gameObject.SetActive(false);
             CheckIfTestEnded();
-        } else {
+        } 
+        else
+        {
             choiceImage.gameObject.SetActive(true);
-            choiceImage.sprite = allSprites[nextSpriteIndex];
-            nextSpriteIndex++;
+
+            if (isDisplayPic)
+            {
+                int randomIndex = Random.Range(0, picSprites.Count);
+                choiceImage.sprite = picSprites[randomIndex];
+                picSprites.RemoveAt(randomIndex);
+            }
+            else
+            {
+                int randomIndex = Random.Range(0, wordSprites.Count);
+                choiceImage.sprite = wordSprites[randomIndex];
+                wordSprites.RemoveAt(randomIndex);
+            }
+
+            if(wordSprites.Count != 0)
+                isDisplayPic = !isDisplayPic;
+
+            answerCount++;
         }
 
         itemStartTime = Time.time;
@@ -174,8 +228,8 @@ public class IATManager : MonoBehaviour {
 
     void CheckIfTestEnded() {
         //========Check if the IAT test has ended==========
-        if (nextRoundIndex == rounds.Length) {
-            nextRoundIndex = 0;
+        if (roundIndex == rounds.Length) {
+            roundIndex = 0;
             SendAnalytics();
             isFirstTest = !isFirstTest;
             ChicagoSceneTransition.Instance.NextScene();
@@ -183,13 +237,9 @@ public class IATManager : MonoBehaviour {
             ActivateTutorial(true);
     }
 
-    void UpdateTextDisplays(Round round) {
-        rightText.text = ConvertKeysToText(round.rightKeys);
-        leftText.text = ConvertKeysToText(round.leftKeys);
-    }
-
     IATKey GetItemKey(Sprite item) {
-        foreach (IATCollection collection in collections)
+        List<IATCollection> _collections = picCollections.Concat(wordCollections).Concat(practiceCollections).ToList();
+        foreach (IATCollection collection in _collections)
             if (collection.IATobjects.Contains(item))
                 return collection.key;
 
@@ -209,14 +259,10 @@ public class IATManager : MonoBehaviour {
         return text;
     }
 
-    List<Sprite> GetSpritesFromEnum(IATKey key) {
-        var collection = collections.FirstOrDefault(x => x.key == key)?.IATobjects;
-        return collection;
-    }
-
-    void CreateIATInfo(string imageID, string answer) {
+    void CreateIATInfo(string imageID, string answer) 
+    {
         string occurance = isFirstTest ? "pre" : "post";
-        int roundID = nextRoundIndex - 1;
+        int roundID = roundIndex;
         float responseTime = Time.time - itemStartTime;
         IATInfo iatInfo = new IATInfo(userID, groupID, headsetID, testTimestamp, occurance, imageID, roundID, answer, responseTime);
         iatInfos.Add(iatInfo);

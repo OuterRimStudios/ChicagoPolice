@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6682517b839056e469a4a7e249bc5011, type: 3}
+  m_Name: Mammal IATCollection
+  m_EditorClassIdentifier: 
+  key: 5
+  IATobjects:
+  - {fileID: 21300000, guid: e5e680f1002523a40bd51860acacf26f, type: 3}
+  - {fileID: 21300000, guid: 3e6c91753ced07c4b9cfabf20936ba06, type: 3}
+  - {fileID: 21300000, guid: 47dc5339b28feb54abc2678db517ca88, type: 3}
+  - {fileID: 21300000, guid: e816cf2ea5dfd5248a75035083042792, type: 3}
+  - {fileID: 21300000, guid: 7fb227f61bf745443ae7a5df1edc983e, type: 3}
+  - {fileID: 21300000, guid: 120ff47d39fe19e4d916e5729f9281fa, type: 3}

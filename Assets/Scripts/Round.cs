@@ -5,6 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Round")]
 public class Round : ScriptableObject
 {
-    public List<IATKey> leftKeys;
-    public List<IATKey> rightKeys;
+    public List<IATKey> yesKeys;
+    public List<IATKey> noKeys;
 }

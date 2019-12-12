@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1853675cc02fed44da2bd3d21d7682b0, type: 3}
   m_Name: Round 2
   m_EditorClassIdentifier: 
-  leftKeys: 03000000
-  rightKeys: 02000000
+  yesKeys: 0200000000000000
+  noKeys: 0300000001000000

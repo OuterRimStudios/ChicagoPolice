@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1853675cc02fed44da2bd3d21d7682b0, type: 3}
-  m_Name: Round 7
+  m_Name: Practice
   m_EditorClassIdentifier: 
-  leftKeys: 0000000003000000
-  rightKeys: 0100000002000000
+  yesKeys: 05000000
+  noKeys: 04000000
