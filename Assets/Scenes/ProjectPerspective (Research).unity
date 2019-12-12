@@ -6908,6 +6908,7 @@ GameObject:
   - component: {fileID: 1043147499}
   - component: {fileID: 1043147500}
   - component: {fileID: 1043147498}
+  - component: {fileID: 1043147501}
   m_Layer: 5
   m_Name: Credits
   m_TagString: Untagged
@@ -6978,6 +6979,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1043147501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043147496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97e4e2497f4ba8c4087d5b78dae517cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1059015832
 GameObject:
   m_ObjectHideFlags: 0
@@ -12589,6 +12602,7 @@ MonoBehaviour:
   - {fileID: 421385296}
   - {fileID: 1233095846}
   - {fileID: 2125143369}
+  - {fileID: 1043147501}
   testB:
   - {fileID: 985450848}
   - {fileID: 23505293}
@@ -12612,6 +12626,7 @@ MonoBehaviour:
   - {fileID: 421385296}
   - {fileID: 1233095846}
   - {fileID: 2125143369}
+  - {fileID: 1043147501}
 --- !u!4 &1733244158
 Transform:
   m_ObjectHideFlags: 0
