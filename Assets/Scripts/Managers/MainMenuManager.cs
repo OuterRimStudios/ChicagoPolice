@@ -19,11 +19,6 @@ public class MainMenuManager : MonoBehaviour
     float timer;
 
     // Start is called before the first frame update
-    void Start()
-    {       
-        hapticInput = GetComponent<HapticInput>();
-        appManager = GetComponent<AppManager>();
-    }
 
     private void OnEnable()
     {
