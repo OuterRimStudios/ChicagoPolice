@@ -12,6 +12,9 @@ public class QuestionnaireManager : MonoBehaviour
     const int NEXT_QUESTION = 1;
     protected string ANALYTICS_TITLE = "QuestionnaireResponses";
     public List<GameObject> questions;
+    [Tooltip("This is the gameobject that will rotate to match the viewer's front.")]
+    public Transform questionHub;
+    public Transform cameraTransform;
     public BubbleSlider responseSlider;
 
     public OVRInput.Button nextQuestionButton;
@@ -87,6 +90,11 @@ public class QuestionnaireManager : MonoBehaviour
         {
             currentQuestion.SetActive(false);
             currentQuestion = questions[currentQuestionIndex];
+            if(questionHub != null)
+            {
+                //Quaternion.Euler(transform.rotation.eulerAngles.x, Camera.main.transform.eulerAngles.y, transform.rotation.eulerAngles.z);
+                questionHub.rotation = Quaternion.Euler(questionHub.rotation.eulerAngles.x, cameraTransform.rotation.eulerAngles.y, questionHub.rotation.eulerAngles.z);
+            }
             currentQuestion.SetActive(true);
         }
     }
