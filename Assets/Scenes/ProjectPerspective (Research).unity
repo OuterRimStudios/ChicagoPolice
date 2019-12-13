@@ -17469,6 +17469,7 @@ GameObject:
   - component: {fileID: 5655674177632127889}
   - component: {fileID: 13}
   - component: {fileID: 7051638915594034011}
+  - component: {fileID: 5655674177632127904}
   m_Layer: 5
   m_Name: MoodSlider
   m_TagString: Untagged
@@ -17476,6 +17477,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &5655674177632127904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5655674177632127903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7762a9f8bc9320548b49290cdd175307, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 456310513}
+  followSpeed: 3
+  rotationSpeed: 3
 --- !u!224 &5655674177680494256
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18003,7 +18019,7 @@ PrefabInstance:
     - target: {fileID: 5881293937886377293, guid: b2cd1ff8c941f424b99dc5da5bcec1cc,
         type: 3}
       propertyPath: m_text
-      value: 'Thank you so much for participating in Project Perspective!.
+      value: 'Thank you so much for participating in Project Perspective.
 
 '
       objectReference: {fileID: 0}
