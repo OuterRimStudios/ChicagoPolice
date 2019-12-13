@@ -24,9 +24,13 @@ public class CreditsManager : MonoBehaviour
         return cameraAnimator.GetCurrentAnimatorStateInfo(0).IsName("FadeWhite");
     }
 
-    public void ResetCredits()
+    public void SetCameraToBlue()
     {
         cameraAnimator.SetTrigger("fadeBlue");
+    }
+
+    public void ResetCredits()
+    {       
         cameraAnimator.ResetTrigger("fadeWhite");
         GetComponent<Animator>().ResetTrigger("startCredits");
         ChicagoSceneTransition.Instance.NextScene();
