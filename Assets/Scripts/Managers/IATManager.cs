@@ -28,18 +28,18 @@ public class IATManager : MonoBehaviour
 
     List<Sprite> picSprites = new List<Sprite>();
     List<Sprite> wordSprites = new List<Sprite>();
+    List<Sprite> introWordSprites = new List<Sprite>();
 
     int answerCount;
     int roundIndex;
     int roundSpriteCount;
-    bool isFirstTest = true;
+    bool waitingToStart;    
     bool isDisplayPic = true;
 
+    //IAT Analytics Variables 
     List<IATInfo> iatInfos = new List<IATInfo>();
-    float itemStartTime; //Time when the current image was displayed
-
-    bool waitingToStart;
-
+    float itemStartTime; //Time when the current image was displayed    
+    bool isFirstTest = true;
     string userID;
     string groupID;
     int headsetID;
@@ -69,81 +69,49 @@ public class IATManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && waitingToStart)
         {
             ActivateTutorial(false);
-            NextRound();
+            SetUpNextRound();
             NextItem();
             
-        } else if (Input.GetKeyDown(KeyCode.RightArrow) && !waitingToStart) {
-            var itemKey = GetItemKey(choiceImage.sprite);
-            if (rounds[roundIndex].noKeys.Contains(itemKey))
-            {
-                //Store Stats
-                CreateIATInfo(choiceImage.sprite.name, itemKey.ToString());
-                NextItem();
-            } 
-            else 
-            {
-                //Display "Nope"
-                wrongAnswerPrompt.SetActive(true);
-            }
         } else if (Input.GetKeyDown(KeyCode.LeftArrow) && !waitingToStart) {
-            var itemKey = GetItemKey(choiceImage.sprite);
-            if (rounds[roundIndex].yesKeys.Contains(itemKey)) 
-            {
-                //Store Stats
-                CreateIATInfo(choiceImage.sprite.name, itemKey.ToString());
-                NextItem();
-            } 
-            else 
-            {
-                wrongAnswerPrompt.SetActive(true);
-            }
+            CheckIfCorrect(rounds[roundIndex].yesKeys);
+        } else if (Input.GetKeyDown(KeyCode.RightArrow) && !waitingToStart) {
+            CheckIfCorrect(rounds[roundIndex].noKeys);
         }
     }
 #endif
 #if UNITY_ANDROID
-    void OnButtonDown(OVRInput.Button button) {
+    void OnButtonDown(OVRInput.Button button) 
+    {
         if (button == OVRInput.Button.Three && waitingToStart)
         {           
             ActivateTutorial(false);
-            NextRound();
+            SetUpNextRound();
             NextItem();            
         }
         else if (button == OVRInput.Button.PrimaryThumbstickLeft && !waitingToStart) 
         {
-            var itemKey = GetItemKey(choiceImage.sprite);
-            if (rounds[roundIndex].yesKeys.Contains(itemKey)) 
-            {
-                //Store Stats
-                CreateIATInfo(choiceImage.sprite.name, itemKey.ToString());
-                NextItem();
-            } 
-            else 
-            {
-                wrongAnswerPrompt.SetActive(true);
-            }
+            CheckIfCorrect(rounds[roundIndex].yesKeys);            
         } 
         else if (button == OVRInput.Button.PrimaryThumbstickRight && !waitingToStart) 
         {
-            var itemKey = GetItemKey(choiceImage.sprite);
-            if (rounds[roundIndex].noKeys.Contains(itemKey))
-            {
-                //Store Stats
-                CreateIATInfo(choiceImage.sprite.name, itemKey.ToString());
-                NextItem();
-            } 
-            else 
-            {
-                //Display "Nope"
-                wrongAnswerPrompt.SetActive(true);
-            }
+            CheckIfCorrect(rounds[roundIndex].noKeys);            
         }
     }
 #endif
-    void ActivateTutorial(bool isActive) {
+    void ActivateTutorial(bool isActive) 
+    {
         waitingToStart = isActive;
 
-        if (isActive) {
-            tutorialText.text = $"Push the joystick <b>left</b> to match the items that belong to the category {ConvertKeysToText(rounds[roundIndex].yesKeys)}." +
+        if (isActive) 
+        {
+            tutorialText.text = "";
+
+            if (roundIndex == IATConstants.TUTORIAL_ROUND)
+            {
+                tutorialText.text += "For example: \n";
+            }
+
+            tutorialText.text += $"Push the joystick <b>left</b> to match the items that belong to the category {ConvertKeysToText(rounds[roundIndex].yesKeys)}." +
                 $"\n\nPush the joystick <b>right</b> if they do not.";
         }
 
@@ -153,18 +121,12 @@ public class IATManager : MonoBehaviour
         renderController.SetActive(isActive);
     }
 
-    void NextRound() 
-    {
-        SetUpRoundSprites();
-        isDisplayPic = true;
-    }
-
-    void SetUpRoundSprites() 
+    void SetUpNextRound() 
     {
         picSprites.Clear();
         wordSprites.Clear();
 
-        if (roundIndex == 0)
+        if (roundIndex == IATConstants.TUTORIAL_ROUND)
         {
             foreach (IATCollection collection in practiceCollections)
             {
@@ -180,11 +142,13 @@ public class IATManager : MonoBehaviour
 
             foreach (IATCollection collection in wordCollections)
             {
+                introWordSprites.AddRange(CollectionUtilities.GetRandomItems(collection.IATobjects, 2));
                 wordSprites.AddRange(CollectionUtilities.GetRandomItems(collection.IATobjects, 4));
             }
-        }        
+        }
 
-        roundSpriteCount = picSprites.Count + wordSprites.Count;
+        roundSpriteCount = picSprites.Count + wordSprites.Count + introWordSprites.Count;
+        isDisplayPic = true;
     }
 
     void NextItem() 
@@ -202,21 +166,24 @@ public class IATManager : MonoBehaviour
         {
             choiceImage.gameObject.SetActive(true);
 
-            if (isDisplayPic)
+            if (answerCount < IATConstants.SOLO_WORD_INDEX && roundIndex != IATConstants.TUTORIAL_ROUND)
             {
-                int randomIndex = Random.Range(0, picSprites.Count);
-                choiceImage.sprite = picSprites[randomIndex];
-                picSprites.RemoveAt(randomIndex);
+                choiceImage.sprite = GetRandomSprite(introWordSprites);
             }
             else
             {
-                int randomIndex = Random.Range(0, wordSprites.Count);
-                choiceImage.sprite = wordSprites[randomIndex];
-                wordSprites.RemoveAt(randomIndex);
-            }
+                if (isDisplayPic)
+                {
+                    choiceImage.sprite = GetRandomSprite(picSprites);
+                }
+                else
+                {
+                    choiceImage.sprite = GetRandomSprite(wordSprites);
+                }
 
-            if(wordSprites.Count != 0)
-                isDisplayPic = !isDisplayPic;
+                if (wordSprites.Any())
+                    isDisplayPic = !isDisplayPic;
+            }    
 
             answerCount++;
         }
@@ -224,18 +191,46 @@ public class IATManager : MonoBehaviour
         itemStartTime = Time.time;
     }
 
-    void CheckIfTestEnded() {
+    void CheckIfCorrect(List<IATKey> matchingKeys)
+    {
+        var itemKey = GetItemKey(choiceImage.sprite);
+        if (matchingKeys.Contains(itemKey))
+        {
+            //Store Stats
+            CreateIATInfo(choiceImage.sprite.name, itemKey.ToString());
+            NextItem();
+        }
+        else
+        {
+            //Display "Nope"
+            wrongAnswerPrompt.SetActive(true);
+        }
+    }
+
+    void CheckIfTestEnded() 
+    {
         //========Check if the IAT test has ended==========
-        if (roundIndex == rounds.Length) {
+        if (roundIndex == rounds.Length) 
+        {
             roundIndex = 0;
             SendAnalytics();
             isFirstTest = !isFirstTest;
             ChicagoSceneTransition.Instance.NextScene();
-        } else
+        } 
+        else
             ActivateTutorial(true);
     }
 
-    IATKey GetItemKey(Sprite item) {
+    Sprite GetRandomSprite(List<Sprite> spriteList)
+    {
+        int randomIndex = Random.Range(0, spriteList.Count);
+        var sprite = spriteList[randomIndex];
+        spriteList.RemoveAt(randomIndex);
+        return sprite;
+    }
+
+    IATKey GetItemKey(Sprite item) 
+    {
         List<IATCollection> _collections = picCollections.Concat(wordCollections).Concat(practiceCollections).ToList();
         foreach (IATCollection collection in _collections)
             if (collection.IATobjects.Contains(item))
@@ -244,7 +239,8 @@ public class IATManager : MonoBehaviour
         return IATKey.None;
     }
 
-    string ConvertKeysToText(List<IATKey> keys) {
+    string ConvertKeysToText(List<IATKey> keys) 
+    {
         string text = "";
         foreach (IATKey key in keys) {
             if (text == "") {
@@ -277,7 +273,8 @@ public class IATManager : MonoBehaviour
         });
     }
 
-    void SendAnalytics() {
+    void SendAnalytics()
+    {
         AnalyticsUtilities.Event(ANALYTICS_TITLE, iatInfos);
     }
 }
@@ -304,4 +301,10 @@ public class IATInfo {
         Answer = answer;
         ResponseTime = responseTime;
     }
+}
+
+internal class IATConstants
+{
+    public const int TUTORIAL_ROUND= 0;
+    public const int SOLO_WORD_INDEX = 4;
 }
