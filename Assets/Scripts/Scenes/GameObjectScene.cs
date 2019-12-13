@@ -4,9 +4,10 @@ public class GameObjectScene : BaseScene
 {
     [Tooltip("The transform that this object will rotate to center on")]
     public Transform centerTarget;
+
     public override void StartScene()
     {
-        //CenterView();
+        CenterView();
         gameObject.SetActive(true);
     }
 
