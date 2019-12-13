@@ -182,9 +182,7 @@ public class IATManager : MonoBehaviour
             {
                 wordSprites.AddRange(CollectionUtilities.GetRandomItems(collection.IATobjects, 4));
             }
-        }
-
-        
+        }        
 
         roundSpriteCount = picSprites.Count + wordSprites.Count;
     }
