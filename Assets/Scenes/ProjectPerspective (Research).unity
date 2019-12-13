@@ -715,12 +715,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 76055127}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &76055133 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7247575004355226930, guid: a683bff9a6963044eabb12a6dbd6d249,
-    type: 3}
-  m_PrefabInstance: {fileID: 76055127}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &76055134 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5232762799745091611, guid: a683bff9a6963044eabb12a6dbd6d249,
@@ -2513,8 +2507,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: 'Before watching the scenario, we would like you to complete the Implicit
-    Association Task. You will be asked to sort pictures and words if they fit into
-    the groups or not as quickly as you can. '
+    Association Task. You will be asked to sort pictures and words into groups as
+    quickly as you can. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3513,17 +3507,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 633987594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 2075895966, guid: e6dfd755027c24b0ea82bdd43cf88e7e, type: 3}
+  m_Script: {fileID: 2075895966, guid: b9352b52bc90047ce855bc6d2626698e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioClipFront: {fileID: 8300000, guid: 4a932329d78e76148aeea63705d5c6c6, type: 3}
   audioClipLeft: {fileID: 8300000, guid: 853ab92425da7984ebf1ee766e30d781, type: 3}
   audioClipBack: {fileID: 8300000, guid: 61b7221343d7e5a4aa6b58c67096df9d, type: 3}
   audioClipRight: {fileID: 8300000, guid: 34bcfccce16a1fe4e9f85e564d640da4, type: 3}
-  cameraTransform: {fileID: 76055133}
-  volume: 1
+  cameraTransform: {fileID: 456310513}
+  vol: 0.7
   autoPlay: 0
   loop: 0
+  transitionThresholdFront: 180
+  transitionThresholdLeft: 180
+  transitionThresholdBack: 180
+  transitionThresholdRight: 180
+  linearCurve: 1
 --- !u!1 &639138135
 GameObject:
   m_ObjectHideFlags: 0
@@ -3579,8 +3578,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Thank you for agreeing to participate. The goal of this test is to capture
-    reactions to scenarios involving police and community.\r"
+  m_text: "Thank you for agreeing to participate in\n<size=75>Project Perspective.</size>\nThe
+    goal of this test is to capture reactions to scenarios involving police and community.\r"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3618,14 +3617,14 @@ MonoBehaviour:
   m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 20
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 62
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -3649,12 +3648,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 639138137}
-    characterCount: 130
+    characterCount: 153
     spriteCount: 0
-    spaceCount: 20
-    wordCount: 21
+    spaceCount: 23
+    wordCount: 24
     linkCount: 0
-    lineCount: 3
+    lineCount: 4
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -4556,7 +4555,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: How angry do you feel?
+  m_text: How angry do you feel at this moment?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4770,7 +4769,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: How anxious do you feel?
+  m_text: How anxious do you feel at this moment?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5611,17 +5610,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 854905462}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 2075895966, guid: e6dfd755027c24b0ea82bdd43cf88e7e, type: 3}
+  m_Script: {fileID: 2075895966, guid: b9352b52bc90047ce855bc6d2626698e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioClipFront: {fileID: 8300000, guid: c38dde6a7125abf458a2c360d18b23e9, type: 3}
-  audioClipLeft: {fileID: 8300000, guid: e9583f3b611c1414f8a922478a078bd6, type: 3}
+  audioClipLeft: {fileID: 8300000, guid: 7a25e78e0395cee48ab9681cda763c15, type: 3}
   audioClipBack: {fileID: 8300000, guid: 8326c1cdd042cfb478cf817bef0844bf, type: 3}
-  audioClipRight: {fileID: 8300000, guid: 7a25e78e0395cee48ab9681cda763c15, type: 3}
-  cameraTransform: {fileID: 76055133}
-  volume: 1
+  audioClipRight: {fileID: 8300000, guid: e9583f3b611c1414f8a922478a078bd6, type: 3}
+  cameraTransform: {fileID: 456310513}
+  vol: 0.7
   autoPlay: 0
   loop: 0
+  transitionThresholdFront: 0
+  transitionThresholdLeft: 0
+  transitionThresholdBack: 0
+  transitionThresholdRight: 0
+  linearCurve: 1
 --- !u!82 &854905465
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5648,7 +5652,7 @@ AudioSource:
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
-  BypassReverbZones: 0
+  BypassReverbZones: 1
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -5708,7 +5712,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -6656,7 +6660,7 @@ PrefabInstance:
     - target: {fileID: 5490005874474729530, guid: 41e63e196c8a65e478faaa0a1ac66b60,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -150
+      value: -211
       objectReference: {fileID: 0}
     - target: {fileID: 5490005874474729530, guid: 41e63e196c8a65e478faaa0a1ac66b60,
         type: 3}
@@ -8524,7 +8528,7 @@ RectTransform:
   - {fileID: 1119246185}
   - {fileID: 882533898}
   m_Father: {fileID: 1579474199}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -9402,7 +9406,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: How sad do you feel?
+  m_text: How sad do you feel at this moment?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10422,7 +10426,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: While watching the scenarios, please use the joystick, moving left or right
+  m_text: Now you will see some videos. Please use the joystick, moving left or right
     throughout the experience, to indicate how you are feeling in the moment.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11764,8 +11768,8 @@ RectTransform:
   - {fileID: 391259198122574038}
   - {fileID: 421385295}
   - {fileID: 5655674177632127902}
-  - {fileID: 1043147497}
   - {fileID: 1233095845}
+  - {fileID: 1043147497}
   - {fileID: 1501009426}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -13256,28 +13260,9 @@ MonoBehaviour:
   - {fileID: 1043147501}
   testB:
   - {fileID: 985450848}
-  - {fileID: 23505293}
-  - {fileID: 2074103373}
-  - {fileID: 2125143369}
-  - {fileID: 421385296}
-  - {fileID: 1109154553}
-  - {fileID: 1501009428}
-  - {fileID: 1985308837}
-  - {fileID: 1231057881}
-  - {fileID: 398747221}
-  - {fileID: 421385296}
-  - {fileID: 1501009428}
   - {fileID: 854905463}
-  - {fileID: 398747221}
-  - {fileID: 421385296}
+  - {fileID: 1985308837}
   - {fileID: 633987595}
-  - {fileID: 398747221}
-  - {fileID: 633987595}
-  - {fileID: 398747221}
-  - {fileID: 421385296}
-  - {fileID: 1233095846}
-  - {fileID: 2125143369}
-  - {fileID: 1043147501}
 --- !u!4 &1733244158
 Transform:
   m_ObjectHideFlags: 0
@@ -13479,6 +13464,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: render
+      objectReference: {fileID: 0}
+    - target: {fileID: 3649994732623976589, guid: 283cda777922c734f8ad1883d593c10d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3649994732623976590, guid: 283cda777922c734f8ad1883d593c10d,
         type: 3}
@@ -14498,17 +14488,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1985308836}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 2075895966, guid: e6dfd755027c24b0ea82bdd43cf88e7e, type: 3}
+  m_Script: {fileID: 2075895966, guid: b9352b52bc90047ce855bc6d2626698e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioClipFront: {fileID: 8300000, guid: 7ec74d8d944e0184c8b5810fc3edd240, type: 3}
-  audioClipLeft: {fileID: 8300000, guid: 005e9c2050c7d1140b9cdfe121d951ef, type: 3}
+  audioClipLeft: {fileID: 8300000, guid: 57baa9facf4a6ec419edbaf38fc99ee2, type: 3}
   audioClipBack: {fileID: 8300000, guid: 660c1dcfe652b8c41acd785cbaec8467, type: 3}
-  audioClipRight: {fileID: 8300000, guid: 57baa9facf4a6ec419edbaf38fc99ee2, type: 3}
-  cameraTransform: {fileID: 76055133}
-  volume: 1
+  audioClipRight: {fileID: 8300000, guid: 005e9c2050c7d1140b9cdfe121d951ef, type: 3}
+  cameraTransform: {fileID: 456310513}
+  vol: 0.7
   autoPlay: 0
   loop: 0
+  transitionThresholdFront: 180
+  transitionThresholdLeft: 180
+  transitionThresholdBack: 180
+  transitionThresholdRight: 180
+  linearCurve: 1
 --- !u!82 &1985308839
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14890,7 +14885,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: How happy do you feel?
+  m_text: How happy do you feel at this moment?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -18000,6 +17995,33 @@ PrefabInstance:
       propertyPath: cameraAnimator
       value: 
       objectReference: {fileID: 76055135}
+    - target: {fileID: 5881293939284169636, guid: b2cd1ff8c941f424b99dc5da5bcec1cc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5881293937886377293, guid: b2cd1ff8c941f424b99dc5da5bcec1cc,
+        type: 3}
+      propertyPath: m_text
+      value: 'Thank you so much for participating in Project Perspective!.
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5881293938148767413, guid: b2cd1ff8c941f424b99dc5da5bcec1cc,
+        type: 3}
+      propertyPath: m_text
+      value: in association with
+      objectReference: {fileID: 0}
+    - target: {fileID: 5881293938637954427, guid: b2cd1ff8c941f424b99dc5da5bcec1cc,
+        type: 3}
+      propertyPath: m_text
+      value: made possible with support from
+      objectReference: {fileID: 0}
+    - target: {fileID: 5881293939435286968, guid: b2cd1ff8c941f424b99dc5da5bcec1cc,
+        type: 3}
+      propertyPath: m_text
+      value: Chicago Police Foundation
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2cd1ff8c941f424b99dc5da5bcec1cc, type: 3}
 --- !u!114 &6923459539599364335
