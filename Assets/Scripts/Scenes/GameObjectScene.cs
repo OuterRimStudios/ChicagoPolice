@@ -7,8 +7,8 @@ public class GameObjectScene : BaseScene
 
     public override void StartScene()
     {
-        CenterView();
         gameObject.SetActive(true);
+        CenterView();
     }
 
     public override void EndScene()

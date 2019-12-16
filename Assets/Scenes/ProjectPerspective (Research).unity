@@ -1238,6 +1238,212 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &195167636
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1611932008}
+    m_Modifications:
+    - target: {fileID: 198420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_Name
+      value: TonyBackstory
+      objectReference: {fileID: 0}
+    - target: {fileID: 127526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 427526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 427526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 427526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2327526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_FilterMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_AnisoLevel
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_AutoStart
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_AlphaPacking
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_StereoPacking
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_Volume
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_Muted
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_VideoLocation
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: _optionsAndroid.useFastOesPath
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_VideoPath
+      value: Tony Backstory.mp4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_AutoOpen
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+--- !u!4 &195167637 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d,
+    type: 3}
+  m_PrefabInstance: {fileID: 195167636}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &195167638 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d,
+    type: 3}
+  m_PrefabInstance: {fileID: 195167636}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 638c870cac4da414fba921606d504407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &195167639 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 127526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d,
+    type: 3}
+  m_PrefabInstance: {fileID: 195167636}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &195167640 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 198420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d,
+    type: 3}
+  m_PrefabInstance: {fileID: 195167636}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &195167641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195167640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2075895966, guid: b9352b52bc90047ce855bc6d2626698e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClipFront: {fileID: 8300000, guid: d6801b542b4258340bb82317b9efcdcc, type: 3}
+  audioClipLeft: {fileID: 8300000, guid: fa6d7166b30614946a05200f7933e38d, type: 3}
+  audioClipBack: {fileID: 8300000, guid: c13994f2cd574b143817c226803808a5, type: 3}
+  audioClipRight: {fileID: 8300000, guid: 7a2b5333cac90a44493009df95d8bbc4, type: 3}
+  cameraTransform: {fileID: 456310513}
+  vol: 0.7
+  autoPlay: 0
+  loop: 0
+  transitionThresholdFront: 45
+  transitionThresholdLeft: 45
+  transitionThresholdBack: 45
+  transitionThresholdRight: 45
+  linearCurve: 0
+--- !u!114 &195167642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195167640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf56284d8f76b444ab614f77b2cf4179, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mediaPlayer: {fileID: 195167638}
+  videoPath: Tony Backstory.mp4
+  videoSphere: {fileID: 195167639}
+  headlockedSource: {fileID: 0}
+  moodSlider: {fileID: 1536771206}
+  trackingEnabled: 0
+  videoID: 3
+  audioDelay: 0
+  eightBallAudioController: {fileID: 195167641}
+  countdownText: {fileID: 1974680790}
+  countdownLength: 3
+  fadeMaterial: {fileID: 2100000, guid: b9023632173546e4d93be9fb07d13819, type: 2}
+  countdownOBJ: {fileID: 1501009425}
+  fadeSpeed: 5
 --- !u!1 &202588356
 GameObject:
   m_ObjectHideFlags: 0
@@ -4172,6 +4378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mediaPlayer: {fileID: 902737630}
+  videoPath: Santana Backstory.mp4
   videoSphere: {fileID: 1577749883}
   headlockedSource: {fileID: 0}
   moodSlider: {fileID: 1536771206}
@@ -4179,6 +4386,11 @@ MonoBehaviour:
   videoID: 3
   audioDelay: 0
   eightBallAudioController: {fileID: 633987596}
+  countdownText: {fileID: 1974680790}
+  countdownLength: 3
+  fadeMaterial: {fileID: 2100000, guid: b9023632173546e4d93be9fb07d13819, type: 2}
+  countdownOBJ: {fileID: 1501009425}
+  fadeSpeed: 5
 --- !u!114 &633987596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4191,19 +4403,19 @@ MonoBehaviour:
   m_Script: {fileID: 2075895966, guid: b9352b52bc90047ce855bc6d2626698e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClipFront: {fileID: 8300000, guid: 4a932329d78e76148aeea63705d5c6c6, type: 3}
-  audioClipLeft: {fileID: 8300000, guid: 853ab92425da7984ebf1ee766e30d781, type: 3}
-  audioClipBack: {fileID: 8300000, guid: 61b7221343d7e5a4aa6b58c67096df9d, type: 3}
-  audioClipRight: {fileID: 8300000, guid: 34bcfccce16a1fe4e9f85e564d640da4, type: 3}
+  audioClipFront: {fileID: 8300000, guid: 2084de6441bbf674189e5b6bcfc49b74, type: 3}
+  audioClipLeft: {fileID: 8300000, guid: 126e3c2db7144834d896492da4d54922, type: 3}
+  audioClipBack: {fileID: 8300000, guid: 0d5234c0948a3dc41881aaa357b11438, type: 3}
+  audioClipRight: {fileID: 8300000, guid: 16f4891a787cdfd4f91bfb1af44e6d19, type: 3}
   cameraTransform: {fileID: 456310513}
   vol: 0.7
   autoPlay: 0
   loop: 0
-  transitionThresholdFront: 180
-  transitionThresholdLeft: 180
-  transitionThresholdBack: 180
-  transitionThresholdRight: 180
-  linearCurve: 1
+  transitionThresholdFront: 45
+  transitionThresholdLeft: 45
+  transitionThresholdBack: 45
+  transitionThresholdRight: 45
+  linearCurve: 0
 --- !u!1 &639138135
 GameObject:
   m_ObjectHideFlags: 0
@@ -6583,13 +6795,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mediaPlayer: {fileID: 994308812}
+  videoPath: Final Angle 01.mp4
   videoSphere: {fileID: 40919614}
   headlockedSource: {fileID: 854905465}
   moodSlider: {fileID: 1536771206}
   trackingEnabled: 1
   videoID: 1
-  audioDelay: 0
+  audioDelay: 0.25
   eightBallAudioController: {fileID: 854905464}
+  countdownText: {fileID: 1974680790}
+  countdownLength: 3
+  fadeMaterial: {fileID: 2100000, guid: b9023632173546e4d93be9fb07d13819, type: 2}
+  countdownOBJ: {fileID: 1501009425}
+  fadeSpeed: 5
 --- !u!114 &854905464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6602,18 +6820,18 @@ MonoBehaviour:
   m_Script: {fileID: 2075895966, guid: b9352b52bc90047ce855bc6d2626698e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClipFront: {fileID: 8300000, guid: c38dde6a7125abf458a2c360d18b23e9, type: 3}
-  audioClipLeft: {fileID: 8300000, guid: 7a25e78e0395cee48ab9681cda763c15, type: 3}
-  audioClipBack: {fileID: 8300000, guid: 8326c1cdd042cfb478cf817bef0844bf, type: 3}
-  audioClipRight: {fileID: 8300000, guid: e9583f3b611c1414f8a922478a078bd6, type: 3}
+  audioClipFront: {fileID: 8300000, guid: 39ac1a2a44eca89438e46fcfe0f3abe1, type: 3}
+  audioClipLeft: {fileID: 8300000, guid: 0429c3f8bf5f472409c1cc822ca62f06, type: 3}
+  audioClipBack: {fileID: 8300000, guid: 7bcb1935b7e9e1c4ba1512f3f15a730c, type: 3}
+  audioClipRight: {fileID: 8300000, guid: e40099bcf4fba3845b0d54d21c562281, type: 3}
   cameraTransform: {fileID: 456310513}
   vol: 0.7
   autoPlay: 0
   loop: 0
-  transitionThresholdFront: 0
-  transitionThresholdLeft: 0
-  transitionThresholdBack: 0
-  transitionThresholdRight: 0
+  transitionThresholdFront: 45
+  transitionThresholdLeft: 45
+  transitionThresholdBack: 45
+  transitionThresholdRight: 45
   linearCurve: 1
 --- !u!82 &854905465
 AudioSource:
@@ -7173,7 +7391,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 198420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_Name
-      value: Interview
+      value: SantanaBackstory
       objectReference: {fileID: 0}
     - target: {fileID: 127526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_IsActive
@@ -7221,7 +7439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7269,7 +7487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_VideoLocation
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_Loop
@@ -7281,7 +7499,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_VideoPath
-      value: Edited Selects 2 Take 3.mp4
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_AutoOpen
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
@@ -7494,7 +7716,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_VideoLocation
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_Loop
@@ -7507,6 +7729,10 @@ PrefabInstance:
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_VideoPath
       value: Final Angle 02.mp4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_AutoOpen
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
@@ -7968,7 +8194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_VideoLocation
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_Loop
@@ -7981,6 +8207,10 @@ PrefabInstance:
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_VideoPath
       value: Final Angle 01.mp4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_AutoOpen
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
@@ -9819,10 +10049,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1501009426}
+  m_Children: []
   m_Father: {fileID: 1579474199}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11840,7 +12069,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Now you will see some scanarios. \nPlease use the joystick, moving left
+  m_text: "Now you will see some scenarios. \nPlease use the joystick, moving left
     or right throughout the experience, to indicate how you are feeling in the moment."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12545,14 +12774,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1501009426}
-  - component: {fileID: 1501009427}
   m_Layer: 5
   m_Name: Countdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1501009426
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12566,31 +12794,14 @@ RectTransform:
   m_Children:
   - {fileID: 1650540421}
   - {fileID: 1974680789}
-  m_Father: {fileID: 1243658957}
-  m_RootOrder: 0
+  m_Father: {fileID: 1579474199}
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 797.5, y: 370}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1501009427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1501009425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebce1becaffff0d409e837c28ea00fa4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  countdownText: {fileID: 1974680790}
-  countdownLength: 3
-  fadeMaterial: {fileID: 2100000, guid: b9023632173546e4d93be9fb07d13819, type: 2}
-  fadeSphere: {fileID: 1650540417}
-  fadeSpeed: 5
 --- !u!1 &1510358995
 GameObject:
   m_ObjectHideFlags: 0
@@ -13406,6 +13617,7 @@ RectTransform:
   - {fileID: 1176527209}
   - {fileID: 1536771208}
   - {fileID: 1215960683}
+  - {fileID: 1501009426}
   - {fileID: 1243658957}
   - {fileID: 1984549535}
   m_Father: {fileID: 0}
@@ -13472,6 +13684,7 @@ Transform:
   m_Children:
   - {fileID: 994308814}
   - {fileID: 982990539}
+  - {fileID: 195167637}
   - {fileID: 902737632}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -14927,7 +15140,6 @@ MonoBehaviour:
   - {fileID: 1365217709}
   - {fileID: 1176527210}
   - {fileID: 1152218089}
-  - {fileID: 1243658958}
   - {fileID: 854905463}
   - {fileID: 1826431646}
   - {fileID: 661164834}
@@ -14935,8 +15147,54 @@ MonoBehaviour:
   - {fileID: 1630607387}
   - {fileID: 1365217709}
   - {fileID: 1176527210}
-  - {fileID: 1243658958}
+  - {fileID: 633987595}
+  - {fileID: 1826431646}
+  - {fileID: 661164834}
+  - {fileID: 702845168}
+  - {fileID: 1630607387}
+  - {fileID: 1365217709}
+  - {fileID: 1176527210}
   - {fileID: 1985308837}
+  - {fileID: 1826431646}
+  - {fileID: 661164834}
+  - {fileID: 702845168}
+  - {fileID: 1630607387}
+  - {fileID: 1365217709}
+  - {fileID: 1176527210}
+  - {fileID: 195167642}
+  - {fileID: 1826431646}
+  - {fileID: 661164834}
+  - {fileID: 702845168}
+  - {fileID: 1630607387}
+  - {fileID: 1365217709}
+  - {fileID: 1176527210}
+  - {fileID: 1215960684}
+  - {fileID: 1027847174}
+  - {fileID: 1984549536}
+  testB:
+  - {fileID: 1814968060}
+  - {fileID: 676895607}
+  - {fileID: 1293142529}
+  - {fileID: 1027847174}
+  - {fileID: 1630607387}
+  - {fileID: 1365217709}
+  - {fileID: 1176527210}
+  - {fileID: 1152218089}
+  - {fileID: 1985308837}
+  - {fileID: 1826431646}
+  - {fileID: 661164834}
+  - {fileID: 702845168}
+  - {fileID: 1630607387}
+  - {fileID: 1365217709}
+  - {fileID: 1176527210}
+  - {fileID: 195167642}
+  - {fileID: 1826431646}
+  - {fileID: 661164834}
+  - {fileID: 702845168}
+  - {fileID: 1630607387}
+  - {fileID: 1365217709}
+  - {fileID: 1176527210}
+  - {fileID: 854905463}
   - {fileID: 1826431646}
   - {fileID: 661164834}
   - {fileID: 702845168}
@@ -14953,11 +15211,6 @@ MonoBehaviour:
   - {fileID: 1215960684}
   - {fileID: 1027847174}
   - {fileID: 1984549536}
-  testB:
-  - {fileID: 0}
-  - {fileID: 854905463}
-  - {fileID: 1985308837}
-  - {fileID: 633987595}
 --- !u!4 &1733244158
 Transform:
   m_ObjectHideFlags: 0
@@ -16348,7 +16601,7 @@ RectTransform:
   m_Children:
   - {fileID: 1043147497}
   m_Father: {fileID: 1579474199}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16387,6 +16640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mediaPlayer: {fileID: 982990537}
+  videoPath: Final Angle 02.mp4
   videoSphere: {fileID: 259715463}
   headlockedSource: {fileID: 1985308839}
   moodSlider: {fileID: 1536771206}
@@ -16394,6 +16648,11 @@ MonoBehaviour:
   videoID: 2
   audioDelay: 0.5
   eightBallAudioController: {fileID: 1985308838}
+  countdownText: {fileID: 1974680790}
+  countdownLength: 3
+  fadeMaterial: {fileID: 2100000, guid: b9023632173546e4d93be9fb07d13819, type: 2}
+  countdownOBJ: {fileID: 1501009425}
+  fadeSpeed: 5
 --- !u!114 &1985308838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16406,19 +16665,19 @@ MonoBehaviour:
   m_Script: {fileID: 2075895966, guid: b9352b52bc90047ce855bc6d2626698e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClipFront: {fileID: 8300000, guid: 7ec74d8d944e0184c8b5810fc3edd240, type: 3}
-  audioClipLeft: {fileID: 8300000, guid: 57baa9facf4a6ec419edbaf38fc99ee2, type: 3}
-  audioClipBack: {fileID: 8300000, guid: 660c1dcfe652b8c41acd785cbaec8467, type: 3}
-  audioClipRight: {fileID: 8300000, guid: 005e9c2050c7d1140b9cdfe121d951ef, type: 3}
+  audioClipFront: {fileID: 8300000, guid: 41acd6d23631aff4f9658bde7267bbd2, type: 3}
+  audioClipLeft: {fileID: 8300000, guid: f4f1cb188536f1b4c97dae5660374fb0, type: 3}
+  audioClipBack: {fileID: 8300000, guid: 42bfdd4cd1d08bc4fa36db8578b9d7cd, type: 3}
+  audioClipRight: {fileID: 8300000, guid: 9dffedda86d13f549b1e63f1f6373a6e, type: 3}
   cameraTransform: {fileID: 456310513}
   vol: 0.7
   autoPlay: 0
   loop: 0
-  transitionThresholdFront: 180
-  transitionThresholdLeft: 180
-  transitionThresholdBack: 180
-  transitionThresholdRight: 180
-  linearCurve: 1
+  transitionThresholdFront: 45
+  transitionThresholdLeft: 45
+  transitionThresholdBack: 45
+  transitionThresholdRight: 45
+  linearCurve: 0
 --- !u!82 &1985308839
 AudioSource:
   m_ObjectHideFlags: 0
