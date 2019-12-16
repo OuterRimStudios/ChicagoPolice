@@ -24,6 +24,9 @@ public class VideoScene : BaseScene
     public Material fadeMaterial;
     public GameObject countdownOBJ;
     public float fadeSpeed;
+    public float dannyEntrance;
+    public Collider dannyCollider;
+    public GameObject freezeFrame;
 
     Coroutine countdownRoutine;
     int currentCount;
@@ -36,6 +39,7 @@ public class VideoScene : BaseScene
 
     void BeginVideo()
     {
+        freezeFrame.SetActive(true);
         fadeMaterial.SetColor("_Color", Color.clear);
         countdownOBJ.SetActive(false);
         StopCoroutine(countdownRoutine);
@@ -58,6 +62,8 @@ public class VideoScene : BaseScene
 
     public override void EndScene()
     {
+        freezeFrame.SetActive(false);
+        dannyCollider.enabled = false;
         mediaPlayer.Pause();
         videoSphere.SetActive(false);
         moodSlider.SetActive(false);
@@ -77,6 +83,12 @@ public class VideoScene : BaseScene
         }
         yield return new WaitUntil(Fade);
         BeginVideo();
+    }
+
+    IEnumerator DannyEntrance()
+    {
+        yield return new WaitForSeconds(dannyEntrance);
+        dannyCollider.enabled = true;
     }
 
     bool Fade()
