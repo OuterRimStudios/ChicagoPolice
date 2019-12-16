@@ -89,7 +89,7 @@ public class PerceptionTracking : MonoBehaviour
                     { "HeadsetID", perceptionInfo.HeadsetID},
                     { "TestTimestamp", perceptionInfo.TestTimestamp},
                     { "VideoID", perceptionInfo.VideoID},
-                    { "Time", perceptionInfo.Time},
+                    { "Time", perceptionInfo.Time.ToString("N1")},
                     { "Location", perceptionInfo.Location}
                 });
             }
