@@ -39,6 +39,7 @@ public class VideoScene : BaseScene
 
     void BeginVideo()
     {
+        StartCoroutine(DannyEntrance());
         perspectiveColliders.SetActive(true);
         fadeMaterial.SetColor("_Color", Color.clear);
         countdownOBJ.SetActive(false);
