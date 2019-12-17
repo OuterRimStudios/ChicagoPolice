@@ -19,6 +19,7 @@ TagManager:
   - South
   - West
   - East
+  - Carolina
   layers:
   - Default
   - TransparentFX
