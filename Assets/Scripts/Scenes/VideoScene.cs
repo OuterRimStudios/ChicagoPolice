@@ -26,7 +26,7 @@ public class VideoScene : BaseScene
     public float fadeSpeed;
     public float dannyEntrance;
     public Collider dannyCollider;
-    public GameObject freezeFrame;
+    public GameObject perspectiveColliders;
 
     Coroutine countdownRoutine;
     int currentCount;
@@ -39,7 +39,7 @@ public class VideoScene : BaseScene
 
     void BeginVideo()
     {
-        freezeFrame.SetActive(true);
+        perspectiveColliders.SetActive(true);
         fadeMaterial.SetColor("_Color", Color.clear);
         countdownOBJ.SetActive(false);
         StopCoroutine(countdownRoutine);
@@ -62,7 +62,7 @@ public class VideoScene : BaseScene
 
     public override void EndScene()
     {
-        freezeFrame.SetActive(false);
+        perspectiveColliders.SetActive(false);
         dannyCollider.enabled = false;
         mediaPlayer.Pause();
         videoSphere.SetActive(false);

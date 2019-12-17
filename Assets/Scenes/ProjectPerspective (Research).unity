@@ -1180,7 +1180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &163795755
 Transform:
   m_ObjectHideFlags: 0
@@ -1447,7 +1447,7 @@ MonoBehaviour:
   fadeSpeed: 5
   dannyEntrance: 0
   dannyCollider: {fileID: 0}
-  freezeFrame: {fileID: 0}
+  perspectiveColliders: {fileID: 0}
 --- !u!1 &202588356
 GameObject:
   m_ObjectHideFlags: 0
@@ -4582,7 +4582,7 @@ MonoBehaviour:
   fadeSpeed: 5
   dannyEntrance: 0
   dannyCollider: {fileID: 0}
-  freezeFrame: {fileID: 0}
+  perspectiveColliders: {fileID: 0}
 --- !u!114 &633987596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7186,7 +7186,7 @@ MonoBehaviour:
   fadeSpeed: 5
   dannyEntrance: 90
   dannyCollider: {fileID: 1381355491}
-  freezeFrame: {fileID: 1116322906}
+  perspectiveColliders: {fileID: 163795754}
 --- !u!114 &854905464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14635,7 +14635,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1612603429
 Transform:
   m_ObjectHideFlags: 0
@@ -14674,7 +14674,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &1614057318
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -17921,7 +17921,7 @@ MonoBehaviour:
   fadeSpeed: 5
   dannyEntrance: 110
   dannyCollider: {fileID: 1626628904}
-  freezeFrame: {fileID: 1614057317}
+  perspectiveColliders: {fileID: 1612603428}
 --- !u!114 &1985308838
 MonoBehaviour:
   m_ObjectHideFlags: 0
