@@ -81,7 +81,7 @@ public class PerceptionTracking : MonoBehaviour
             {
                 lastTag = hit.transform.tag;
                 float time = mediaPlayer.Control.GetCurrentTimeMs() / 1000;
-                PerceptionInfo perceptionInfo = new PerceptionInfo(userID, headsetID, testTimestamp, videoScene.videoID, time, lastTag);
+                PerceptionInfo perceptionInfo = new PerceptionInfo(userID, headsetID, testTimestamp, videoScene.videoID, time.ToString("N1"), lastTag);
                 perceptionData.Add(perceptionInfo);
 
                 Analytics.CustomEvent(ANALYTICS_TITLE, new Dictionary<string, object>{
@@ -89,7 +89,7 @@ public class PerceptionTracking : MonoBehaviour
                     { "HeadsetID", perceptionInfo.HeadsetID},
                     { "TestTimestamp", perceptionInfo.TestTimestamp},
                     { "VideoID", perceptionInfo.VideoID},
-                    { "Time", perceptionInfo.Time.ToString("N1")},
+                    { "Time", perceptionInfo.Time},
                     { "Location", perceptionInfo.Location}
                 });
             }
@@ -111,10 +111,10 @@ public class PerceptionInfo
     public int HeadsetID { get; set; }
     public string TestTimestamp { get; set; }
     public int VideoID { get; set; }
-    public double Time { get; set; }
+    public string Time { get; set; }
     public string Location { get; set; }
 
-    public PerceptionInfo(string userID, int headsetID, string testTimestamp, int videoID, double time, string location)
+    public PerceptionInfo(string userID, int headsetID, string testTimestamp, int videoID, string time, string location)
     {
         UserID = userID;
         HeadsetID = headsetID;

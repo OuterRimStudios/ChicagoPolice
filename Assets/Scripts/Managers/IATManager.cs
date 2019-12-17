@@ -258,7 +258,7 @@ public class IATManager : MonoBehaviour
         string occurance = isFirstTest ? "pre" : "post";
         int roundID = roundIndex;
         float responseTime = Time.time - itemStartTime;
-        IATInfo iatInfo = new IATInfo(userID, groupID, headsetID, testTimestamp, occurance, imageID, roundID, answer, responseTime);
+        IATInfo iatInfo = new IATInfo(userID, groupID, headsetID, testTimestamp, occurance, imageID, roundID, answer, responseTime.ToString("N3"));
         iatInfos.Add(iatInfo);
 
         Analytics.CustomEvent(ANALYTICS_TITLE, new Dictionary<string, object> { { "UserID", iatInfo.UserID },
@@ -269,7 +269,7 @@ public class IATManager : MonoBehaviour
             { "ImageID", iatInfo.ImageID },
             { "RoundID", iatInfo.RoundID },
             { "Answer", iatInfo.Answer },
-            { "ResponseTime", iatInfo.ResponseTime.ToString("N3") }
+            { "ResponseTime", iatInfo.ResponseTime }
         });
     }
 
@@ -288,9 +288,9 @@ public class IATInfo {
     public string ImageID { get; set; }
     public int RoundID { get; set; }
     public string Answer { get; set; }
-    public float ResponseTime { get; set; }
+    public string ResponseTime { get; set; }
 
-    public IATInfo(string userID, string groupID, int headsetID, string timestamp, string occurance, string imageID, int roundID, string answer, float responseTime) {
+    public IATInfo(string userID, string groupID, int headsetID, string timestamp, string occurance, string imageID, int roundID, string answer, string responseTime) {
         UserID = userID;
         GroupID = groupID;
         HeadsetID = headsetID;

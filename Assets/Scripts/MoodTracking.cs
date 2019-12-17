@@ -65,7 +65,7 @@ public class MoodTracking : MonoBehaviour
         {
             double time = currentMediaPlayer.Control.GetCurrentTimeMs() / 1000;
             float mood = slider?.value ?? -1;
-            MoodInfo moodInfo = new MoodInfo(userID, headsetID, testTimestamp, videoId, time, mood);
+            MoodInfo moodInfo = new MoodInfo(userID, headsetID, testTimestamp, videoId, time.ToString("N1"), mood);
             moodInfos.Add(moodInfo);
 
             Analytics.CustomEvent("MoodTracking", new Dictionary<string, object>
@@ -74,7 +74,7 @@ public class MoodTracking : MonoBehaviour
                 { "HeadsetID", moodInfo.HeadsetID},
                 { "TestTimestamp", moodInfo.TestTimestamp},
                 { "VideoID", moodInfo.VideoID },
-                { "Time", moodInfo.Time.ToString("N1") },
+                { "Time", moodInfo.Time },
                 { "Mood", moodInfo.Mood }
             });
         }        
@@ -87,7 +87,7 @@ internal class MoodInfo
     public int HeadsetID { get; set; }
     public string TestTimestamp { get; set; }
     public int VideoID { get; set; }
-    public double Time { get; set; }
+    public string Time { get; set; }
     public float Mood { get; set; }
 
     readonly int neutralValue = 6;
@@ -98,11 +98,11 @@ internal class MoodInfo
         HeadsetID = headsetID;
         TestTimestamp = testTimestamp;
         VideoID = videoId;
-        Time = 0;
+        Time = "0";
         Mood = neutralValue;
     }
 
-    public MoodInfo(string userID, int headsetID, string testTimestamp, int videoId, double time, float mood)
+    public MoodInfo(string userID, int headsetID, string testTimestamp, int videoId, string time, float mood)
     {
         UserID = userID;
         HeadsetID = headsetID;
