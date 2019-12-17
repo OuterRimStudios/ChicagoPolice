@@ -111,7 +111,7 @@ public class IATManager : MonoBehaviour
                 tutorialText.text += "For example: \n";
             }
 
-            tutorialText.text += $"Push the joystick <b>left</b> to match the items that belong to the category {ConvertKeysToText(rounds[roundIndex].yesKeys)}." +
+            tutorialText.text += $"Push the joystick <b>left</b> if the items match the category {ConvertKeysToText(rounds[roundIndex].yesKeys)}." +
                 $"\n\nPush the joystick <b>right</b> if they do not.";
         }
 

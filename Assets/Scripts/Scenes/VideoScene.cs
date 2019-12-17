@@ -10,6 +10,7 @@ public class VideoScene : BaseScene
     public MediaPlayer mediaPlayer;
     public string videoPath;
     public GameObject videoSphere;
+    
     public AudioSource headlockedSource;
     public GameObject moodSlider;
     public bool trackingEnabled;
@@ -39,8 +40,10 @@ public class VideoScene : BaseScene
 
     void BeginVideo()
     {
-        StartCoroutine(DannyEntrance());
-        perspectiveColliders.SetActive(true);
+        if(dannyCollider != null)
+            StartCoroutine(DannyEntrance());
+        if(perspectiveColliders != null)
+            perspectiveColliders.SetActive(true);
         fadeMaterial.SetColor("_Color", Color.clear);
         countdownOBJ.SetActive(false);
         StopCoroutine(countdownRoutine);
@@ -63,8 +66,10 @@ public class VideoScene : BaseScene
 
     public override void EndScene()
     {
-        perspectiveColliders.SetActive(false);
-        dannyCollider.enabled = false;
+        if (perspectiveColliders != null)
+            perspectiveColliders.SetActive(false);
+        if (dannyCollider != null)
+            dannyCollider.enabled = false;
         mediaPlayer.Pause();
         videoSphere.SetActive(false);
         moodSlider.SetActive(false);
@@ -76,6 +81,7 @@ public class VideoScene : BaseScene
         currentCount = countdownLength;
         countdownText.text = countdownLength.ToString();
         countdownOBJ.SetActive(true);
+        CenterView();
         while (currentCount > 0)
         {
             yield return new WaitForSecondsRealtime(1);
@@ -88,8 +94,13 @@ public class VideoScene : BaseScene
 
     IEnumerator DannyEntrance()
     {
-        yield return new WaitForSeconds(dannyEntrance);
-        dannyCollider.enabled = true;
+        if (dannyCollider != null)
+        {
+            yield return new WaitForSeconds(dannyEntrance);
+            dannyCollider.enabled = true;
+        }
+        else
+            yield break;
     }
 
     bool Fade()
@@ -104,5 +115,12 @@ public class VideoScene : BaseScene
             fadeMaterial.SetColor("_Color", Color.Lerp(fadeMaterial.GetColor("_Color"), Color.black, fadeSpeed * Time.deltaTime));
             return false;
         }
+    }
+
+    protected override void CenterView()
+    {
+        base.CenterView();
+        if(centerTarget)
+            countdownOBJ.transform.rotation = Quaternion.Euler(countdownOBJ.transform.rotation.eulerAngles.x, centerTarget.rotation.eulerAngles.y, countdownOBJ.transform.rotation.eulerAngles.z);
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,7 +27,7 @@ public class AppManager : MonoBehaviour
         request.Credentials = credential;
         while (true)
         {
-            yield return new WaitUntil(CheckSeconds);
+            yield return new WaitForSeconds(dataRate);
             try
             {
 
@@ -55,14 +54,6 @@ public class AppManager : MonoBehaviour
                 Debug.LogError(e.Message);
             }
         }
-    }
-
-    bool CheckSeconds()
-    {
-        if (DateTime.Now.Second % dataRate == 0)
-            return true;
-        else
-            return false;
     }
 
     void Post()
