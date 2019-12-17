@@ -269,7 +269,7 @@ public class IATManager : MonoBehaviour
             { "ImageID", iatInfo.ImageID },
             { "RoundID", iatInfo.RoundID },
             { "Answer", iatInfo.Answer },
-            { "ResponseTime", iatInfo.ResponseTime }
+            { "ResponseTime", iatInfo.ResponseTime.ToString("N3") }
         });
     }
 

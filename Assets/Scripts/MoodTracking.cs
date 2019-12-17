@@ -74,7 +74,7 @@ public class MoodTracking : MonoBehaviour
                 { "HeadsetID", moodInfo.HeadsetID},
                 { "TestTimestamp", moodInfo.TestTimestamp},
                 { "VideoID", moodInfo.VideoID },
-                { "Time", moodInfo.Time },
+                { "Time", moodInfo.Time.ToString("N1") },
                 { "Mood", moodInfo.Mood }
             });
         }        
