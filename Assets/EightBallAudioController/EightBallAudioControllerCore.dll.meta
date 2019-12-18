@@ -1,14 +1,16 @@
 fileFormatVersion: 2
 guid: b9352b52bc90047ce855bc6d2626698e
-timeCreated: 1468517410
-licenseType: Pro
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2
   iconMap: {}
-  executionOrder: {}
+  executionOrder:
+    Hear360.EightBallAudioController: 100
+  defineConstraints: []
   isPreloaded: 0
   isOverridable: 0
+  isExplicitlyReferenced: 0
+  validateReferences: 1
   platformData:
   - first:
       Any: 

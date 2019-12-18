@@ -1,16 +1,22 @@
-﻿using System.Collections;
+﻿//hector sux
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using RenderHeads.Media.AVProVideo;
 using OuterRimStudios.Utilities;
+using Hear360;
+using System.IO;
+
 public class PerspectiveScene : BaseScene
 {
-    public MediaPlayer[] mediaPlayers;
-    public GameObject[] videoSpheres;
+    public VideoInfo[] videoInfos;
     public Animator fadeAnimator;
 
+    Coroutine switchPerspective;
+    Coroutine play;
     int perspectiveIndex;
-    float time;
+    bool sceneStarted;
 
     private void OnEnable()
     {
@@ -22,81 +28,136 @@ public class PerspectiveScene : BaseScene
         OVRInputManager.OnButtonDown -= OnButtonDown;
     }
 
+    private void Start()
+    {
+        foreach(VideoInfo videoInfo in videoInfos)
+            videoInfo.sources = videoInfo.audioController.GetComponents<AudioSource>();
+    }
+
     void OnButtonDown(OVRInput.Button button)
     {
-        //Debug.LogError("Getting input from button " + button);
-
-        if(!fadeAnimator.GetCurrentAnimatorStateInfo(0).IsName("Fade"))
+        if (sceneStarted && !fadeAnimator.GetCurrentAnimatorStateInfo(0).IsName("Fade"))
         {
-            fadeAnimator.SetTrigger("Fade");
-
-            if (button == OVRInput.Button.One)
-                NextPerspective();
-            else
-                PreviousPerspective();
+            if (switchPerspective == null)
+            {
+                if (button == OVRInput.Button.One || button == OVRInput.Button.Two)
+                    switchPerspective = StartCoroutine(SwitchPerspective(button == OVRInput.Button.One));
+            }            
         }
     }
 
     private void Update()
     {
-        foreach (MediaPlayer mediaPlayer in mediaPlayers)
-        {
-            if(mediaPlayer.Control.IsFinished())
-                SundanceSceneTransition.Instance.NextScene();
-        }
+        if(videoInfos.Any(x => x.mediaPlayer.Control.IsFinished()))
+            SundanceSceneTransition.Instance.NextScene();
     }
 
     public override void StartScene()
     {
+        sceneStarted = true;
         //Debug.LogError("Starting Scene.");
         gameObject.SetActive(true);
-        Play();
+        Play(0);
     }
 
     public override void EndScene()
     {
+        sceneStarted = false;
         //Debug.LogError("Ending Scene.");
         Stop();
-        time = 0;
         gameObject.SetActive(false);
+    }
+
+    IEnumerator SwitchPerspective(bool isNext)
+    {
+        fadeAnimator.SetTrigger("Fade");
+        
+        yield return new WaitForSeconds(1f);
+
+        if (isNext)
+            NextPerspective();
+        else
+            PreviousPerspective();
+
+        switchPerspective = null;
     }
 
     void NextPerspective()
     {
         //Debug.LogError("Next Perspective");
-        Stop();
-        perspectiveIndex = perspectiveIndex.IncrementLoop(mediaPlayers.Length - 1);
-        Play();
+        if (play != null)
+            StopCoroutine(play);
+
+        float videoTime = Stop();
+        perspectiveIndex = perspectiveIndex.IncrementLoop(videoInfos.Length - 1);
+        play = StartCoroutine(Play(videoTime));
     }
 
     void PreviousPerspective()
     {
         //Debug.LogError("Previous Perspective");
-        Stop();
-        perspectiveIndex = perspectiveIndex.DecrementLoop(0, mediaPlayers.Length - 1);
-        Play();
+        if (play != null)
+            StopCoroutine(play);
+
+        float videoTime = Stop();
+        perspectiveIndex = perspectiveIndex.DecrementLoop(0, videoInfos.Length - 1);
+        play = StartCoroutine(Play(videoTime));
     }
 
-    void Play()
+    IEnumerator Play(float currentTime)
     {
+        var videoInfo = videoInfos[perspectiveIndex];
         //Debug.LogError("Playing: " + mediaPlayers[perspectiveIndex].transform.parent.name);
-        mediaPlayers[perspectiveIndex].OpenVideoFromFile(MediaPlayer.FileLocation.RelativeToStreamingAssetsFolder, mediaPlayers[perspectiveIndex].m_VideoPath, false);
+        videoInfo.mediaPlayer.OpenVideoFromFile(MediaPlayer.FileLocation.AbsolutePathOrURL, Path.Combine(Application.persistentDataPath, videoInfo.videoPath), false);
 
         //Debug.LogError(mediaPlayers[perspectiveIndex].transform.parent.name + "is seeking to: " + time);
-        mediaPlayers[perspectiveIndex].Control.SeekFast(time);
+        videoInfo.mediaPlayer.Control.SeekFast(currentTime);
 
         //Debug.LogError(mediaPlayers[perspectiveIndex].transform.parent.name + "'s current time: " + time);
-        videoSpheres[perspectiveIndex].SetActive(true);
-        mediaPlayers[perspectiveIndex].Play();
+        videoInfo.videoSphere.SetActive(true);
+        videoInfo.mediaPlayer.Play();
+
+        yield return new WaitForSeconds(videoInfo.audioDelay);
+
+        foreach(AudioSource source in videoInfo.sources)
+            source.time = (currentTime / 1000);
+
+        videoInfo.audioController.Play();
+        videoInfo.headlockedSource.Play();
     }
 
-    void Stop()
+    float Stop()
     {
+        var videoInfo = videoInfos[perspectiveIndex];
+
         //Debug.LogError("Stopping: " + mediaPlayers[perspectiveIndex].transform.parent.name);
-        time = mediaPlayers[perspectiveIndex].Control.GetCurrentTimeMs();
+        float videoTime = videoInfo.sources[0].time;
+
+        videoInfo.audioController.Stop();
+        videoInfo.headlockedSource.Stop();
+
+        //videoInfo.mediaPlayer.Control.GetCurrentTimeMs();
 
         //Debug.LogError(mediaPlayers[perspectiveIndex].transform.parent.name + "'s current time: " + time);
-        videoSpheres[perspectiveIndex].SetActive(false);
-        mediaPlayers[perspectiveIndex].CloseVideo();
+        videoInfo.videoSphere.SetActive(false);
+        videoInfo.mediaPlayer.CloseVideo();
+
+        return videoTime;
     }
+}
+
+[System.Serializable]
+public class VideoInfo
+{
+    [Header("Video")]
+    public MediaPlayer mediaPlayer;
+    public GameObject videoSphere;
+    public string videoPath;
+
+    [Space, Header("Audio")]
+    public EightBallAudioController audioController;
+    public AudioSource headlockedSource;
+    public float audioDelay;
+
+    public AudioSource[] sources;
 }
