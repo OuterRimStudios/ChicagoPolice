@@ -56,6 +56,7 @@ public class Laser : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, interactionLayer))
         {
+            Debug.LogError(hit.transform.name);
             if (hit.transform.tag.Equals("UI"))
             {
                 line.SetPosition(1, hit.point);
