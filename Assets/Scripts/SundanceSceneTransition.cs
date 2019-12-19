@@ -20,6 +20,7 @@ public class SundanceSceneTransition : SceneTransition
     }
     public override void NextScene()
     {
+        //calls end scene on the currently playing scene
         baseScenes[sceneIndex].EndScene();
         OnSceneEnded?.Invoke(baseScenes[sceneIndex]);
 
@@ -28,6 +29,7 @@ public class SundanceSceneTransition : SceneTransition
         else
             sceneIndex = 0;
 
+        //starts next scene
         baseScenes[sceneIndex].StartScene();
         OnSceneStarted?.Invoke(baseScenes[sceneIndex]);
     }

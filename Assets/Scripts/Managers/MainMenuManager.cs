@@ -18,8 +18,6 @@ public class MainMenuManager : MonoBehaviour
 
     float timer;
 
-    // Start is called before the first frame update
-
     private void OnEnable()
     {
         hapticInput = GetComponent<HapticInput>();
@@ -57,6 +55,7 @@ public class MainMenuManager : MonoBehaviour
         }     
     }
 
+    //Toggles the manual input menu when the user holds the button for the duration of holdTime
     void CheckCountdown()
     {
         if (buttonHeld)

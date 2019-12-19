@@ -38,6 +38,12 @@ public class OVRInputManager : MonoBehaviour
     private void Update()
     {
         OVRInput.Update();
+        CheckInputStates();
+    }
+
+    //loops through every button selected in activeButtons. Sends an event everytime a button is pressed or released
+    void CheckInputStates()
+    {
         foreach (OVRInput.Button button in buttons)
         {
             if (inputStates[button] && OVRInput.Get(button))

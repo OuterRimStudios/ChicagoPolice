@@ -21,7 +21,9 @@ public class TutorialManager : MonoBehaviour
 
     private void OnEnable()
     {
+#if UNITY_ANDROID
         OVRInputManager.OnButtonDown += OnButtonDown;
+#endif
 
         controllerAnimator.ResetTrigger("none");
         controllerAnimator.SetTrigger(controllerAnimation.ToString());
@@ -29,7 +31,9 @@ public class TutorialManager : MonoBehaviour
 
     private void OnDisable()
     {
+#if UNITY_ANDROID
         OVRInputManager.OnButtonDown -= OnButtonDown;
+#endif
 
         controllerAnimator.SetTrigger("none");
     }
@@ -43,7 +47,6 @@ public class TutorialManager : MonoBehaviour
                 NextScene();
             }
         }
-        
     }
 #endif
 #if UNITY_ANDROID

@@ -32,6 +32,7 @@ public class VideoScene : BaseScene
     Coroutine countdownRoutine;
     int currentCount;
 
+    //starts the countdown and loads the video
     public override void StartScene()
     {
         countdownRoutine = StartCoroutine(Countdown());
@@ -44,9 +45,14 @@ public class VideoScene : BaseScene
             StartCoroutine(DannyEntrance());
         if(perspectiveColliders != null)
             perspectiveColliders.SetActive(true);
+
+        //ensures the fade is clear so it's not blocking the view
         fadeMaterial.SetColor("_Color", Color.clear);
+
         countdownOBJ.SetActive(false);
         StopCoroutine(countdownRoutine);
+
+        //enables/plays the video and enables the mood slider
         videoSphere.SetActive(true);
         moodSlider.SetActive(true);
         mediaPlayer.Control.Play();
@@ -55,15 +61,20 @@ public class VideoScene : BaseScene
 
     IEnumerator IsPlaying()
     {
+        //wait for the video to start playing before proceeding
         yield return new WaitUntil(() => mediaPlayer.Control.IsPlaying());
+        //wait for the audio delay before proceeding
         yield return new WaitForSeconds(audioDelay);
+        //playing the audio
         eightBallAudioController.Play();
         headlockedSource?.Play();
         yield return new WaitForSeconds(1);
+        //wait for the video to finish playing before moving to the next scene
         yield return new WaitUntil(() => !mediaPlayer.Control.IsPlaying());
         ChicagoSceneTransition.Instance.NextScene();
     }
 
+    //resets all of the scene objects associated with this video and unloads the video from memory
     public override void EndScene()
     {
         if (perspectiveColliders != null)
@@ -76,6 +87,7 @@ public class VideoScene : BaseScene
         mediaPlayer.CloseVideo();
     }
 
+    //displays a countdown on screen and fades to black when the countdown reaches 0
     IEnumerator Countdown()
     {
         currentCount = countdownLength;
@@ -92,6 +104,7 @@ public class VideoScene : BaseScene
         BeginVideo();
     }
 
+    //waits for Danny to enter the room in the video before enabling his collider for perception tracking
     IEnumerator DannyEntrance()
     {
         if (dannyCollider != null)
@@ -117,6 +130,7 @@ public class VideoScene : BaseScene
         }
     }
 
+    //calls normal CenterView, but also centers the countdown text
     protected override void CenterView()
     {
         base.CenterView();

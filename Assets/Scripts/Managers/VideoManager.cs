@@ -67,6 +67,7 @@ public class VideoManager : MonoBehaviour
         }
 
         MediaPlayer currentPlayer = playerOne.Control.IsPlaying() ? playerOne : playerTwo;
+        //controls when the user can toggle perspectives based on the current time of the video
         if (Mathf.Abs((safeTimers[safeTimerIndex].x * 1000) - currentPlayer.Control.GetCurrentTimeMs()) < MARGIN_OF_ERROR)
         {
             timerBar.value = 0;
@@ -82,6 +83,7 @@ public class VideoManager : MonoBehaviour
 
         OVRInput.Update();
 
+        //when the perspective switch button is pressed, toggle objects and seek
         if (acceptInput && OVRInput.Get(OVRInput.Button.One))
         {
             acceptInput = false;

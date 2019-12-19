@@ -26,15 +26,16 @@ public class HeadsetSelectionManager : MonoBehaviour
     private void OnButtonDown(OVRInput.Button key)
     {
         if (key == OVRInput.Button.SecondaryThumbstickLeft && !acknowledgementPanel.activeInHierarchy)
-            ChangeID(-1);
+            ChangeID(-1);   //decreases the ID by 1
         else if (key == OVRInput.Button.SecondaryThumbstickRight && !acknowledgementPanel.activeInHierarchy)
-            ChangeID(1);
+            ChangeID(1);    //increases the ID by 1
         else if (key == OVRInput.Button.One)
             SubmitID();
         else if (key == OVRInput.Button.Two && acknowledgementPanel.activeInHierarchy)
             Cancel();
     }
 
+    //adds the value passed in to the current ID
     void ChangeID(int changeAmount)
     {
         if (currentID + changeAmount < 1)
@@ -44,8 +45,10 @@ public class HeadsetSelectionManager : MonoBehaviour
         idText.text = currentID.ToString();
     }
 
+
     void SubmitID()
     {
+        //This will activate a confirmation panel the first time submit is called
         if (!acknowledgementPanel.activeInHierarchy)
         {
             mainPanel.SetActive(false);
@@ -55,6 +58,7 @@ public class HeadsetSelectionManager : MonoBehaviour
         else
             acknowledgedID = true;
 
+        //if the user has confirmed the ID is correct, this sets the ID of this headset and proceeds with the experience
         if (acknowledgedID)
         {
             gameObject.SetActive(false);
@@ -63,6 +67,7 @@ public class HeadsetSelectionManager : MonoBehaviour
         }
     }
 
+    //allows the user to return to the menu where they set the value of the ID
     void Cancel()
     {
         if(acknowledgementPanel.activeInHierarchy)

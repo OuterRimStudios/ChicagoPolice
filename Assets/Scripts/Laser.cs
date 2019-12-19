@@ -31,6 +31,7 @@ public class Laser : MonoBehaviour
     {
         if (key == OVRInput.Button.SecondaryIndexTrigger && selectable != null)
         {
+            //calls the event that would happen if a user would click on a UI object
             BaseEventData data = new BaseEventData(eventSystem);
             ExecuteEvents.Execute(selectable.gameObject, data, ExecuteEvents.submitHandler);
         }
@@ -52,10 +53,11 @@ public class Laser : MonoBehaviour
         Ray ray = new Ray(raycastPosition.position, raycastPosition.forward);
 
         line.enabled = true;
-        line.SetPosition(0, raycastPosition.position);
+        line.SetPosition(0, raycastPosition.position);      //sets the starting point of the line renderer to the position the raycast emits from
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, interactionLayer))
         {
+            //if the ray hits an object that can be interacted with, set the end point of the line renderer to the hit.point and mark that object as the selectable
             if (hit.transform.tag.Equals("UI"))
             {
                 line.SetPosition(1, hit.point);
@@ -64,6 +66,7 @@ public class Laser : MonoBehaviour
         }
         else
         {
+            //if the ray hits nothing, set the end point of the line renderer to 20 units from the origin and clear the selectable object
             line.SetPosition(1, ray.GetPoint(20));
             selectable = null;
         }

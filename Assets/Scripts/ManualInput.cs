@@ -7,13 +7,13 @@ public class ManualInput : MonoBehaviour
 
     public GameObject[] gosManualInput;
 
+    //sets the values for the specific user for later use in analytics
     public void Submit()
     {
         ChicagoSceneTransition.Instance.InitializeUser(userId.inputText.text, groupId.textDisplay.text);
         userId.Reset();
         groupId.Reset();
         Activate(false);
-        //ChicagoSceneTransition.Instance.NextScene();        
     }
 
     public void Activate(bool isActive)

@@ -20,7 +20,7 @@ public class HapticInput : MonoBehaviour
             if (capabilities.supportsImpulse)
             {
                 uint channel = 0;
-                device.SendHapticImpulse(channel, amplitude, duration);
+                device.SendHapticImpulse(channel, amplitude, duration);     //makes the controller rumble
             }
         }
         else

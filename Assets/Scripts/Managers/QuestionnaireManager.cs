@@ -36,6 +36,8 @@ public class QuestionnaireManager : MonoBehaviour
     protected void OnEnable()
     {
         OVRInputManager.OnButtonDown += OnButtonDown;
+
+        //grab the user specific values for use in the analytics
         userID = ChicagoSceneTransition.Instance.UserID;
         headsetID = ChicagoSceneTransition.Instance.HeadsetID;
         testTimestamp = ChicagoSceneTransition.Instance.TestTimestamp;
@@ -64,9 +66,9 @@ public class QuestionnaireManager : MonoBehaviour
             {
                 currentQuestionIndex++;
                 if (responses[currentQuestionIndex] == -1)
-                    responseSlider.Reset();
+                    responseSlider.Reset();     //if this question has not been answered, reset the slider to the middle
                 else
-                    responseSlider.SetSliderValue(responses[currentQuestionIndex]);
+                    responseSlider.SetSliderValue(responses[currentQuestionIndex]);     //if this question has already been answered, set the slider to the value of that answer
             }
             else
             {
@@ -82,17 +84,18 @@ public class QuestionnaireManager : MonoBehaviour
             if (currentQuestionIndex > 0)
             {
                 currentQuestionIndex--;
-                responseSlider.SetSliderValue(responses[currentQuestionIndex]);
+                responseSlider.SetSliderValue(responses[currentQuestionIndex]);     //set the slider value to what the user entered
             }
         }
 
+        //cycles between question objects
         if (currentQuestion != questions[currentQuestionIndex])
         {
             currentQuestion.SetActive(false);
             currentQuestion = questions[currentQuestionIndex];
             if(questionHub != null)
             {
-                //Quaternion.Euler(transform.rotation.eulerAngles.x, Camera.main.transform.eulerAngles.y, transform.rotation.eulerAngles.z);
+                //rotates the questionHub object to face the same direction as the camera
                 questionHub.rotation = Quaternion.Euler(questionHub.rotation.eulerAngles.x, cameraTransform.rotation.eulerAngles.y, questionHub.rotation.eulerAngles.z);
             }
             currentQuestion.SetActive(true);

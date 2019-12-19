@@ -45,5 +45,4 @@ public class Keypad : MonoBehaviour
         inputText.text = "";
         defaultText.gameObject.SetActive(true);
     }
-
 }

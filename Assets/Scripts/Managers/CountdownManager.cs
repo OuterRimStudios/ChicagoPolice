@@ -21,10 +21,12 @@ public class CountdownManager : MonoBehaviour
 
     private void OnDisable()
     {
+        //make sure the color is clear so it doesn't block vision
         fadeMaterial.SetColor("_Color", Color.clear);
         StopCoroutine(countdownRoutine);
     }
 
+    //manages the countdown and text display
     IEnumerator Countdown()
     {
         currentCount = countdownLength;
@@ -39,6 +41,7 @@ public class CountdownManager : MonoBehaviour
         ChicagoSceneTransition.Instance.NextScene();
     }
 
+    //handles the fade out. changes the color of the material to black
     bool Fade()
     {
         if (Mathf.Abs(fadeMaterial.GetColor("_Color").a - 1) <= 0.01f)

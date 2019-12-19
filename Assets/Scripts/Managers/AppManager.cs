@@ -27,24 +27,25 @@ public class AppManager : MonoBehaviour
         request.Credentials = credential;
         while (true)
         {
+            //wait the data rate before requesting the data again
             yield return new WaitForSeconds(dataRate);
             try
             {
-
+                //downloads the data from the hosted file and tries to format it into a string
                 byte[] newFileData = request.DownloadData(url);
                 string fileString = System.Text.Encoding.UTF8.GetString(newFileData);
+                //formatting the data from the hosted file into the type TestGroup so it can be used easier
                 data = JsonUtility.FromJson(fileString, typeof(TestGroup)) as TestGroup;
 
+                //check if the hosted file has given the signal to start the experience
                 if (data.canStart)
                 {
-                    foreach (UserInfo page in data.users)
-                    {
-                        Debug.Log($"OculusID: {page.questID} | UserID: {page.userID} | GroupID: {page.groupID}");
-                    }
+                    //setting the values for this user from the data pulled from the hosted file
                     string userID = data.users[ChicagoSceneTransition.Instance.HeadsetID - 1].userID;
                     string groupID = data.users[ChicagoSceneTransition.Instance.HeadsetID - 1].groupID;
                     ChicagoSceneTransition.Instance.InitializeUser(userID, groupID);
                     data.users[ChicagoSceneTransition.Instance.HeadsetID - 1].questReady = true;
+                    //post back to the file that this user is ready
                     Post();
                     yield break;
                 }
@@ -56,6 +57,7 @@ public class AppManager : MonoBehaviour
         }
     }
 
+    //posts data to hosted file
     void Post()
     {
         WebClient client = new WebClient();

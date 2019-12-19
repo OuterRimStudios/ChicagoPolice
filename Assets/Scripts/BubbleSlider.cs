@@ -87,27 +87,31 @@ public class BubbleSlider : MonoBehaviour
                 StopCoroutine(heldDownEnumerator);
         }
     }
+
     void OnButtonDown(OVRInput.Button key)
     {
-        if(key == OVRInput.Button.PrimaryThumbstickLeft)
+        if(key == OVRInput.Button.PrimaryThumbstickLeft)    //the user moved the joystick to the left
         {
+            //move the bubble on the slider to the left
             stepIndex = stepIndex.DecrementClamped(slider.minValue);
             UpdateUI();
             if (heldDownEnumerator != null)
                 StopCoroutine(heldDownEnumerator);
-            heldDownEnumerator = StartCoroutine(UpdateHold(false));
+            heldDownEnumerator = StartCoroutine(UpdateHold(false));     //starts the coroutine that will continue to move the bubble left as long as the person is holding the joystick to the left
         }
-        else if(key == OVRInput.Button.PrimaryThumbstickRight)
+        else if(key == OVRInput.Button.PrimaryThumbstickRight)      //the user moved the joystick to the right
         {
+            //move the bubble on the slider to the right
             stepIndex = stepIndex.IncrementClamped(slider.maxValue);
             UpdateUI();
             if (heldDownEnumerator != null)
                 StopCoroutine(heldDownEnumerator);
-            heldDownEnumerator = StartCoroutine(UpdateHold(true));
+            heldDownEnumerator = StartCoroutine(UpdateHold(true));      //starts the coroutine that will continue to move the bubble right as long as the person is holding the joystick to the right
         }
     }
 #endif
 
+    //moves the bubble depending on the direction the user is holding the joystick
     IEnumerator UpdateHold(bool isIncreased)
     {
         yield return new WaitForSeconds(holdDownTime);
@@ -124,6 +128,7 @@ public class BubbleSlider : MonoBehaviour
         heldDownEnumerator = StartCoroutine(UpdateHold(isIncreased));
     }
 
+    //creates the visuals of the slider
     void SetUI()
     {        
         float sliderWidth = sliderArea.GetComponent<RectTransform>().sizeDelta.x;
@@ -149,6 +154,7 @@ public class BubbleSlider : MonoBehaviour
             slider.handleRect.gameObject.transform.SetAsLastSibling();
     }
 
+    //sets the position of the bubble as well as optionally setting the color of the bubble
     void UpdateUI()
     {        
         slider.value = stepIndex;

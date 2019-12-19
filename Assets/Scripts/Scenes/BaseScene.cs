@@ -7,6 +7,8 @@ public class BaseScene : MonoBehaviour
     public Transform centerTarget;
     public virtual void StartScene() { }
     public virtual void EndScene() { }
+
+    //rotates the object to face the same direction as the centerTarget object
     protected virtual void CenterView()
     {
         if (centerTarget)

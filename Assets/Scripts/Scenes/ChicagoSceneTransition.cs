@@ -35,15 +35,18 @@ public class ChicagoSceneTransition : SceneTransition
 
     public override void NextScene()
     {
+        //gets the scene that is currently active and calls EndScene
         List<BaseScene> baseScene = GetActiveTest();
         baseScene[sceneIndex].EndScene();
         OnSceneEnded?.Invoke(baseScene[sceneIndex]);
 
+        //increments to next scene, or resets to the beginning of the list
         if (sceneIndex < baseScene.Count - 1)
             sceneIndex++;
         else
             sceneIndex = 0;
 
+        //starts new scene
         baseScene[sceneIndex].StartScene();
         OnSceneStarted?.Invoke(baseScene[sceneIndex]);
     }
@@ -57,6 +60,7 @@ public class ChicagoSceneTransition : SceneTransition
         return isTestB ? testB[sceneIndex - 1] : testA[sceneIndex - 1];
     }
 
+    //returns the VideoScene of the video that was viewed last
     public VideoScene GetLastVideo()
     {
         for(int i = sceneIndex; i > 0; i--)
@@ -79,6 +83,7 @@ public class ChicagoSceneTransition : SceneTransition
         testA[0].gameObject.SetActive(true);
     }
 
+    //sets user specific values for use in the analytics
     public void InitializeUser(string userID, string groupID)
     {
         UserID = userID;

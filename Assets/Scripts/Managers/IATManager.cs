@@ -34,7 +34,7 @@ public class IATManager : MonoBehaviour
     int roundIndex;
     int roundSpriteCount;
     bool waitingToStart;    
-    bool isDisplayPic = true;
+    bool isDisplayPic = true;   //used to toggle the IAT item between an image and a word
 
     //IAT Analytics Variables 
     List<IATInfo> iatInfos = new List<IATInfo>();
@@ -128,6 +128,7 @@ public class IATManager : MonoBehaviour
 
         if (roundIndex == IATConstants.TUTORIAL_ROUND)
         {
+            //adds 4 random pictures from each group in the practice collections
             foreach (IATCollection collection in practiceCollections)
             {
                 picSprites.AddRange(CollectionUtilities.GetRandomItems(collection.IATobjects, 4));
@@ -135,11 +136,14 @@ public class IATManager : MonoBehaviour
         }
         else
         {
+            //adds 4 random pictures from each of the picture collections to the same list for the current round
             foreach (IATCollection collection in picCollections)
             {
                 picSprites.AddRange(CollectionUtilities.GetRandomItems(collection.IATobjects, 4));
             }
 
+            //adds 2 random words from each of the word collections to the same list for an intro to the current round
+            //adds 4 random words from each of the word collections to the same list for the current round
             foreach (IATCollection collection in wordCollections)
             {
                 introWordSprites.AddRange(CollectionUtilities.GetRandomItems(collection.IATobjects, 2));
@@ -155,8 +159,10 @@ public class IATManager : MonoBehaviour
     {
         wrongAnswerPrompt.SetActive(false);
 
+        //cehcks if the user has matched all of the items to the correct category
         if (answerCount == roundSpriteCount) 
         {
+            //resets and moves to the next round, or ends the test
             answerCount = 0;
             roundIndex++;
             choiceImage.gameObject.SetActive(false);
@@ -166,12 +172,14 @@ public class IATManager : MonoBehaviour
         {
             choiceImage.gameObject.SetActive(true);
 
+            //if the user has completed the tutorial and has not completed the intro to the round
             if (answerCount < IATConstants.SOLO_WORD_INDEX && roundIndex != IATConstants.TUTORIAL_ROUND)
             {
                 choiceImage.sprite = GetRandomSprite(introWordSprites);
             }
             else
             {
+                //toggles between showing a face and a word
                 if (isDisplayPic)
                 {
                     choiceImage.sprite = GetRandomSprite(picSprites);
@@ -229,6 +237,7 @@ public class IATManager : MonoBehaviour
         return sprite;
     }
 
+    //returns the key of an IAT item by comparing it to the contents of each collection
     IATKey GetItemKey(Sprite item) 
     {
         List<IATCollection> _collections = picCollections.Concat(wordCollections).Concat(practiceCollections).ToList();

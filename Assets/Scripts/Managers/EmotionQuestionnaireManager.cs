@@ -7,9 +7,11 @@ public class EmotionQuestionnaireManager : QuestionnaireManager
 {
     private void Awake()
     {
+        //setting the string to differentiate these analytics from the normal questionnaire
         ANALYTICS_TITLE = "EmotionQuestionnaireResponses";
     }
 
+    //overriding the base with new values relevant to this specific questionnaire
     protected override void SendAnalytics()
     {
         int videoID = ChicagoSceneTransition.Instance.GetLastVideo() != null ? ChicagoSceneTransition.Instance.GetLastVideo().videoID : -1;
