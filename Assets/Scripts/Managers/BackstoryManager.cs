@@ -20,6 +20,7 @@ public class BackstoryManager : MonoBehaviour
         OVRInputManager.OnButtonDown += OnButtonDown;
         backstorySelectors[0].gameObject.SetActive(true);
         currentBackstory = backstorySelectors[0];
+        currentBackstoryIndex = 0;
     }
 
     private void OnDisable()

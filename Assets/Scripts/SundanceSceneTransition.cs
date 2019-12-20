@@ -13,22 +13,35 @@ public class SundanceSceneTransition : SceneTransition
     public List<BaseScene> baseScenes;
 
     int sceneIndex;
+    BaseScene currentScene;
 
     private void Awake()
     {
         Instance = this;
+        currentScene = baseScenes[0];
+        currentScene.StartScene();
     }
     public override void NextScene()
     {
-        baseScenes[sceneIndex].EndScene();
-        OnSceneEnded?.Invoke(baseScenes[sceneIndex]);
+        currentScene?.EndScene();
+        OnSceneEnded?.Invoke(currentScene);
 
         if (sceneIndex < baseScenes.Count - 1)
             sceneIndex++;
         else
             sceneIndex = 0;
 
-        baseScenes[sceneIndex].StartScene();
-        OnSceneStarted?.Invoke(baseScenes[sceneIndex]);
+        currentScene = baseScenes[sceneIndex];
+        currentScene?.StartScene();
+        OnSceneStarted?.Invoke(currentScene);
+    }
+
+    public void ChangeScene(BaseScene nextScene)
+    {
+        currentScene?.EndScene();
+        OnSceneEnded?.Invoke(currentScene);
+        currentScene = nextScene;
+        currentScene?.StartScene();
+        OnSceneStarted?.Invoke(currentScene);
     }
 }

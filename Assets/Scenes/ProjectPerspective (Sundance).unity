@@ -825,6 +825,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2327526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f6b1d32f4456cb047b1bf58cf0e155b8, type: 2}
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_FilterMode
       value: 2
@@ -914,28 +918,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 593791857}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf56284d8f76b444ab614f77b2cf4179, type: 3}
+  m_Script: {fileID: 2075895966, guid: b9352b52bc90047ce855bc6d2626698e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClipFront: {fileID: 8300000, guid: d6801b542b4258340bb82317b9efcdcc, type: 3}
+  audioClipLeft: {fileID: 8300000, guid: fa6d7166b30614946a05200f7933e38d, type: 3}
+  audioClipBack: {fileID: 8300000, guid: c13994f2cd574b143817c226803808a5, type: 3}
+  audioClipRight: {fileID: 8300000, guid: 7a2b5333cac90a44493009df95d8bbc4, type: 3}
+  cameraTransform: {fileID: 1763202767}
+  vol: 0.7
+  autoPlay: 0
+  loop: 0
+  transitionThresholdFront: 0
+  transitionThresholdLeft: 0
+  transitionThresholdBack: 0
+  transitionThresholdRight: 0
+  linearCurve: 1
+--- !u!114 &593791859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593791857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ec9b685ee5fb84591ec00270a13e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotateToView: 1
-  centerTarget: {fileID: 0}
+  centerTarget: {fileID: 1763202767}
   mediaPlayer: {fileID: 593791855}
-  videoPath: 
+  videoPath: Tony Backstory.mp4
   videoSphere: {fileID: 593791856}
-  headlockedSource: {fileID: 0}
-  moodSlider: {fileID: 0}
-  trackingEnabled: 0
-  videoID: 3
+  eightBallAudioController: {fileID: 593791858}
   audioDelay: 0
-  eightBallAudioController: {fileID: 0}
-  countdownText: {fileID: 0}
-  countdownLength: 0
-  fadeMaterial: {fileID: 0}
-  countdownOBJ: {fileID: 0}
-  fadeSpeed: 0
-  dannyEntrance: 0
-  dannyCollider: {fileID: 0}
-  perspectiveColliders: {fileID: 0}
+  backstoryHub: {fileID: 2078996004796077262}
 --- !u!1 &633987594 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 198420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d,
@@ -951,28 +969,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 633987594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf56284d8f76b444ab614f77b2cf4179, type: 3}
+  m_Script: {fileID: 2075895966, guid: b9352b52bc90047ce855bc6d2626698e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClipFront: {fileID: 8300000, guid: 2084de6441bbf674189e5b6bcfc49b74, type: 3}
+  audioClipLeft: {fileID: 8300000, guid: 126e3c2db7144834d896492da4d54922, type: 3}
+  audioClipBack: {fileID: 8300000, guid: 0d5234c0948a3dc41881aaa357b11438, type: 3}
+  audioClipRight: {fileID: 8300000, guid: 16f4891a787cdfd4f91bfb1af44e6d19, type: 3}
+  cameraTransform: {fileID: 1763202767}
+  vol: 0.7
+  autoPlay: 0
+  loop: 0
+  transitionThresholdFront: 0
+  transitionThresholdLeft: 0
+  transitionThresholdBack: 0
+  transitionThresholdRight: 0
+  linearCurve: 1
+--- !u!114 &633987596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633987594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ec9b685ee5fb84591ec00270a13e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotateToView: 1
-  centerTarget: {fileID: 0}
+  centerTarget: {fileID: 1763202767}
   mediaPlayer: {fileID: 902737630}
-  videoPath: 
+  videoPath: Santana Backstory.mp4
   videoSphere: {fileID: 1577749883}
-  headlockedSource: {fileID: 0}
-  moodSlider: {fileID: 0}
-  trackingEnabled: 0
-  videoID: 3
+  eightBallAudioController: {fileID: 633987595}
   audioDelay: 0
-  eightBallAudioController: {fileID: 0}
-  countdownText: {fileID: 0}
-  countdownLength: 0
-  fadeMaterial: {fileID: 0}
-  countdownOBJ: {fileID: 0}
-  fadeSpeed: 0
-  dannyEntrance: 0
-  dannyCollider: {fileID: 0}
-  perspectiveColliders: {fileID: 0}
+  backstoryHub: {fileID: 2078996004796077262}
 --- !u!1 &639138135
 GameObject:
   m_ObjectHideFlags: 0
@@ -1177,10 +1209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca5960490778b2408e127272590250d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mediaPlayer: {fileID: 1694979954}
-  videoPath: Danny_Catalina Backstory.mp4
-  videoSphere: {fileID: 1694979955}
-  backstoryHub: {fileID: 2078996004796077260}
+  backstoryScene: {fileID: 1694979958}
 --- !u!114 &869818173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1193,10 +1222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca5960490778b2408e127272590250d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mediaPlayer: {fileID: 0}
-  videoPath: 
-  videoSphere: {fileID: 2078996004796077260}
-  backstoryHub: {fileID: 2078996004796077260}
+  backstoryScene: {fileID: 0}
 --- !u!114 &869818174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1209,10 +1235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca5960490778b2408e127272590250d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mediaPlayer: {fileID: 902737630}
-  videoPath: Santana Backstory.mp4
-  videoSphere: {fileID: 1577749883}
-  backstoryHub: {fileID: 2078996004796077260}
+  backstoryScene: {fileID: 633987596}
 --- !u!114 &869818175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1225,10 +1248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca5960490778b2408e127272590250d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mediaPlayer: {fileID: 593791855}
-  videoPath: Tony Backstory.mp4
-  videoSphere: {fileID: 593791856}
-  backstoryHub: {fileID: 2078996004796077260}
+  backstoryScene: {fileID: 593791859}
 --- !u!114 &869818176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1241,10 +1261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca5960490778b2408e127272590250d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mediaPlayer: {fileID: 1855649465}
-  videoPath: Antwaun Backstory .mp4
-  videoSphere: {fileID: 1855649466}
-  backstoryHub: {fileID: 2078996004796077260}
+  backstoryScene: {fileID: 1855649469}
 --- !u!1001 &902737629
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1324,6 +1341,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2327526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 91d4f096cf6708140b6751058335835f, type: 2}
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_FilterMode
       value: 2
@@ -2014,7 +2035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21fed5e5882269343afcea6da56e9a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeButtons: 2891776
+  activeButtons: 2891780
   onButtonDownWaitTime: 0.1
 --- !u!1001 &1269437239
 PrefabInstance:
@@ -2707,16 +2728,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1579474195}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7aaf960227867044282d921171d2d7ac, type: 3}
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 3
+  m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  pointer: {fileID: 0}
-  sortOrder: 0
 --- !u!114 &1579474197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2779,7 +2798,7 @@ RectTransform:
   - {fileID: 69449912}
   - {fileID: 2078996004796077263}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2823,7 +2842,7 @@ Transform:
   - {fileID: 593791854}
   - {fileID: 151608525}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1642443497
 GameObject:
@@ -3057,7 +3076,7 @@ Transform:
   m_LocalScale: {x: 8, y: 8, z: 8}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1682553266
 Animator:
@@ -3157,6 +3176,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2327526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9bf45bed75ee5ca43ad2133b2ca0c92a, type: 2}
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_FilterMode
       value: 2
@@ -3246,28 +3269,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 1694979956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf56284d8f76b444ab614f77b2cf4179, type: 3}
+  m_Script: {fileID: 2075895966, guid: b9352b52bc90047ce855bc6d2626698e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClipFront: {fileID: 8300000, guid: c4e25212201bbdd4a857cf95782fdc91, type: 3}
+  audioClipLeft: {fileID: 8300000, guid: 40ed4a45b95b0c8488286e1a88baa292, type: 3}
+  audioClipBack: {fileID: 8300000, guid: 45645ae4bccb3c843bf06e48db70865a, type: 3}
+  audioClipRight: {fileID: 8300000, guid: 5fb4f4126ae941b4488547f64eb56a84, type: 3}
+  cameraTransform: {fileID: 1763202767}
+  vol: 0.7
+  autoPlay: 0
+  loop: 0
+  transitionThresholdFront: 0
+  transitionThresholdLeft: 0
+  transitionThresholdBack: 0
+  transitionThresholdRight: 0
+  linearCurve: 1
+--- !u!114 &1694979958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694979956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ec9b685ee5fb84591ec00270a13e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotateToView: 1
-  centerTarget: {fileID: 0}
+  centerTarget: {fileID: 1763202767}
   mediaPlayer: {fileID: 1694979954}
-  videoPath: 
+  videoPath: Danny_Catalina Backstory.mp4
   videoSphere: {fileID: 1694979955}
-  headlockedSource: {fileID: 0}
-  moodSlider: {fileID: 0}
-  trackingEnabled: 0
-  videoID: 3
+  eightBallAudioController: {fileID: 1694979957}
   audioDelay: 0
-  eightBallAudioController: {fileID: 0}
-  countdownText: {fileID: 0}
-  countdownLength: 0
-  fadeMaterial: {fileID: 0}
-  countdownOBJ: {fileID: 0}
-  fadeSpeed: 0
-  dannyEntrance: 0
-  dannyCollider: {fileID: 0}
-  perspectiveColliders: {fileID: 0}
+  backstoryHub: {fileID: 2078996004796077262}
 --- !u!1001 &1705655699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3513,7 +3550,7 @@ PrefabInstance:
     - target: {fileID: 6477619250105155981, guid: 3602ea33e4d8e444fac758997e69910d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6477619250105155981, guid: 3602ea33e4d8e444fac758997e69910d,
         type: 3}
@@ -3548,6 +3585,51 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1763202766}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1791078518
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1791078520}
+  - component: {fileID: 1791078519}
+  m_Layer: 0
+  m_Name: ExperienceManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1791078519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791078518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d0f20a867accc4eb0f98ccea9065f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseScenes:
+  - {fileID: 2078996004796077262}
+--- !u!4 &1791078520
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791078518}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1855649463
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3627,6 +3709,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2327526, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3ac81a5e55d96c44fbfafa3a2eadd193, type: 2}
     - target: {fileID: 11498420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d, type: 3}
       propertyPath: m_FilterMode
       value: 2
@@ -3716,28 +3802,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 1855649467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf56284d8f76b444ab614f77b2cf4179, type: 3}
+  m_Script: {fileID: 2075895966, guid: b9352b52bc90047ce855bc6d2626698e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClipFront: {fileID: 8300000, guid: 7b8f4d27b12407745be55b308906d98c, type: 3}
+  audioClipLeft: {fileID: 8300000, guid: 51fd671976680244ab035fa359d9e688, type: 3}
+  audioClipBack: {fileID: 8300000, guid: 1d2fe4dc51c4f5440b5426dc5af62c20, type: 3}
+  audioClipRight: {fileID: 8300000, guid: ebe1cc6614c169544b2f0cb04b05d8be, type: 3}
+  cameraTransform: {fileID: 1763202767}
+  vol: 0.7
+  autoPlay: 0
+  loop: 0
+  transitionThresholdFront: 0
+  transitionThresholdLeft: 0
+  transitionThresholdBack: 0
+  transitionThresholdRight: 0
+  linearCurve: 1
+--- !u!114 &1855649469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855649467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ec9b685ee5fb84591ec00270a13e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotateToView: 1
-  centerTarget: {fileID: 0}
+  centerTarget: {fileID: 1763202767}
   mediaPlayer: {fileID: 1855649465}
-  videoPath: 
+  videoPath: Antwaun Backstory .mp4
   videoSphere: {fileID: 1855649466}
-  headlockedSource: {fileID: 0}
-  moodSlider: {fileID: 0}
-  trackingEnabled: 0
-  videoID: 3
+  eightBallAudioController: {fileID: 1855649468}
   audioDelay: 0
-  eightBallAudioController: {fileID: 0}
-  countdownText: {fileID: 0}
-  countdownLength: 0
-  fadeMaterial: {fileID: 0}
-  countdownOBJ: {fileID: 0}
-  fadeSpeed: 0
-  dannyEntrance: 0
-  dannyCollider: {fileID: 0}
-  perspectiveColliders: {fileID: 0}
+  backstoryHub: {fileID: 2078996004796077262}
 --- !u!1 &1985308836 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 198420, guid: 5a12218ea7e5b7a4e8b89d25e07d237d,
@@ -4538,7 +4638,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2078996003999074855}
   m_LocalRotation: {x: -0, y: -0.9799628, z: -0, w: -0.19918068}
-  m_LocalPosition: {x: 0.000000022429235, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 2078996003379488195}
@@ -4563,7 +4663,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!33 &2078996003999074872
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4852,6 +4952,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2078996004796077263}
+  - component: {fileID: 2078996004796077262}
   - component: {fileID: 2078996004796077261}
   m_Layer: 0
   m_Name: BackstoryHub
@@ -4878,6 +4979,20 @@ MonoBehaviour:
   - {fileID: 869818174}
   - {fileID: 869818172}
   cameraTransform: {fileID: 1763202767}
+--- !u!114 &2078996004796077262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078996004796077260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97e4e2497f4ba8c4087d5b78dae517cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateToView: 1
+  centerTarget: {fileID: 1763202767}
 --- !u!4 &2078996004796077263
 Transform:
   m_ObjectHideFlags: 0

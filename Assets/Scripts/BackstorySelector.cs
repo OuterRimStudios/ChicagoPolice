@@ -6,16 +6,12 @@ using RenderHeads.Media.AVProVideo;
 
 public class BackstorySelector : MonoBehaviour
 {
-    public MediaPlayer mediaPlayer;
-    public string videoPath;
-    public GameObject videoSphere;
-    public GameObject backstoryHub;
+    public BackstoryScene backstoryScene;
 
     public void SelectBackground()
     {
         Debug.LogError($"{transform.name} Backstory selected");
-        mediaPlayer.OpenVideoFromFile(MediaPlayer.FileLocation.AbsolutePathOrURL, Path.Combine(Application.persistentDataPath, videoPath), true);
-        videoSphere.SetActive(true);
-        backstoryHub.SetActive(false);
+        gameObject.SetActive(false);
+        SundanceSceneTransition.Instance.ChangeScene(backstoryScene);
     }
 }
