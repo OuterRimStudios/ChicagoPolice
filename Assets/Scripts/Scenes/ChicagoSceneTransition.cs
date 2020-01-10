@@ -12,8 +12,7 @@ public class ChicagoSceneTransition : SceneTransition
 
     public static ChicagoSceneTransition Instance;
 
-    public List<BaseScene> testA;
-    public List<BaseScene> testB;    
+    public List<BaseScene> testScenes;
 
     public string UserID { get; private set; }
     public string GroupID { get; private set; }
@@ -21,44 +20,46 @@ public class ChicagoSceneTransition : SceneTransition
     public string TestTimestamp { get; private set; }
 
     int sceneIndex;
-    bool isTestB;
 
     private void Awake()
     {
         Instance = this;
+        StartScene();
     }
 
     private void Update()
     {
-        OVRInput.Update();      
+        OVRInput.Update();
     }
 
     public override void NextScene()
     {
-        //gets the scene that is currently active and calls EndScene
-        List<BaseScene> baseScene = GetActiveTest();
-        baseScene[sceneIndex].EndScene();
-        OnSceneEnded?.Invoke(baseScene[sceneIndex]);
-
+        EndScene();
         //increments to next scene, or resets to the beginning of the list
-        if (sceneIndex < baseScene.Count - 1)
+        if (sceneIndex < testScenes.Count - 1)
             sceneIndex++;
         else
             sceneIndex = 0;
 
-        //starts new scene
-        baseScene[sceneIndex].StartScene();
-        OnSceneStarted?.Invoke(baseScene[sceneIndex]);
+        StartScene();
     }
 
-    public BaseScene GetActiveScene()
+    public void EndScene()
     {
-        return isTestB ? testB[sceneIndex] : testA[sceneIndex];
+        //gets the scene that is currently active and calls EndScene
+        testScenes[sceneIndex].EndScene();
+        OnSceneEnded?.Invoke(testScenes[sceneIndex]);
     }
-    public BaseScene GetPreviousScene()
+
+    public void StartScene()
     {
-        return isTestB ? testB[sceneIndex - 1] : testA[sceneIndex - 1];
+        //starts new scene
+        testScenes[sceneIndex].StartScene();
+        OnSceneStarted?.Invoke(testScenes[sceneIndex]);
     }
+
+
+  
 
     //returns the VideoScene of the video that was viewed last
     public VideoScene GetLastVideo()
@@ -74,22 +75,6 @@ public class ChicagoSceneTransition : SceneTransition
 
     List<BaseScene> GetActiveTest()
     {
-        return isTestB ? testB : testA;
-    }
-
-    public void InitializeHeadset(int headsetID)
-    {
-        HeadsetID = headsetID;
-        testA[0].gameObject.SetActive(true);
-    }
-
-    //sets user specific values for use in the analytics
-    public void InitializeUser(string userID, string groupID)
-    {
-        UserID = userID;
-        GroupID = groupID;
-        TestTimestamp = DateTime.Now.ToString("MM/dd/yyyy H:mm");
-        isTestB = GroupID.ToLower() == "b" ? true : false;
-        NextScene();
+        return testScenes;
     }
 }
