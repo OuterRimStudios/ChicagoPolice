@@ -29,13 +29,7 @@ public class PerspectiveScene : BaseScene
         if(!fadeAnimator.GetCurrentAnimatorStateInfo(0).IsName("Fade") && mediaPlayers[perspectiveIndex].Control.IsPlaying() && !delayed)
         {
             delayed = true;
-            fadeAnimator.SetTrigger("Fade");
-
-            if (button == OVRInput.Button.One)
-                NextPerspective();
-            else
-                PreviousPerspective();
-            StartCoroutine(Delay());
+            StartCoroutine(Delay(button));
         }
     }
 
@@ -93,8 +87,16 @@ public class PerspectiveScene : BaseScene
         mediaPlayers[perspectiveIndex].CloseVideo();
     }
 
-    IEnumerator Delay()
+    IEnumerator Delay(OVRInput.Button button)
     {
+        fadeAnimator.SetTrigger("Fade");
+
+        yield return new WaitForSeconds(.35f);
+        if (button == OVRInput.Button.One)
+            NextPerspective();
+        else
+            PreviousPerspective();
+
         yield return new WaitForSeconds(delay);
         delayed = false;
     }

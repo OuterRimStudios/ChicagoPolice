@@ -284,6 +284,7 @@ MonoBehaviour:
   - {fileID: 426645911}
   - {fileID: 1220051057}
   fadeAnimator: {fileID: 1682553266}
+  delay: 1.5
 --- !u!1 &133597282
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,6 +421,16 @@ PrefabInstance:
     - target: {fileID: 8780716575293623004, guid: 0e0f901291be3814d953af5c0b2da478,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780716575287954254, guid: 0e0f901291be3814d953af5c0b2da478,
+        type: 3}
+      propertyPath: m_AutoOpen
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780716575287954254, guid: 0e0f901291be3814d953af5c0b2da478,
+        type: 3}
+      propertyPath: m_AutoStart
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1134,6 +1145,16 @@ PrefabInstance:
     - target: {fileID: 8780716575287954254, guid: 0e0f901291be3814d953af5c0b2da478,
         type: 3}
       propertyPath: m_StereoPacking
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780716575287954254, guid: 0e0f901291be3814d953af5c0b2da478,
+        type: 3}
+      propertyPath: m_AutoOpen
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780716575287954254, guid: 0e0f901291be3814d953af5c0b2da478,
+        type: 3}
+      propertyPath: m_AutoStart
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2360,7 +2381,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
   - {fileID: 0}
