@@ -8,9 +8,11 @@ public class PerspectiveScene : BaseScene
     public MediaPlayer[] mediaPlayers;
     public GameObject[] videoSpheres;
     public Animator fadeAnimator;
+    public float delay = 1.5f;
 
     int perspectiveIndex;
     float time;
+    bool delayed;
 
     private void OnEnable()
     {
@@ -24,14 +26,16 @@ public class PerspectiveScene : BaseScene
 
     void OnButtonDown(OVRInput.Button button)
     {
-        if(!fadeAnimator.GetCurrentAnimatorStateInfo(0).IsName("Fade"))
+        if(!fadeAnimator.GetCurrentAnimatorStateInfo(0).IsName("Fade") && mediaPlayers[perspectiveIndex].Control.IsPlaying() && !delayed)
         {
+            delayed = true;
             fadeAnimator.SetTrigger("Fade");
 
             if (button == OVRInput.Button.One)
                 NextPerspective();
             else
                 PreviousPerspective();
+            StartCoroutine(Delay());
         }
     }
 
@@ -87,5 +91,11 @@ public class PerspectiveScene : BaseScene
 
         videoSpheres[perspectiveIndex].SetActive(false);
         mediaPlayers[perspectiveIndex].CloseVideo();
+    }
+
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(delay);
+        delayed = false;
     }
 }

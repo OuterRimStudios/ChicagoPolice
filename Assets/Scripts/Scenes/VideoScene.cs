@@ -36,7 +36,7 @@ public class VideoScene : BaseScene
     public override void StartScene()
     {
         countdownRoutine = StartCoroutine(Countdown());
-        mediaPlayer.OpenVideoFromFile(MediaPlayer.FileLocation.AbsolutePathOrURL, Path.Combine(Application.persistentDataPath, videoPath), false);
+        //mediaPlayer.OpenVideoFromFile(MediaPlayer.FileLocation.AbsolutePathOrURL, Path.Combine(Application.persistentDataPath, videoPath), false);
     }
 
     void BeginVideo()
