@@ -7,6 +7,7 @@ public class PerspectiveScene : BaseScene
 {
     public MediaPlayer[] mediaPlayers;
     public GameObject[] videoSpheres;
+    public GameObject moodSlider;
     public Animator fadeAnimator;
     public float delay = 1.5f;
 
@@ -45,6 +46,7 @@ public class PerspectiveScene : BaseScene
     public override void StartScene()
     {
         gameObject.SetActive(true);
+        moodSlider.SetActive(true);
         Play();
     }
 
@@ -53,6 +55,7 @@ public class PerspectiveScene : BaseScene
         Stop();
         time = 0;
         gameObject.SetActive(false);
+        moodSlider.SetActive(false);
     }
 
     void NextPerspective()
