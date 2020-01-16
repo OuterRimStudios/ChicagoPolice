@@ -24,8 +24,7 @@ public class SundanceSceneTransition : SceneTransition
     public override void NextScene()
     {
         //calls end scene on the currently playing scene
-        currentScene?.EndScene();
-        OnSceneEnded?.Invoke(currentScene);
+        EndScene();
 
         if (sceneIndex < baseScenes.Count - 1)
             sceneIndex++;
@@ -34,8 +33,35 @@ public class SundanceSceneTransition : SceneTransition
 
         //starts next scene
         currentScene = baseScenes[sceneIndex];
+        StartScene();
+    }
+
+    public void EndScene()
+    {
+        currentScene?.EndScene();
+        OnSceneEnded?.Invoke(currentScene);
+    }
+
+    public void StartScene()
+    {
         currentScene?.StartScene();
         OnSceneStarted?.Invoke(currentScene);
+    }
+
+    public void PreviousScene()
+    {
+        //calls end scene on the currently playing scene
+        EndScene();
+
+        if (sceneIndex > 0)
+            sceneIndex--;
+        else
+            sceneIndex = 0;
+
+        //starts next scene
+        currentScene = baseScenes[sceneIndex];
+        Debug.LogError("CurrentScene: " + currentScene.name);
+        StartScene();
     }
 
     public void ChangeScene(BaseScene nextScene)

@@ -1,13 +1,16 @@
-﻿using System.Collections;
+﻿using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RenderHeads.Media.AVProVideo;
 using OuterRimStudios.Utilities;
 public class PerspectiveScene : BaseScene
 {
-    public MediaPlayer[] mediaPlayers;
-    public GameObject[] videoSpheres;
-    public GameObject moodSlider;
+    public MediaPlayer mediaPlayer;
+    public GameObject videoSphere;
+    public string[] videoPaths;
+    public float[] videoRotations;
+    //public GameObject moodSlider;
     public Animator fadeAnimator;
     public float delay = 1.5f;
 
@@ -27,7 +30,10 @@ public class PerspectiveScene : BaseScene
 
     void OnButtonDown(OVRInput.Button button)
     {
-        if(!fadeAnimator.GetCurrentAnimatorStateInfo(0).IsName("Fade") && mediaPlayers[perspectiveIndex].Control.IsPlaying() && !delayed)
+        if (button != OVRInput.Button.Three && button != OVRInput.Button.Four)
+            return;
+
+        if (!fadeAnimator.GetCurrentAnimatorStateInfo(0).IsName("Fade") && mediaPlayer.Control.IsPlaying() && !delayed)
         {
             delayed = true;
             StartCoroutine(Delay(button));
@@ -36,18 +42,15 @@ public class PerspectiveScene : BaseScene
 
     private void Update()
     {
-        foreach (MediaPlayer mediaPlayer in mediaPlayers)
-        {
-            if(mediaPlayer.Control.IsFinished())
-                SundanceSceneTransition.Instance.NextScene();
-        }
+        if(mediaPlayer.Control.IsFinished())
+            SundanceSceneTransition.Instance.NextScene();
     }
 
     public override void StartScene()
     {
         gameObject.SetActive(true);
-        moodSlider.SetActive(true);
-        Play();
+        //moodSlider.SetActive(true);
+        Play(videoPaths[perspectiveIndex], videoRotations[perspectiveIndex]);
     }
 
     public override void EndScene()
@@ -55,39 +58,53 @@ public class PerspectiveScene : BaseScene
         Stop();
         time = 0;
         gameObject.SetActive(false);
-        moodSlider.SetActive(false);
+        //moodSlider.SetActive(false);
     }
 
     void NextPerspective()
     {
         Stop();
-        perspectiveIndex = perspectiveIndex.IncrementLoop(mediaPlayers.Length - 1);
-        Play();
+        perspectiveIndex = perspectiveIndex.IncrementLoop(videoPaths.Length - 1);
+        Play(videoPaths[perspectiveIndex], time, videoRotations[perspectiveIndex]);
     }
 
     void PreviousPerspective()
     {
         Stop();
-        perspectiveIndex = perspectiveIndex.DecrementLoop(0, mediaPlayers.Length - 1);
-        Play();
+        perspectiveIndex = perspectiveIndex.DecrementLoop(0, videoPaths.Length - 1);
+        Play(videoPaths[perspectiveIndex], time, videoRotations[perspectiveIndex]);
     }
 
-    void Play()
+
+    public void Play(string videoPath, float seekTime, float yOffset)
     {
-        mediaPlayers[perspectiveIndex].OpenVideoFromFile(MediaPlayer.FileLocation.RelativeToStreamingAssetsFolder, mediaPlayers[perspectiveIndex].m_VideoPath, false);
+        mediaPlayer.OpenVideoFromFile(MediaPlayer.FileLocation.AbsolutePathOrURL, Path.Combine(Application.persistentDataPath, videoPath), false);
 
-        mediaPlayers[perspectiveIndex].Control.SeekFast(time);
+        if (seekTime != 0)
+            mediaPlayer.Control.SeekFast(seekTime);
 
-        videoSpheres[perspectiveIndex].SetActive(true);
-        mediaPlayers[perspectiveIndex].Play();
+        videoSphere.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, yOffset, transform.rotation.eulerAngles.z);
+        videoSphere.SetActive(true);
+        mediaPlayer.Play();
     }
+
+    public void Play(string videoPath, float yOffset)
+    {
+        Play(videoPath, 0, yOffset);
+    }
+
+    public void Play(string videoPath)
+    {
+        Play(videoPath, 0, videoSphere.transform.rotation.eulerAngles.y);
+    }
+
 
     void Stop()
     {
-        time = mediaPlayers[perspectiveIndex].Control.GetCurrentTimeMs();
+        time = mediaPlayer.Control.GetCurrentTimeMs();
 
-        videoSpheres[perspectiveIndex].SetActive(false);
-        mediaPlayers[perspectiveIndex].CloseVideo();
+        videoSphere.SetActive(false);
+        mediaPlayer.CloseVideo();
     }
 
     IEnumerator Delay(OVRInput.Button button)
@@ -95,9 +112,9 @@ public class PerspectiveScene : BaseScene
         fadeAnimator.SetTrigger("Fade");
 
         yield return new WaitForSeconds(.35f);
-        if (button == OVRInput.Button.One)
+        if (button == OVRInput.Button.Three)
             NextPerspective();
-        else
+        else if (button == OVRInput.Button.Four)
             PreviousPerspective();
 
         yield return new WaitForSeconds(delay);

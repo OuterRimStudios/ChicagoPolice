@@ -38,9 +38,10 @@ public class BackstoryManager : MonoBehaviour
 
     private void OnButtonDown(OVRInput.Button key)
     {
-        if (key == OVRInput.Button.PrimaryIndexTrigger)
+        if (key == OVRInput.Button.Three)
         {
             currentBackstory.SelectBackground();
+            gameObject.SetActive(false);
         }
 
         if (key == OVRInput.Button.PrimaryThumbstickLeft)

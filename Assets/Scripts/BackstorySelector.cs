@@ -1,17 +1,18 @@
-﻿using System.IO;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RenderHeads.Media.AVProVideo;
 
 public class BackstorySelector : MonoBehaviour
 {
-    public BackstoryScene backstoryScene;
+    public PerspectiveScene perspectiveScene;
+    public string videoPath;
+    public float sphereRotation;
 
     public void SelectBackground()
     {
         Debug.LogError($"{transform.name} Backstory selected");
+        SundanceSceneTransition.Instance.NextScene();
+        perspectiveScene.Play(videoPath, sphereRotation);
         gameObject.SetActive(false);
-        SundanceSceneTransition.Instance.ChangeScene(backstoryScene);
     }
 }
