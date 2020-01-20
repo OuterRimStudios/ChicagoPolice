@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CreditsManager : MonoBehaviour
 {
+    public SceneType sceneType = SceneType.Sundance;
     public Animator cameraAnimator;
 
     void OnEnable()
@@ -33,6 +34,10 @@ public class CreditsManager : MonoBehaviour
     {       
         cameraAnimator.ResetTrigger("fadeWhite");
         GetComponent<Animator>().ResetTrigger("startCredits");
-        ChicagoSceneTransition.Instance.NextScene();
+
+        if (sceneType == SceneType.Chicago)
+            ChicagoSceneTransition.Instance.NextScene();
+        else
+            SundanceSceneTransition.Instance.NextScene();
     }
 }

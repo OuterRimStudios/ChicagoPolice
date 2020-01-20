@@ -46,6 +46,7 @@ public class SundanceSceneTransition : SceneTransition
     {
         currentScene?.StartScene();
         OnSceneStarted?.Invoke(currentScene);
+        Debug.LogError("Starting Scene: " + currentScene.name);
     }
 
     public void PreviousScene()
@@ -60,7 +61,6 @@ public class SundanceSceneTransition : SceneTransition
 
         //starts next scene
         currentScene = baseScenes[sceneIndex];
-        Debug.LogError("CurrentScene: " + currentScene.name);
         StartScene();
     }
 
@@ -69,6 +69,7 @@ public class SundanceSceneTransition : SceneTransition
         currentScene?.EndScene();
         OnSceneEnded?.Invoke(currentScene);
         currentScene = nextScene;
+        sceneIndex = baseScenes.IndexOf(nextScene);
         currentScene?.StartScene();
         OnSceneStarted?.Invoke(currentScene);
     }

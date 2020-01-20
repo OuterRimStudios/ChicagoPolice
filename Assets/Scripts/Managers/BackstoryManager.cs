@@ -12,6 +12,8 @@ public class BackstoryManager : MonoBehaviour
 
     public Transform cameraTransform;
 
+    public BaseScene creditsScene;
+
     BackstorySelector currentBackstory;
     int currentBackstoryIndex;
 
@@ -44,8 +46,14 @@ public class BackstoryManager : MonoBehaviour
             gameObject.SetActive(false);
         }
 
-        if (key == OVRInput.Button.PrimaryThumbstickLeft)
+        if (key == OVRInput.Button.Four)
+        {
+            SundanceSceneTransition.Instance.ChangeScene(creditsScene);
+        }
+
+        if (key == OVRInput.Button.PrimaryThumbstickLeft)        
             ChangeBackstory(PREVIOUS_BACKSTORY);
+        
         if (key == OVRInput.Button.PrimaryThumbstickRight)
             ChangeBackstory(NEXT_BACKSTORY);
     }

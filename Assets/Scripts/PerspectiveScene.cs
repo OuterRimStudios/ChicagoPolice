@@ -13,6 +13,9 @@ public class PerspectiveScene : BaseScene
     //public GameObject moodSlider;
     public Animator fadeAnimator;
     public float delay = 1.5f;
+    public CountdownManager countdown;
+
+    public bool isTesting;
 
     int perspectiveIndex;
     float time;
@@ -48,9 +51,22 @@ public class PerspectiveScene : BaseScene
 
     public override void StartScene()
     {
+        countdown.StartCountdown();
+        CountdownManager.OnCountdownFinished += PlayVideo;
+        //gameObject.SetActive(true);
+        //moodSlider.SetActive(true);
+        //Play(videoPaths[perspectiveIndex], videoRotations[perspectiveIndex]);
+    }
+
+    void PlayVideo()
+    {
         gameObject.SetActive(true);
         //moodSlider.SetActive(true);
         Play(videoPaths[perspectiveIndex], videoRotations[perspectiveIndex]);
+        CountdownManager.OnCountdownFinished -= PlayVideo;
+
+        if (isTesting)
+            SundanceSceneTransition.Instance.NextScene();
     }
 
     public override void EndScene()
@@ -58,6 +74,7 @@ public class PerspectiveScene : BaseScene
         Stop();
         time = 0;
         gameObject.SetActive(false);
+        videoSphere.SetActive(false);
         //moodSlider.SetActive(false);
     }
 
