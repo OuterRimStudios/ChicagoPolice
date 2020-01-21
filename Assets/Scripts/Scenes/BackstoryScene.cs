@@ -8,8 +8,8 @@ public class BackstoryScene : BaseScene
 
     private void OnButtonDown(OVRInput.Button key)
     {
-        if (key == OVRInput.Button.Three)
-            SundanceSceneTransition.Instance.PreviousScene();
+        //if (key == OVRInput.Button.Three)
+        //    SundanceSceneTransition.Instance.PreviousScene();
     }
 
     public override void StartScene()
@@ -20,7 +20,7 @@ public class BackstoryScene : BaseScene
     public override void EndScene()
     {
         OVRInputManager.OnButtonDown -= OnButtonDown;
-        perspectiveScene.mediaPlayer.Pause();
+        perspectiveScene.videoSphere.GetComponent<Renderer>().material.SetTexture("_MainTex", null);
         perspectiveScene.mediaPlayer.CloseVideo();
         perspectiveScene.videoSphere.SetActive(false);
     }

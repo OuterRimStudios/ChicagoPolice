@@ -9,6 +9,8 @@ public class SundanceSceneTransition : SceneTransition
     public delegate void SceneEvents(BaseScene baseScene);
     public static event SceneEvents OnSceneStarted;
     public static event SceneEvents OnSceneEnded;
+    public AudioSource source;
+    public AudioClip transitionClip;
 
     public List<BaseScene> baseScenes;
 
@@ -18,11 +20,17 @@ public class SundanceSceneTransition : SceneTransition
     private void Awake()
     {
         Instance = this;
-        currentScene = baseScenes[0];
-        //currentScene.StartScene();
     }
+
+    private void Start()
+    {
+        currentScene = baseScenes[0];
+        StartScene();
+    }
+
     public override void NextScene()
     {
+        source.PlayOneShot(transitionClip);
         //calls end scene on the currently playing scene
         EndScene();
 

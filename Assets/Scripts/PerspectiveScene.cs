@@ -101,8 +101,10 @@ public class PerspectiveScene : BaseScene
             mediaPlayer.Control.SeekFast(seekTime);
 
         videoSphere.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, yOffset, transform.rotation.eulerAngles.z);
-        videoSphere.SetActive(true);
+        
         mediaPlayer.Play();
+        videoSphere.GetComponent<Renderer>().material.color = Color.white;
+        videoSphere.SetActive(true);
     }
 
     public void Play(string videoPath, float yOffset)

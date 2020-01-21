@@ -22,7 +22,7 @@ public class BackstorySelector : MonoBehaviour
     void PlayVideo()
     {
         perspectiveScene.Play(videoPath, sphereRotation);
-        CountdownManager.OnCountdownFinished += PlayVideo;
+        CountdownManager.OnCountdownFinished -= PlayVideo;
         gameObject.SetActive(false);
     }
 }

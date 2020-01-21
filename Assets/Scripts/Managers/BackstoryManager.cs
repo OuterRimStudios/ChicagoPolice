@@ -28,6 +28,9 @@ public class BackstoryManager : MonoBehaviour
     private void OnDisable()
     {
         OVRInputManager.OnButtonDown -= OnButtonDown;
+
+        foreach(BackstorySelector backstory in backstorySelectors)
+            backstory.gameObject.SetActive(false);
     }
 
     private void Update()

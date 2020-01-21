@@ -6,6 +6,7 @@ public class CreditsManager : MonoBehaviour
 {
     public SceneType sceneType = SceneType.Sundance;
     public Animator cameraAnimator;
+    public GameObject chicagoBackground;
 
     void OnEnable()
     {
@@ -15,6 +16,7 @@ public class CreditsManager : MonoBehaviour
 
     IEnumerator StartAnimation()
     {
+        chicagoBackground.SetActive(false);
         yield return new WaitForSeconds(1.5f);
         //yield return new WaitUntil(HasAnimationFinished);
         GetComponent<Animator>().SetTrigger("startCredits");
@@ -34,6 +36,7 @@ public class CreditsManager : MonoBehaviour
     {       
         cameraAnimator.ResetTrigger("fadeWhite");
         GetComponent<Animator>().ResetTrigger("startCredits");
+        chicagoBackground.SetActive(true);
 
         if (sceneType == SceneType.Chicago)
             ChicagoSceneTransition.Instance.NextScene();
