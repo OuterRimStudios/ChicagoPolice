@@ -627,7 +627,7 @@ MonoBehaviour:
   fadeAnimator: {fileID: 1682553266}
   delay: 1.5
   countdown: {fileID: 1901774419}
-  isTesting: 1
+  isTesting: 0
 --- !u!1001 &85238022
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -869,7 +869,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3096,7 +3096,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: In order to understand the situation that occurred, you will get the option
     to hear a short interview with the characters after the fact. Use the control
-    stick to move between people and press then X to hear what they have to say.
+    stick to move between people and press X to hear what they have to say.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

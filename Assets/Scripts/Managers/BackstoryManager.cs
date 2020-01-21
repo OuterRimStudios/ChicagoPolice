@@ -43,13 +43,13 @@ public class BackstoryManager : MonoBehaviour
 
     private void OnButtonDown(OVRInput.Button key)
     {
-        if (key == OVRInput.Button.Three)
+        if (key == OVRInput.Button.Three || key == OVRInput.Button.Four)
         {
             currentBackstory.SelectBackground();
             gameObject.SetActive(false);
         }
 
-        if (key == OVRInput.Button.Four)
+        if (key == OVRInput.Button.Start)
         {
             SundanceSceneTransition.Instance.ChangeScene(creditsScene);
         }
