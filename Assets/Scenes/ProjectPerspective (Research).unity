@@ -5264,7 +5264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &676895606
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13251,7 +13251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1466054004
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16801,7 +16801,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testA:
-  - {fileID: 1814968060}
   - {fileID: 676895607}
   - {fileID: 1293142529}
   - {fileID: 1027847174}
@@ -16843,7 +16842,6 @@ MonoBehaviour:
   - {fileID: 1027847174}
   - {fileID: 1984549536}
   testB:
-  - {fileID: 1814968060}
   - {fileID: 676895607}
   - {fileID: 1293142529}
   - {fileID: 1027847174}
